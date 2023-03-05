@@ -11,8 +11,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import com.jumrukovski.quotescompose.ui.theme.BlackColor
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
@@ -23,16 +21,7 @@ class MainActivity : ComponentActivity() {
     private fun Toolbar() {
         SmallTopAppBar(
             modifier = Modifier.background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
-            title = {
-                Box(modifier = Modifier
-                    .background(BlackColor)
-                    .padding(all = 0.dp)) {
-                    Text(
-                        stringResource(R.string.app_name),
-                        modifier = Modifier.background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
-                    )
-                }
-            },
+            title = { Text(stringResource(R.string.app_name)) },
             colors = TopAppBarDefaults.smallTopAppBarColors(
                 containerColor = MaterialTheme.colorScheme.PrimaryBackgroundColor,
                 scrolledContainerColor = MaterialTheme.colorScheme.PrimaryBackgroundColor,
