@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
@@ -18,7 +19,7 @@ import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 class MainActivity : ComponentActivity() {
 
     @Composable
-    private fun Toolbar() {
+    private fun Toolbar(onActionClick: () -> Unit = {}) {
         SmallTopAppBar(
             modifier = Modifier.background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
             title = { Text(stringResource(R.string.app_name)) },
@@ -28,7 +29,16 @@ class MainActivity : ComponentActivity() {
                 navigationIconContentColor = MaterialTheme.colorScheme.PrimaryTextColor,
                 titleContentColor = MaterialTheme.colorScheme.PrimaryTextColor,
                 actionIconContentColor = MaterialTheme.colorScheme.PrimaryTextColor
-            )
+            ),
+            actions = {
+                IconButton(onClick = onActionClick) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_search_24),
+                        contentDescription = stringResource(id = R.string.action_search),
+                        tint = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
         )
     }
 
@@ -38,7 +48,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             QuotesComposeTheme {
                 Scaffold(
-                    topBar = { Toolbar() },
+                    topBar = {
+                        Toolbar(onActionClick = {
+                            //todo search icon clicked
+                        })
+                    },
                     content = { padding ->
                         Box(
                             modifier = Modifier
@@ -46,7 +60,7 @@ class MainActivity : ComponentActivity() {
                                 .padding(padding)
                                 .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
                         ) {
-                            //todo
+                            //todo content details
                         }
                     })
             }
