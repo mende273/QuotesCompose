@@ -13,17 +13,13 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 private val DarkColorScheme = darkColorScheme(
     primary = BlackColor,
     secondary = WhiteColor,
-    tertiary = WhiteColor,
-    surface = BlackColor,
-    background = BlackColor
+    tertiary = WhiteColor
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = WhiteColor,
     secondary = BlackColor,
-    tertiary = BlackColor,
-    surface = WhiteColor,
-    background = WhiteColor
+    tertiary = BlackColor
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -36,10 +32,10 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
-val TextColor: Color @Composable
+val ColorScheme.PrimaryTextColor: Color @Composable
 get() = if (!isSystemInDarkTheme()) BlackColor else WhiteColor
 
-val BackgroundColor: Color @Composable
+val ColorScheme.PrimaryBackgroundColor: Color @Composable
 get() = if (!isSystemInDarkTheme()) WhiteColor else BlackColor
 
 @Composable
