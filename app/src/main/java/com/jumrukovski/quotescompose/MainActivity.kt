@@ -20,7 +20,7 @@ import com.jumrukovski.quotescompose.ui.theme.*
 class MainActivity : ComponentActivity() {
 
     @Composable
-    private fun Toolbar(onActionClick: () -> Unit = {}) {
+    private fun Toolbar() {
         SmallTopAppBar(
             modifier = Modifier.background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
             title = { Text(stringResource(R.string.app_name)) },
@@ -32,7 +32,9 @@ class MainActivity : ComponentActivity() {
                 actionIconContentColor = MaterialTheme.colorScheme.PrimaryTextColor
             ),
             actions = {
-                IconButton(onClick = onActionClick) {
+                IconButton(onClick = {
+                    //todo action icon clicked
+                }) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_search_24),
                         contentDescription = stringResource(id = R.string.action_search),
@@ -85,11 +87,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             QuotesComposeTheme {
                 Scaffold(
-                    topBar = {
-                        Toolbar(onActionClick = {
-                            //todo search icon clicked
-                        })
-                    },
+                    topBar = { Toolbar() },
                     content = { padding ->
                         Box(
                             modifier = Modifier
