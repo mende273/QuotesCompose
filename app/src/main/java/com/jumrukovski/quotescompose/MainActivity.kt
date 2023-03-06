@@ -3,7 +3,6 @@ package com.jumrukovski.quotescompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -44,15 +43,8 @@ class MainActivity : ComponentActivity() {
         )
     }
 
-    data class MenuItem(val title: String, @DrawableRes val icon: Int)
-
     @Composable
     private fun BottomNavigationBar() {
-        val menuItems = mutableListOf<MenuItem>()
-        menuItems.add(MenuItem("Home", R.drawable.baseline_home_24))
-        menuItems.add(MenuItem("Categories", R.drawable.baseline_category_24))
-        menuItems.add(MenuItem("Favourites", R.drawable.baseline_favorite_24))
-
         val selectedIndex = remember { mutableStateOf(0) }
 
         NavigationBar(
@@ -61,16 +53,16 @@ class MainActivity : ComponentActivity() {
             tonalElevation = 0.dp,
             containerColor = MaterialTheme.colorScheme.NavigationBarBackgroundColor,
             content = {
-                menuItems.forEachIndexed { index, menuItem ->
+                BottomMenuItem.values().forEachIndexed { index, menuItem ->
                     NavigationBarItem(
                         selected = selectedIndex.value == index,
                         onClick = { selectedIndex.value = index },
-                        label = { Text(text = menuItem.title) },
+                        label = { Text(text = stringResource(id = menuItem.titleTextId)) },
                         enabled = true,
                         icon = {
                             Icon(
                                 painter = painterResource(id = menuItem.icon),
-                                contentDescription = menuItem.title
+                                contentDescription = stringResource(id = menuItem.titleTextId)
                             )
                         },
                         alwaysShowLabel = true,
