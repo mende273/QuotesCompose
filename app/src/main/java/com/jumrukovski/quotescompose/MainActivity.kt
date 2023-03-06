@@ -3,13 +3,15 @@ package com.jumrukovski.quotescompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -42,14 +44,46 @@ class MainActivity : ComponentActivity() {
         )
     }
 
+    data class MenuItem(val title: String, @DrawableRes val icon: Int)
+
     @Composable
-    private fun BottomNavigationBar(content: @Composable RowScope.() -> Unit) {
+    private fun BottomNavigationBar() {
+        val menuItems = mutableListOf<MenuItem>()
+        menuItems.add(MenuItem("Home", R.drawable.baseline_home_24))
+        menuItems.add(MenuItem("Categories", R.drawable.baseline_category_24))
+        menuItems.add(MenuItem("Favourites", R.drawable.baseline_favorite_24))
+
+        val selectedIndex = remember { mutableStateOf(0) }
+
         NavigationBar(
             modifier = Modifier,
             contentColor = MaterialTheme.colorScheme.NavigationBarItemRippleColor,
             tonalElevation = 0.dp,
-            content = content,
-            containerColor = MaterialTheme.colorScheme.NavigationBarBackgroundColor
+            containerColor = MaterialTheme.colorScheme.NavigationBarBackgroundColor,
+            content = {
+                menuItems.forEachIndexed { index, menuItem ->
+                    NavigationBarItem(
+                        selected = selectedIndex.value == index,
+                        onClick = { selectedIndex.value = index },
+                        label = { Text(text = menuItem.title) },
+                        enabled = true,
+                        icon = {
+                            Icon(
+                                painter = painterResource(id = menuItem.icon),
+                                contentDescription = menuItem.title
+                            )
+                        },
+                        alwaysShowLabel = true,
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
+                            unselectedIconColor = MediumDarkGreyColor,
+                            selectedTextColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
+                            unselectedTextColor = MediumDarkGreyColor,
+                            indicatorColor = MaterialTheme.colorScheme.NavigationBarBackgroundColor
+                        )
+                    )
+                }
+            }
         )
     }
 
@@ -74,64 +108,7 @@ class MainActivity : ComponentActivity() {
                             //todo content details
                         }
                     },
-                    bottomBar = {
-                        BottomNavigationBar {
-                            NavigationBarItem(
-                                selected = true,
-                                onClick = { null },
-                                label = { Text(text = "test") },
-                                enabled = true,
-                                icon = {Icon(
-                                    painter = painterResource(id = R.drawable.baseline_home_24),
-                                    contentDescription = "item"
-                                )},
-                                alwaysShowLabel = true,
-                                colors = NavigationBarItemDefaults.colors(
-                                    selectedIconColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
-                                    unselectedIconColor = MediumDarkGreyColor,
-                                    selectedTextColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
-                                    unselectedTextColor = MediumDarkGreyColor,
-                                    indicatorColor = MaterialTheme.colorScheme.NavigationBarBackgroundColor
-                                )
-                            )
-                            NavigationBarItem(
-                                selected = false,
-                                onClick = { null },
-                                label = { Text(text = "test") },
-                                enabled = true,
-                                icon = {Icon(
-                                    painter = painterResource(id = R.drawable.baseline_category_24),
-                                    contentDescription = "item"
-                                )},
-                                alwaysShowLabel = true,
-                                colors = NavigationBarItemDefaults.colors(
-                                    selectedIconColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
-                                    unselectedIconColor = MediumDarkGreyColor,
-                                    selectedTextColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
-                                    unselectedTextColor = MediumDarkGreyColor,
-                                    indicatorColor = MaterialTheme.colorScheme.PrimaryBackgroundColor
-                                )
-                            )
-                            NavigationBarItem(
-                                selected = false,
-                                onClick = { null },
-                                label = { Text(text = "test") },
-                                enabled = true,
-                                icon = {Icon(
-                                    painter = painterResource(id = R.drawable.baseline_favorite_24),
-                                    contentDescription = "item"
-                                )},
-                                alwaysShowLabel = true,
-                                colors = NavigationBarItemDefaults.colors(
-                                    selectedIconColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
-                                    unselectedIconColor = MediumDarkGreyColor,
-                                    selectedTextColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
-                                    unselectedTextColor = MediumDarkGreyColor,
-                                    indicatorColor = MaterialTheme.colorScheme.PrimaryBackgroundColor
-                                )
-                            )
-                        }
-                    })
+                    bottomBar = { BottomNavigationBar() })
             }
         }
     }
