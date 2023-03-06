@@ -19,12 +19,13 @@ import com.jumrukovski.quotescompose.ui.theme.*
 
 class MainActivity : ComponentActivity() {
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun Toolbar() {
-        SmallTopAppBar(
+        TopAppBar(
             modifier = Modifier.background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
             title = { Text(stringResource(R.string.app_name)) },
-            colors = TopAppBarDefaults.smallTopAppBarColors(
+            colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = MaterialTheme.colorScheme.PrimaryBackgroundColor,
                 scrolledContainerColor = MaterialTheme.colorScheme.PrimaryBackgroundColor,
                 navigationIconContentColor = MaterialTheme.colorScheme.PrimaryTextColor,
@@ -81,7 +82,6 @@ class MainActivity : ComponentActivity() {
         )
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
