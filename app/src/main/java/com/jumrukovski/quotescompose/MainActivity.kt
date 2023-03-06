@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
@@ -12,9 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
-import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
-import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
+import androidx.compose.ui.unit.dp
+import com.jumrukovski.quotescompose.ui.theme.*
 
 class MainActivity : ComponentActivity() {
 
@@ -42,6 +42,17 @@ class MainActivity : ComponentActivity() {
         )
     }
 
+    @Composable
+    private fun BottomNavigationBar(content: @Composable RowScope.() -> Unit) {
+        NavigationBar(
+            modifier = Modifier,
+            contentColor = MaterialTheme.colorScheme.NavigationBarItemRippleColor,
+            tonalElevation = 0.dp,
+            content = content,
+            containerColor = MaterialTheme.colorScheme.NavigationBarBackgroundColor
+        )
+    }
+
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +72,64 @@ class MainActivity : ComponentActivity() {
                                 .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
                         ) {
                             //todo content details
+                        }
+                    },
+                    bottomBar = {
+                        BottomNavigationBar {
+                            NavigationBarItem(
+                                selected = true,
+                                onClick = { null },
+                                label = { Text(text = "test") },
+                                enabled = true,
+                                icon = {Icon(
+                                    painter = painterResource(id = R.drawable.baseline_search_24),
+                                    contentDescription = "item"
+                                )},
+                                alwaysShowLabel = true,
+                                colors = NavigationBarItemDefaults.colors(
+                                    selectedIconColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
+                                    unselectedIconColor = MediumDarkGreyColor,
+                                    selectedTextColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
+                                    unselectedTextColor = MediumDarkGreyColor,
+                                    indicatorColor = MaterialTheme.colorScheme.NavigationBarBackgroundColor
+                                )
+                            )
+                            NavigationBarItem(
+                                selected = false,
+                                onClick = { null },
+                                label = { Text(text = "test") },
+                                enabled = true,
+                                icon = {Icon(
+                                    painter = painterResource(id = R.drawable.baseline_search_24),
+                                    contentDescription = "item"
+                                )},
+                                alwaysShowLabel = true,
+                                colors = NavigationBarItemDefaults.colors(
+                                    selectedIconColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
+                                    unselectedIconColor = MediumDarkGreyColor,
+                                    selectedTextColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
+                                    unselectedTextColor = MediumDarkGreyColor,
+                                    indicatorColor = MaterialTheme.colorScheme.PrimaryBackgroundColor
+                                )
+                            )
+                            NavigationBarItem(
+                                selected = false,
+                                onClick = { null },
+                                label = { Text(text = "test") },
+                                enabled = true,
+                                icon = {Icon(
+                                    painter = painterResource(id = R.drawable.baseline_search_24),
+                                    contentDescription = "item"
+                                )},
+                                alwaysShowLabel = true,
+                                colors = NavigationBarItemDefaults.colors(
+                                    selectedIconColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
+                                    unselectedIconColor = MediumDarkGreyColor,
+                                    selectedTextColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
+                                    unselectedTextColor = MediumDarkGreyColor,
+                                    indicatorColor = MaterialTheme.colorScheme.PrimaryBackgroundColor
+                                )
+                            )
                         }
                     })
             }
