@@ -12,12 +12,12 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorScheme = darkColorScheme(
     primary = BlackColor,
-    secondary = WhiteColor,
-    tertiary = WhiteColor
+    secondary = GreyColor,
+    tertiary = GreyColor
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = WhiteColor,
+    primary = GreyColor,
     secondary = BlackColor,
     tertiary = BlackColor
 
@@ -32,11 +32,25 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
-val ColorScheme.PrimaryTextColor: Color @Composable
+val ColorScheme.PrimaryTextColor: Color
+    @Composable
+    get() = if (!isSystemInDarkTheme()) BlackColor else GreyColor
+
+val ColorScheme.PrimaryBackgroundColor: Color
+    @Composable
+    get() = if (!isSystemInDarkTheme()) GreyColor else BlackColor
+
+val ColorScheme.NavigationBarBackgroundColor:Color
+@Composable
+get() = if (!isSystemInDarkTheme()) WhiteColor else DarkGreyColor
+
+val ColorScheme.NavigationBarSelectedItemColor:Color
+@Composable
 get() = if (!isSystemInDarkTheme()) BlackColor else WhiteColor
 
-val ColorScheme.PrimaryBackgroundColor: Color @Composable
-get() = if (!isSystemInDarkTheme()) WhiteColor else BlackColor
+val ColorScheme.NavigationBarItemRippleColor:Color
+    @Composable
+    get() = if (!isSystemInDarkTheme()) NavigationItemRippleColorLightTheme else NavigationItemRippleColorDarkTheme
 
 @Composable
 fun QuotesComposeTheme(
@@ -58,9 +72,10 @@ fun QuotesComposeTheme(
         val systemUiController = rememberSystemUiController()
 
         SideEffect {
-            systemUiController.setStatusBarColor(
-                color = if(darkTheme) BlackColor else WhiteColor,
-            )
+            with(systemUiController) {
+                setStatusBarColor(color = if (darkTheme) BlackColor else GreyColor)
+                setNavigationBarColor(color = if (darkTheme) DarkGreyColor else WhiteColor)
+            }
         }
     }
 
