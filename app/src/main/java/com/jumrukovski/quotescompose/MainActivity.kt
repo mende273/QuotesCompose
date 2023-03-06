@@ -82,7 +82,7 @@ class MainActivity : ComponentActivity() {
                                 label = { Text(text = "test") },
                                 enabled = true,
                                 icon = {Icon(
-                                    painter = painterResource(id = R.drawable.baseline_search_24),
+                                    painter = painterResource(id = R.drawable.baseline_home_24),
                                     contentDescription = "item"
                                 )},
                                 alwaysShowLabel = true,
@@ -100,7 +100,7 @@ class MainActivity : ComponentActivity() {
                                 label = { Text(text = "test") },
                                 enabled = true,
                                 icon = {Icon(
-                                    painter = painterResource(id = R.drawable.baseline_search_24),
+                                    painter = painterResource(id = R.drawable.baseline_category_24),
                                     contentDescription = "item"
                                 )},
                                 alwaysShowLabel = true,
@@ -118,7 +118,7 @@ class MainActivity : ComponentActivity() {
                                 label = { Text(text = "test") },
                                 enabled = true,
                                 icon = {Icon(
-                                    painter = painterResource(id = R.drawable.baseline_search_24),
+                                    painter = painterResource(id = R.drawable.baseline_favorite_24),
                                     contentDescription = "item"
                                 )},
                                 alwaysShowLabel = true,
