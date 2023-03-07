@@ -3,6 +3,7 @@ package com.jumrukovski.quotescompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,7 +22,10 @@ class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    private fun Toolbar() {
+    private fun Toolbar(
+        topMenuItems: List<MainActivityMenuItem>,
+        onActionClick: (MainActivityMenuItem) -> Unit = {}
+    ) {
         TopAppBar(
             modifier = Modifier.background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
             title = { Text(stringResource(R.string.app_name)) },
@@ -33,21 +37,23 @@ class MainActivity : ComponentActivity() {
                 actionIconContentColor = MaterialTheme.colorScheme.PrimaryTextColor
             ),
             actions = {
-                IconButton(onClick = {
-                    //todo action icon clicked
-                }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_search_24),
-                        contentDescription = stringResource(id = R.string.action_search),
-                        tint = MaterialTheme.colorScheme.onSurface
-                    )
+                topMenuItems.forEach {
+                    IconButton(onClick = { onActionClick(it) }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_search_24),
+                            contentDescription = stringResource(id = R.string.action_search),
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
                 }
             }
         )
     }
 
+    data class MainActivityMenuItem(val title: String, @DrawableRes val drawable: Int)
+
     @Composable
-    private fun BottomNavigationBar() {
+    private fun BottomNavigationBar(onItemClick: (BottomMenuItem) -> Unit = {}) {
         val selectedIndex = remember { mutableStateOf(0) }
 
         NavigationBar(
@@ -59,7 +65,10 @@ class MainActivity : ComponentActivity() {
                 BottomMenuItem.values().forEachIndexed { index, menuItem ->
                     NavigationBarItem(
                         selected = selectedIndex.value == index,
-                        onClick = { selectedIndex.value = index },
+                        onClick = {
+                            selectedIndex.value = index
+                            onItemClick(BottomMenuItem.values()[index])
+                        },
                         label = { Text(text = stringResource(id = menuItem.titleTextId)) },
                         enabled = true,
                         icon = {
@@ -84,10 +93,22 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val topMenuItems = ArrayList<MainActivityMenuItem>()
+        topMenuItems.add(
+            MainActivityMenuItem(
+                resources.getString(R.string.action_search),
+                R.drawable.baseline_search_24
+            )
+        )
         setContent {
             QuotesComposeTheme {
                 Scaffold(
-                    topBar = { Toolbar() },
+                    topBar = {
+                        Toolbar(topMenuItems) { menuItem ->
+                            //todo handle top menu item
+                        }
+                    },
                     content = { padding ->
                         Box(
                             modifier = Modifier
@@ -98,7 +119,11 @@ class MainActivity : ComponentActivity() {
                             //todo content details
                         }
                     },
-                    bottomBar = { BottomNavigationBar() })
+                    bottomBar = {
+                        BottomNavigationBar { menuItem ->
+                            //todo handle bottom menu item click
+                        }
+                    })
             }
         }
     }
