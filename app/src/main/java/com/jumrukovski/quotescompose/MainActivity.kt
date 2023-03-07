@@ -37,19 +37,28 @@ class MainActivity : ComponentActivity() {
                 actionIconContentColor = MaterialTheme.colorScheme.PrimaryTextColor
             ),
             actions = {
-                topMenuItems.forEach {
-                    IconButton(onClick = { onActionClick(it) }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.baseline_search_24),
-                            contentDescription = stringResource(id = R.string.action_search),
-                            tint = MaterialTheme.colorScheme.onSurface
-                        )
-                    }
+                topMenuItems.forEach { topMenuItem ->
+                    TopMenuItem(topMenuItem = topMenuItem, onActionClick = { onActionClick(it) })
                 }
             }
         )
     }
 
+    @Composable
+    private fun TopMenuItem(
+        topMenuItem: MainActivityMenuItem,
+        onActionClick: (MainActivityMenuItem) -> Unit = {}
+    ) {
+        IconButton(onClick = { onActionClick(topMenuItem) }) {
+            Icon(
+                painter = painterResource(id = topMenuItem.drawable),
+                contentDescription = topMenuItem.title,
+                tint = MaterialTheme.colorScheme.onSurface
+            )
+        }
+    }
+
+    //todo do it differently
     data class MainActivityMenuItem(val title: String, @DrawableRes val drawable: Int)
 
     @Composable
