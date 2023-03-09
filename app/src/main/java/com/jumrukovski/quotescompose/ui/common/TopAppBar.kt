@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.shared
+package com.jumrukovski.quotescompose.ui.common
 
 import androidx.compose.foundation.background
 import androidx.compose.material3.*
