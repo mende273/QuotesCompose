@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.jumrukovski.quotescompose.BottomMenuItem
 import com.jumrukovski.quotescompose.ui.theme.MediumDarkGreyColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarItemRippleColor

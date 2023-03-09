@@ -6,13 +6,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.jumrukovski.quotescompose.MainScreenMenuItem
+import com.jumrukovski.quotescompose.ui.feature.main.MainScreenMenuItem
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Toolbar(title:String,
+fun Toolbar(
+    title: String,
     topMenuItems: List<MainScreenMenuItem>,
     onActionClick: (MainScreenMenuItem) -> Unit = {}
 ) {
