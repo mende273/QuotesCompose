@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose
+package com.jumrukovski.quotescompose.ui.feature.search
 
 import android.content.Context
 import android.content.Intent

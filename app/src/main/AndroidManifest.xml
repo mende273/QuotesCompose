@@ -12,7 +12,7 @@
         android:theme="@style/Theme.QuotesCompose"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.feature.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.QuotesCompose">
@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchActivity"/>
+        <activity android:name=".ui.feature.search.SearchActivity"/>
     </application>
 
 </manifest>

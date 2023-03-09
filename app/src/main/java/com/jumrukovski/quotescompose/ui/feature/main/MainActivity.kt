@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose
+package com.jumrukovski.quotescompose.ui.feature.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,6 +11,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import com.jumrukovski.quotescompose.R
+import com.jumrukovski.quotescompose.ui.feature.search.SearchActivity
 import com.jumrukovski.quotescompose.ui.common.BottomNavigationBar
 import com.jumrukovski.quotescompose.ui.common.Toolbar
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
