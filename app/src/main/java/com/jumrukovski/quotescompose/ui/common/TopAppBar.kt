@@ -5,15 +5,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import com.jumrukovski.quotescompose.MainActivity
+import androidx.compose.ui.res.stringResource
+import com.jumrukovski.quotescompose.MainScreenMenuItem
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Toolbar(title:String,
-    topMenuItems: List<MainActivity.MainActivityMenuItem>,
-    onActionClick: (MainActivity.MainActivityMenuItem) -> Unit = {}
+    topMenuItems: List<MainScreenMenuItem>,
+    onActionClick: (MainScreenMenuItem) -> Unit = {}
 ) {
     TopAppBar(
         modifier = Modifier.background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
@@ -35,13 +36,13 @@ fun Toolbar(title:String,
 
 @Composable
 private fun TopMenuItem(
-    topMenuItem: MainActivity.MainActivityMenuItem,
-    onActionClick: (MainActivity.MainActivityMenuItem) -> Unit = {}
+    topMenuItem: MainScreenMenuItem,
+    onActionClick: (MainScreenMenuItem) -> Unit = {}
 ) {
     IconButton(onClick = { onActionClick(topMenuItem) }) {
         Icon(
-            painter = painterResource(id = topMenuItem.drawable),
-            contentDescription = topMenuItem.title,
+            painter = painterResource(id = topMenuItem.icon),
+            contentDescription = stringResource(id = topMenuItem.titleTextId),
             tint = MaterialTheme.colorScheme.onSurface
         )
     }
