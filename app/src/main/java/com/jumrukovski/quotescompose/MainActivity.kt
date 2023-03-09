@@ -37,7 +37,9 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     topBar = {
                         Toolbar(stringResource(id = R.string.app_name), topMenuItems) { menuItem ->
-                            //todo handle top menu item
+                            if(menuItem.title == resources.getString(R.string.action_search)){
+                                startActivity(SearchActivity.newIntent(this@MainActivity))
+                            }
                         }
                     },
                     content = { padding ->
