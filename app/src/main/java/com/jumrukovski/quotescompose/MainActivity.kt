@@ -12,8 +12,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.jumrukovski.quotescompose.ui.shared.BottomNavigationBar
-import com.jumrukovski.quotescompose.ui.shared.Toolbar
+import com.jumrukovski.quotescompose.ui.common.BottomNavigationBar
+import com.jumrukovski.quotescompose.ui.common.Toolbar
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 

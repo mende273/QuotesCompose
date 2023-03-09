@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.shared
+package com.jumrukovski.quotescompose.ui.common
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
