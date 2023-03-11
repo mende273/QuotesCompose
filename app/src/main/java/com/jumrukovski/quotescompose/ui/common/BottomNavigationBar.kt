@@ -2,20 +2,30 @@ package com.jumrukovski.quotescompose.ui.common
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.jumrukovski.quotescompose.ui.theme.MediumDarkGreyColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarItemRippleColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarSelectedItemColor
 
 @Composable
-fun BottomNavigationBar(onItemClick: (BottomMenuItem) -> Unit = {}) {
-    val selectedIndex = rememberSaveable{ mutableStateOf(0) }
+fun BottomNavigationBar(
+    navHostController: NavHostController
+) {
+
+    val items = listOf(
+        Screen.Home,
+        Screen.Categories,
+        Screen.Favourites
+    )
 
     NavigationBar(
         modifier = Modifier,
@@ -23,19 +33,27 @@ fun BottomNavigationBar(onItemClick: (BottomMenuItem) -> Unit = {}) {
         tonalElevation = 0.dp,
         containerColor = MaterialTheme.colorScheme.NavigationBarBackgroundColor,
         content = {
-            BottomMenuItem.values().forEachIndexed { index, menuItem ->
+            val navBackStackEntry by navHostController.currentBackStackEntryAsState()
+            val currentDestination = navBackStackEntry?.destination
+
+            items.forEach { screen ->
                 NavigationBarItem(
-                    selected = selectedIndex.value == index,
+                    selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                     onClick = {
-                        selectedIndex.value = index
-                        onItemClick(BottomMenuItem.values()[index])
+                        navHostController.navigate(screen.route) {
+                            popUpTo(navHostController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     },
-                    label = { Text(text = stringResource(id = menuItem.titleTextId)) },
+                    label = { Text(text = stringResource(id = screen.resourceId)) },
                     enabled = true,
                     icon = {
                         Icon(
-                            painter = painterResource(id = menuItem.icon),
-                            contentDescription = stringResource(id = menuItem.titleTextId)
+                            painter = painterResource(id = screen.icon),
+                            contentDescription = stringResource(id = screen.resourceId)
                         )
                     },
                     alwaysShowLabel = true,
