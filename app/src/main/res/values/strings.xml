@@ -4,7 +4,8 @@
     <!-- action items -->
     <string name="action_search">Search</string>
 
-    <string name="bottom_navigation_menu_item_home">Home</string>
-    <string name="bottom_navigation_menu_item_categories">Categories</string>
-    <string name="bottom_navigation_menu_item_favourites">Favourites</string>
+    <!-- Screens -->
+    <string name="screen_home">Home</string>
+    <string name="screen_categories">Categories</string>
+    <string name="screen_favourites">Favourites</string>
 </resources>
