@@ -3,13 +3,9 @@ package com.jumrukovski.quotescompose.ui.feature.main
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -21,44 +17,13 @@ import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.ui.common.BottomNavigationBar
 import com.jumrukovski.quotescompose.ui.common.Screen
 import com.jumrukovski.quotescompose.ui.common.Toolbar
+import com.jumrukovski.quotescompose.ui.feature.categories.CategoriesScreen
+import com.jumrukovski.quotescompose.ui.feature.favourites.FavouritesScreen
+import com.jumrukovski.quotescompose.ui.feature.home.HomeScreen
 import com.jumrukovski.quotescompose.ui.feature.search.SearchActivity
-import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 class MainActivity : ComponentActivity() {
-
-    @Composable
-    private fun HomeScreen(navHostController: NavHostController) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
-        ) {
-            Text(text = "Home screen")
-        }
-    }
-
-    @Composable
-    private fun CategoriesScreen(navHostController: NavHostController) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
-        ) {
-            Text(text = "Categories screen")
-        }
-    }
-
-    @Composable
-    private fun FavouritesScreen(navHostController: NavHostController) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
-        ) {
-            Text(text = "Favourites screen")
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,20 +43,28 @@ class MainActivity : ComponentActivity() {
                         }
                     },
                     content = { innerPadding ->
-                        NavHost(
-                            navController,
-                            startDestination = Screen.Home.route,
-                            Modifier.padding(innerPadding)
-                        ) {
-                            composable(Screen.Home.route) { HomeScreen(navController) }
-                            composable(Screen.Categories.route) { CategoriesScreen(navController) }
-                            composable(Screen.Favourites.route) { FavouritesScreen(navController) }
-                        }
+                        ContentNavigation(
+                            navHostController = navController,
+                            innerPadding = innerPadding
+                        )
                     },
                     bottomBar = {
                         BottomNavigationBar(navController)
                     })
             }
+        }
+    }
+
+    @Composable
+    private fun ContentNavigation(navHostController: NavHostController,innerPadding:PaddingValues){
+        NavHost(
+            navHostController,
+            startDestination = Screen.Home.route,
+            Modifier.padding(innerPadding)
+        ) {
+            composable(Screen.Home.route) { HomeScreen(navHostController) }
+            composable(Screen.Categories.route) { CategoriesScreen(navHostController) }
+            composable(Screen.Favourites.route) { FavouritesScreen(navHostController) }
         }
     }
 }
