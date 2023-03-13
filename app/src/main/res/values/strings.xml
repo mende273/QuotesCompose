@@ -8,4 +8,5 @@
     <string name="screen_home">Home</string>
     <string name="screen_categories">Categories</string>
     <string name="screen_favourites">Favourites</string>
+    <string name="screen_quote_detail">Quote Detail</string>
 </resources>

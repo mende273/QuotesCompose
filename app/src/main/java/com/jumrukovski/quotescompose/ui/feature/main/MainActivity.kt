@@ -18,6 +18,7 @@ import com.jumrukovski.quotescompose.ui.common.BottomNavigationBar
 import com.jumrukovski.quotescompose.ui.common.Screen
 import com.jumrukovski.quotescompose.ui.common.Toolbar
 import com.jumrukovski.quotescompose.ui.feature.categories.CategoriesScreen
+import com.jumrukovski.quotescompose.ui.feature.detail.QuoteDetailScreen
 import com.jumrukovski.quotescompose.ui.feature.favourites.FavouritesScreen
 import com.jumrukovski.quotescompose.ui.feature.home.HomeScreen
 import com.jumrukovski.quotescompose.ui.feature.search.SearchActivity
@@ -65,6 +66,7 @@ class MainActivity : ComponentActivity() {
             composable(Screen.Home.route) { HomeScreen(navHostController) }
             composable(Screen.Categories.route) { CategoriesScreen(navHostController) }
             composable(Screen.Favourites.route) { FavouritesScreen(navHostController) }
+            composable(Screen.QuoteDetail.route){QuoteDetailScreen()}
         }
     }
 }
