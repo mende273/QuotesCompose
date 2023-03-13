@@ -28,23 +28,17 @@ class SearchActivity : ComponentActivity() {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
+                        .background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            text = "Search Activity",
-                            color = MaterialTheme.colorScheme.PrimaryTextColor
-                        )
-                    }
+                    Text(
+                        text = "Search Activity",
+                        color = MaterialTheme.colorScheme.PrimaryTextColor
+                    )
                 }
             }
         }
     }
-
 
     companion object {
         fun newIntent(context: Context): Intent {
