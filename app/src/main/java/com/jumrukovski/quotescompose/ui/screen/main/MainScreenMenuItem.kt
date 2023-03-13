@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.feature.main
+package com.jumrukovski.quotescompose.ui.screen.main
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

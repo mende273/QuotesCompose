@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.feature.categories
+package com.jumrukovski.quotescompose.ui.screen.favourites
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -11,12 +11,12 @@ import androidx.navigation.NavHostController
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 
 @Composable
-fun CategoriesScreen(navHostController: NavHostController) {
+fun FavouritesScreen(navHostController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
     ) {
-        Text(text = "Categories screen")
+        Text(text = "Favourites screen")
     }
 }

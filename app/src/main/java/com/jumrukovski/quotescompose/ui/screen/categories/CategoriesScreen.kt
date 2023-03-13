@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.feature.detail
+package com.jumrukovski.quotescompose.ui.screen.categories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -6,18 +6,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 
 @Composable
-fun QuoteDetailScreen(){
+fun CategoriesScreen(navHostController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
-        contentAlignment = Alignment.Center
+            .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
     ) {
-        Text(text = "Quote detail Screen")
+        Text(text = "Categories screen")
     }
 }
