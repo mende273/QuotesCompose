@@ -1,10 +1,8 @@
 package com.jumrukovski.quotescompose.ui.feature.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -22,17 +20,30 @@ fun HomeScreen(navHostController: NavHostController) {
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
     ) {
-        MainScreen()
+        HomeScreenContents()
     }
 }
 
 @Composable
-private fun MainScreen(){
+private fun HomeScreenContents(){
     val dumbItems = listOf("item 1","item 2","item 3","item 4")
+    val dumbInnerItems = ArrayList<String>()
+    for(i in 0..50){
+        dumbInnerItems.add("item $i")
+    }
     Column {
         LazyRow{
             items(dumbItems){
                 Box(modifier = Modifier.padding(16.dp)){
+                    Text(text = it)
+                }
+            }
+        }
+        LazyColumn{
+            items(dumbInnerItems){
+                Box(modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()){
                     Text(text = it)
                 }
             }
