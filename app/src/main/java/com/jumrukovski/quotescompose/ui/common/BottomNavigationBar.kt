@@ -51,10 +51,12 @@ fun BottomNavigationBar(
                     label = { Text(text = stringResource(id = screen.resourceId)) },
                     enabled = true,
                     icon = {
-                        Icon(
-                            painter = painterResource(id = screen.icon),
-                            contentDescription = stringResource(id = screen.resourceId)
-                        )
+                        screen.icon?.let { painterResource(id = screen.icon) }?.let {
+                            Icon(
+                                painter = it,
+                                contentDescription = stringResource(id = screen.resourceId)
+                            )
+                        }
                     },
                     alwaysShowLabel = true,
                     colors = NavigationBarItemDefaults.colors(
