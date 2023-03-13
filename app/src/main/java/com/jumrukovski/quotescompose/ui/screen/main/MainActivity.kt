@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.feature.main
+package com.jumrukovski.quotescompose.ui.screen.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -17,11 +17,11 @@ import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.ui.common.BottomNavigationBar
 import com.jumrukovski.quotescompose.ui.common.Screen
 import com.jumrukovski.quotescompose.ui.common.Toolbar
-import com.jumrukovski.quotescompose.ui.feature.categories.CategoriesScreen
-import com.jumrukovski.quotescompose.ui.feature.detail.QuoteDetailScreen
-import com.jumrukovski.quotescompose.ui.feature.favourites.FavouritesScreen
-import com.jumrukovski.quotescompose.ui.feature.home.HomeScreen
-import com.jumrukovski.quotescompose.ui.feature.search.SearchActivity
+import com.jumrukovski.quotescompose.ui.screen.categories.CategoriesScreen
+import com.jumrukovski.quotescompose.ui.screen.detail.QuoteDetailScreen
+import com.jumrukovski.quotescompose.ui.screen.favourites.FavouritesScreen
+import com.jumrukovski.quotescompose.ui.screen.home.HomeScreen
+import com.jumrukovski.quotescompose.ui.screen.search.SearchActivity
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 class MainActivity : ComponentActivity() {

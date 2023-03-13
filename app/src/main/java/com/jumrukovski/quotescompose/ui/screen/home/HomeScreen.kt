@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.feature.home
+package com.jumrukovski.quotescompose.ui.screen.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
