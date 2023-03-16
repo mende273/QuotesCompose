@@ -3,31 +3,37 @@ package com.jumrukovski.quotescompose.ui.screen.main
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
+import androidx.activity.viewModels
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
 import com.jumrukovski.quotescompose.R
+import com.jumrukovski.quotescompose.TagsViewModel
+import com.jumrukovski.quotescompose.navigation.AppNavigation
 import com.jumrukovski.quotescompose.ui.common.BottomNavigationBar
-import com.jumrukovski.quotescompose.ui.common.Screen
 import com.jumrukovski.quotescompose.ui.common.Toolbar
-import com.jumrukovski.quotescompose.ui.screen.categories.CategoriesScreen
-import com.jumrukovski.quotescompose.ui.screen.detail.QuoteDetailScreen
-import com.jumrukovski.quotescompose.ui.screen.favourites.FavouritesScreen
-import com.jumrukovski.quotescompose.ui.screen.home.HomeScreen
 import com.jumrukovski.quotescompose.ui.screen.search.SearchActivity
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    //TODO create screen tags
+
+    //TODO place here just for test
+    private val viewModel: TagsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //TODO just for test
+        lifecycleScope.launch {
+            viewModel.getQuotesForTag("love")
+        }
+
         setContent {
             val navController = rememberNavController()
 
@@ -44,7 +50,7 @@ class MainActivity : ComponentActivity() {
                         }
                     },
                     content = { innerPadding ->
-                        ContentNavigation(
+                        AppNavigation(
                             navHostController = navController,
                             innerPadding = innerPadding
                         )
@@ -53,20 +59,6 @@ class MainActivity : ComponentActivity() {
                         BottomNavigationBar(navController)
                     })
             }
-        }
-    }
-
-    @Composable
-    private fun ContentNavigation(navHostController: NavHostController,innerPadding:PaddingValues){
-        NavHost(
-            navHostController,
-            startDestination = Screen.Home.route,
-            Modifier.padding(innerPadding)
-        ) {
-            composable(Screen.Home.route) { HomeScreen(navHostController) }
-            composable(Screen.Categories.route) { CategoriesScreen(navHostController) }
-            composable(Screen.Favourites.route) { FavouritesScreen(navHostController) }
-            composable(Screen.QuoteDetail.route){QuoteDetailScreen()}
         }
     }
 }

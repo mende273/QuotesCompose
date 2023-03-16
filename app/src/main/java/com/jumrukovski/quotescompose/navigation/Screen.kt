@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.common
+package com.jumrukovski.quotescompose.navigation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -8,5 +8,5 @@ sealed class Screen(val route: String, @StringRes val resourceId: Int, @Drawable
     object Home : Screen("home", R.string.screen_home, R.drawable.baseline_home_24)
     object Categories : Screen("categories", R.string.screen_categories, R.drawable.baseline_category_24)
     object Favourites : Screen("favourites", R.string.screen_favourites, R.drawable.baseline_favorite_24)
-    object QuoteDetail:Screen("quote detail",R.string.screen_quote_detail,null)
+    object QuoteDetail: Screen("quote detail",R.string.screen_quote_detail,null)
 }

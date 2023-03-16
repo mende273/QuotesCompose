@@ -11,6 +11,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.jumrukovski.quotescompose.navigation.Screen
 import com.jumrukovski.quotescompose.ui.theme.MediumDarkGreyColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarItemRippleColor
