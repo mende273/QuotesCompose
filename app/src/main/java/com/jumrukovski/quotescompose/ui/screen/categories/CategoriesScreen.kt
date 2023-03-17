@@ -19,7 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.jumrukovski.quotescompose.navigation.Screen
-import com.jumrukovski.quotescompose.navigation.addCategoryNameAsRouteArgument
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 
 @Composable
@@ -42,7 +41,7 @@ fun CategoriesScreen(navHostController: NavHostController, viewModel: Categories
                     .fillMaxWidth()
                     .padding(16.dp)
                     .clickable {
-                        navHostController.navigate(Screen.CategoryDetail.route.addCategoryNameAsRouteArgument(it.name)){
+                        navHostController.navigate(Screen.CategoryDetail.getRouteWithArgument(it.name)){
                            // popUpTo(navHostController.graph.findStartDestination().id)
                             launchSingleTop = true
                         }
