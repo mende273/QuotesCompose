@@ -1,6 +1,7 @@
 package com.jumrukovski.quotescompose.ui.screen.categories
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.jumrukovski.quotescompose.navigation.Screen
+import com.jumrukovski.quotescompose.navigation.addCategoryNameAsRouteArgument
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 
 @Composable
@@ -35,7 +38,16 @@ fun CategoriesScreen(navHostController: NavHostController, viewModel: Categories
     ) {
         LazyColumn() {
             items(tagItems) {
-                Text(modifier = Modifier.fillMaxWidth().padding(16.dp), text = it.name, color = Color.Black)
+                Text(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .clickable {
+                        navHostController.navigate(Screen.CategoryDetail.route.addCategoryNameAsRouteArgument(it.name)){
+                           // popUpTo(navHostController.graph.findStartDestination().id)
+                            launchSingleTop = true
+                        }
+                    }, text = it.name, color = Color.Black
+                )
             }
         }
     }
