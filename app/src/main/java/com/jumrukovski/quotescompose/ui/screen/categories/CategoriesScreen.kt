@@ -17,12 +17,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import com.jumrukovski.quotescompose.navigation.Screen
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 
 @Composable
-fun CategoriesScreen(navHostController: NavHostController, viewModel: CategoriesViewModel) {
+fun CategoriesScreen(viewModel: CategoriesViewModel,
+                     onNavigateToCategoryItems: (String) -> Unit) {
 
     LaunchedEffect(key1 = "items") {
         viewModel.getAllTags()
@@ -41,10 +40,7 @@ fun CategoriesScreen(navHostController: NavHostController, viewModel: Categories
                     .fillMaxWidth()
                     .padding(16.dp)
                     .clickable {
-                        navHostController.navigate(Screen.CategoryDetail.getRouteWithArgument(it.name)){
-                           // popUpTo(navHostController.graph.findStartDestination().id)
-                            launchSingleTop = true
-                        }
+                        onNavigateToCategoryItems(it.name)
                     }, text = it.name, color = Color.Black
                 )
             }
