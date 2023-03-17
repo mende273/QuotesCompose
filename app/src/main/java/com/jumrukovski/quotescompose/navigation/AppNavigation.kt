@@ -36,13 +36,9 @@ fun AppNavigation(
         composable(Screen.Favourites.route) { FavouritesScreen(navHostController) }
         composable(Screen.QuoteDetail.route) { QuoteDetailScreen() }
         composable(Screen.CategoryDetail.route) {backStackEntry ->
-            val category:String = backStackEntry.arguments?.getString("categoryName","") ?: ""
+            val category:String = backStackEntry.arguments?.getString(Screen.CategoryDetail.CATEGORY_NAME_ARGUMENT,"") ?: ""
             val viewModel: CategoryItemsViewModel by activity.viewModels()
             CategoryItemsScreen(navHostController = navHostController, viewModel = viewModel,categoryName = category)
         }
     }
-}
-
-fun String.addCategoryNameAsRouteArgument(argument:String):String{
-    return this.replace("{categoryName}",argument)
 }
