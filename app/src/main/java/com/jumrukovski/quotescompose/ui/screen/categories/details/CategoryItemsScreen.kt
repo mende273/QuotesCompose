@@ -13,17 +13,18 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import com.jumrukovski.quotescompose.data.model.QuoteDTO
 import com.jumrukovski.quotescompose.navigation.Screen
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 
 @Composable
-fun CategoryItemsScreen(navHostController: NavHostController, viewModel: CategoryItemsViewModel,categoryName:String) {
+fun CategoryItemsScreen(viewModel: CategoryItemsViewModel,categoryName:String,
+                        onNavigateToQuoteDetails: (QuoteDTO) -> Unit) {
+    val categoryItems by viewModel.items.collectAsState()
+
     LaunchedEffect(key1 = Screen.CategoryDetail.CATEGORY_NAME_ARGUMENT){
         viewModel.getQuotesForTag(categoryName)
     }
-
-    val categoryItems by viewModel.items.collectAsState()
 
     Box(
         modifier = Modifier
@@ -31,14 +32,17 @@ fun CategoryItemsScreen(navHostController: NavHostController, viewModel: Categor
             .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
             .padding(16.dp)
     ) {
-        LazyColumn(){
-            items(categoryItems){
-                Box(modifier = Modifier.fillMaxSize().clickable {
-                    navHostController.navigate(Screen.QuoteDetail.route)
-                }){
-                    Column {
-                        Text(text = it.content)
-                        Spacer(modifier = Modifier.height(20.dp))
+        Column {
+            Text(text = categoryName)
+            LazyColumn(){
+                items(categoryItems){
+                    Box(modifier = Modifier
+                        .fillMaxSize()
+                        .clickable { onNavigateToQuoteDetails(it) }){
+                        Column {
+                            Text(text = it.content)
+                            Spacer(modifier = Modifier.height(20.dp))
+                        }
                     }
                 }
             }
