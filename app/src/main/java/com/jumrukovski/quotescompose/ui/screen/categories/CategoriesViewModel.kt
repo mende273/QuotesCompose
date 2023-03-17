@@ -14,8 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CategoriesViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
     private val _items: MutableStateFlow<List<TagDTO>> = MutableStateFlow(emptyList())
-    val items: StateFlow<List<TagDTO>>
-        get() = _items
+    val items: StateFlow<List<TagDTO>> = _items
 
     suspend fun getAllTags() {
         viewModelScope.launch {
