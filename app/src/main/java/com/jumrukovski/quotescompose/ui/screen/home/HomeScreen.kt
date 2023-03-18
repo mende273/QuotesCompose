@@ -12,7 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.jumrukovski.quotescompose.navigation.Screen
+import com.jumrukovski.quotescompose.navigation.ScreenWithArgument
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 
 @Composable
@@ -54,7 +54,7 @@ private fun HomeScreenContents(navHostController: NavHostController){
                     .padding(16.dp)
                     .fillMaxWidth()
                     .clickable {
-                        navHostController.navigate(Screen.QuoteDetail.route)
+                        navHostController.navigate(ScreenWithArgument.QuoteDetail.route)
                     }){
                     Text(text = it)
                 }

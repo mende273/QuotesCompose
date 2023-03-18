@@ -14,7 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
-import com.jumrukovski.quotescompose.navigation.Screen
+import com.jumrukovski.quotescompose.navigation.ScreenWithArgument
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 
 @Composable
@@ -22,7 +22,7 @@ fun CategoryItemsScreen(viewModel: CategoryItemsViewModel,categoryName:String,
                         onNavigateToQuoteDetails: (QuoteDTO) -> Unit) {
     val categoryItems by viewModel.items.collectAsState()
 
-    LaunchedEffect(key1 = Screen.CategoryDetail.CATEGORY_NAME_ARGUMENT){
+    LaunchedEffect(key1 = ScreenWithArgument.CategoryDetail.argument){
         viewModel.getQuotesForTag(categoryName)
     }
 
