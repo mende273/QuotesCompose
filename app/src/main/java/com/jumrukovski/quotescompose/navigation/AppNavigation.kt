@@ -34,28 +34,28 @@ fun AppNavigation(
         composable(Screen.Categories.route) {
             val viewModel: CategoriesViewModel by activity.viewModels()
             CategoriesScreen(viewModel) {
-                navHostController.navigate(Screen.CategoryDetail.getRouteWithArgument(it)) {
+                navHostController.navigate(ScreenWithArgument.CategoryDetail.getRouteWithArgument(it)) {
                     launchSingleTop = true
                 }
             }
         }
         composable(Screen.Favourites.route) { FavouritesScreen(navHostController) }
-        composable(Screen.QuoteDetail.route) {
+        composable(ScreenWithArgument.QuoteDetail.route) {
             val bundleArguments = navHostController.previousBackStackEntry?.arguments
            val quote = if (Build.VERSION.SDK_INT >= 33) {
-               bundleArguments?.getParcelable(Screen.QuoteDetail.QUOTE_ARGUMENT,QuoteDTO::class.java)
+               bundleArguments?.getParcelable(ScreenWithArgument.QuoteDetail.argument,QuoteDTO::class.java)
             } else {
-               bundleArguments?.getParcelable(Screen.QuoteDetail.QUOTE_ARGUMENT)
+               bundleArguments?.getParcelable(ScreenWithArgument.QuoteDetail.argument)
             }
             QuoteDetailScreen(quote)
         }
-        composable(Screen.CategoryDetail.route) { backStackEntry ->
+        composable(ScreenWithArgument.CategoryDetail.route) { backStackEntry ->
             val category: String = backStackEntry.arguments?.getString(
-                Screen.CategoryDetail.CATEGORY_NAME_ARGUMENT, "") ?: ""
+                ScreenWithArgument.CategoryDetail.argument, "") ?: ""
             val viewModel: CategoryItemsViewModel by activity.viewModels()
             CategoryItemsScreen(viewModel = viewModel, categoryName = category) {
-                navHostController.currentBackStackEntry?.arguments?.putParcelable(Screen.QuoteDetail.QUOTE_ARGUMENT, it)
-                navHostController.navigate(Screen.QuoteDetail.route) {
+                navHostController.currentBackStackEntry?.arguments?.putParcelable(ScreenWithArgument.QuoteDetail.argument, it)
+                navHostController.navigate(ScreenWithArgument.QuoteDetail.route) {
                     launchSingleTop = true
                 }
             }
