@@ -30,7 +30,9 @@ fun AppNavigation(
         startDestination = Screen.Home.route,
         Modifier.padding(innerPadding)
     ) {
-        composable(Screen.Home.route) { HomeScreen(navHostController) }
+        composable(Screen.Home.route) { HomeScreen(){
+            //navigate to quote detail screen
+        } }
         composable(Screen.Categories.route) {
             val viewModel: CategoriesViewModel by activity.viewModels()
             CategoriesScreen(viewModel) {
