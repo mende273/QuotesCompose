@@ -31,9 +31,13 @@ fun AppNavigation(
         startDestination = Screen.Home.route,
         Modifier.padding(innerPadding)
     ) {
-        composable(Screen.Home.route) { HomeScreen(){
-            //navigate to quote detail screen
-        } }
+        composable(Screen.Home.route) {
+            HomeScreen(onNavigateToQuoteDetails = {
+                //todo navigate to quote details
+            }, onNavigateToRandomQuote = {
+                navHostController.navigate(Screen.RandomQuote.route)
+            })
+        }
         composable(Screen.Categories.route) {
             val viewModel: CategoriesViewModel by activity.viewModels()
             CategoriesScreen(viewModel) {
@@ -45,25 +49,32 @@ fun AppNavigation(
         composable(Screen.Favourites.route) { FavouritesScreen(navHostController) }
         composable(ScreenWithArgument.QuoteDetail.route) {
             val bundleArguments = navHostController.previousBackStackEntry?.arguments
-           val quote = if (Build.VERSION.SDK_INT >= 33) {
-               bundleArguments?.getParcelable(ScreenWithArgument.QuoteDetail.argument,QuoteDTO::class.java)
+            val quote = if (Build.VERSION.SDK_INT >= 33) {
+                bundleArguments?.getParcelable(
+                    ScreenWithArgument.QuoteDetail.argument,
+                    QuoteDTO::class.java
+                )
             } else {
-               bundleArguments?.getParcelable(ScreenWithArgument.QuoteDetail.argument)
+                bundleArguments?.getParcelable(ScreenWithArgument.QuoteDetail.argument)
             }
             QuoteDetailScreen(quote)
         }
         composable(ScreenWithArgument.CategoryDetail.route) { backStackEntry ->
             val category: String = backStackEntry.arguments?.getString(
-                ScreenWithArgument.CategoryDetail.argument, "") ?: ""
+                ScreenWithArgument.CategoryDetail.argument, ""
+            ) ?: ""
             val viewModel: CategoryItemsViewModel by activity.viewModels()
             CategoryItemsScreen(viewModel = viewModel, categoryName = category) {
-                navHostController.currentBackStackEntry?.arguments?.putParcelable(ScreenWithArgument.QuoteDetail.argument, it)
+                navHostController.currentBackStackEntry?.arguments?.putParcelable(
+                    ScreenWithArgument.QuoteDetail.argument,
+                    it
+                )
                 navHostController.navigate(ScreenWithArgument.QuoteDetail.route) {
                     launchSingleTop = true
                 }
             }
         }
-        composable(Screen.RandomQuote.route){
+        composable(Screen.RandomQuote.route) {
             RandomQuoteScreen()
         }
     }
