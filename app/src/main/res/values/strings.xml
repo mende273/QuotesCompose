@@ -10,4 +10,5 @@
     <string name="screen_favourites">Favourites</string>
     <string name="screen_quote_detail">Quote Detail</string>
     <string name="screen_category_detail">Category Detail</string>
+    <string name="screen_random_quote">Random Quote</string>
 </resources>

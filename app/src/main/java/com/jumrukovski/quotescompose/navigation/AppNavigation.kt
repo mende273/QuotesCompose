@@ -18,6 +18,7 @@ import com.jumrukovski.quotescompose.ui.screen.categories.details.CategoryItemsV
 import com.jumrukovski.quotescompose.ui.screen.detail.QuoteDetailScreen
 import com.jumrukovski.quotescompose.ui.screen.favourites.FavouritesScreen
 import com.jumrukovski.quotescompose.ui.screen.home.HomeScreen
+import com.jumrukovski.quotescompose.ui.screen.random.RandomQuoteScreen
 
 @Composable
 fun AppNavigation(
@@ -61,6 +62,9 @@ fun AppNavigation(
                     launchSingleTop = true
                 }
             }
+        }
+        composable(Screen.RandomQuote.route){
+            RandomQuoteScreen()
         }
     }
 }

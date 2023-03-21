@@ -8,6 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.rememberNavController
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.navigation.AppNavigation
+import com.jumrukovski.quotescompose.navigation.Screen
 import com.jumrukovski.quotescompose.ui.common.BottomNavigationBar
 import com.jumrukovski.quotescompose.ui.common.Toolbar
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
@@ -30,7 +31,7 @@ class MainActivity : ComponentActivity() {
                             MainScreenMenuItem.values().asList()
                         ){
                             when(it){
-                                MainScreenMenuItem.RANDOM -> ""//todo
+                                MainScreenMenuItem.RANDOM -> navController.navigate(Screen.RandomQuote.route)
                             }
                         }
                     },
