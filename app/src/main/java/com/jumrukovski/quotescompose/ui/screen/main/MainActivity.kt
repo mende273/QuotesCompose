@@ -10,7 +10,6 @@ import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.navigation.AppNavigation
 import com.jumrukovski.quotescompose.ui.common.BottomNavigationBar
 import com.jumrukovski.quotescompose.ui.common.Toolbar
-import com.jumrukovski.quotescompose.ui.screen.search.SearchActivity
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,11 +28,7 @@ class MainActivity : ComponentActivity() {
                         Toolbar(
                             stringResource(id = R.string.app_name),
                             MainScreenMenuItem.values().asList()
-                        ) { menuItem ->
-                            if (menuItem == MainScreenMenuItem.SEARCH) {
-                                startActivity(SearchActivity.newIntent(this@MainActivity))
-                            }
-                        }
+                        )
                     },
                     content = { innerPadding ->
                         AppNavigation(this@MainActivity,
