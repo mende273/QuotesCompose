@@ -14,7 +14,7 @@ import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 @Composable
 fun Toolbar(
     title: String,
-    topMenuItems: List<MainScreenMenuItem>,
+    topMenuItems: List<MainScreenMenuItem> = emptyList(),
     onActionClick: (MainScreenMenuItem) -> Unit = {}) {
     TopAppBar(
         modifier = Modifier.background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
@@ -27,8 +27,12 @@ fun Toolbar(
             actionIconContentColor = MaterialTheme.colorScheme.PrimaryTextColor
         ),
         actions = {
-            topMenuItems.forEach { topMenuItem ->
-                TopMenuItem(topMenuItem = topMenuItem, onActionClick = { onActionClick(it) })
+            with(topMenuItems){
+                if(this.isNotEmpty()){
+                    this.forEach { topMenuItem ->
+                        TopMenuItem(topMenuItem = topMenuItem, onActionClick = { onActionClick(it) })
+                    }
+                }
             }
         }
     )
