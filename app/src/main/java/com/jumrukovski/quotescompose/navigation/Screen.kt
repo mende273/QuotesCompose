@@ -8,6 +8,7 @@ sealed class Screen(val route: String, @StringRes val resourceId: Int, @Drawable
     object Home : Screen("home", R.string.screen_home, R.drawable.baseline_home_24)
     object Categories : Screen("categories", R.string.screen_categories, R.drawable.baseline_category_24)
     object Favourites : Screen("favourites", R.string.screen_favourites, R.drawable.baseline_favorite_24)
+    object RandomQuote:Screen("random quote",R.string.screen_random_quote,R.drawable.baseline_random)
 }
 
 sealed class ScreenWithArgument(private val originalRoute: String, val argument:String, @StringRes resourceId: Int, @DrawableRes icon: Int?):Screen("$originalRoute{$argument}", resourceId, icon){
