@@ -2,7 +2,7 @@
     <string name="app_name">Quotes Compose</string>
 
     <!-- action items -->
-    <string name="action_search">Search</string>
+    <string name="action_random">Random</string>
 
     <!-- Screens -->
     <string name="screen_home">Home</string>

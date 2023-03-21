@@ -28,7 +28,11 @@ class MainActivity : ComponentActivity() {
                         Toolbar(
                             stringResource(id = R.string.app_name),
                             MainScreenMenuItem.values().asList()
-                        )
+                        ){
+                            when(it){
+                                MainScreenMenuItem.RANDOM -> ""//todo
+                            }
+                        }
                     },
                     content = { innerPadding ->
                         AppNavigation(this@MainActivity,
