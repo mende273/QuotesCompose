@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.screen.categories.details
+package com.jumrukovski.quotescompose.ui.screen.tags.selected
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +13,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class CategoryItemsViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class SelectedTagViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     private val _items: MutableStateFlow<List<QuoteDTO>> = MutableStateFlow(emptyList())
     val items: StateFlow<List<QuoteDTO>> = _items

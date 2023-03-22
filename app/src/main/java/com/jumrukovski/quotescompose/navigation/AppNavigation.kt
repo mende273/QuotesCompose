@@ -11,10 +11,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
-import com.jumrukovski.quotescompose.ui.screen.categories.CategoriesScreen
-import com.jumrukovski.quotescompose.ui.screen.categories.CategoriesViewModel
-import com.jumrukovski.quotescompose.ui.screen.categories.details.CategoryItemsScreen
-import com.jumrukovski.quotescompose.ui.screen.categories.details.CategoryItemsViewModel
+import com.jumrukovski.quotescompose.ui.screen.tags.TagsScreen
+import com.jumrukovski.quotescompose.ui.screen.tags.TagsViewModel
+import com.jumrukovski.quotescompose.ui.screen.tags.selected.SelectedTagScreen
+import com.jumrukovski.quotescompose.ui.screen.tags.selected.SelectedTagViewModel
 import com.jumrukovski.quotescompose.ui.screen.detail.QuoteDetailScreen
 import com.jumrukovski.quotescompose.ui.screen.favourites.FavouritesScreen
 import com.jumrukovski.quotescompose.ui.screen.home.HomeScreen
@@ -38,10 +38,10 @@ fun AppNavigation(
                 navHostController.navigate(Screen.RandomQuote.route)
             })
         }
-        composable(Screen.Categories.route) {
-            val viewModel: CategoriesViewModel by activity.viewModels()
-            CategoriesScreen(viewModel) {
-                navHostController.navigate(ScreenWithArgument.CategoryDetail.getRouteWithArgument(it)) {
+        composable(Screen.Tags.route) {
+            val viewModel: TagsViewModel by activity.viewModels()
+            TagsScreen(viewModel) {
+                navHostController.navigate(ScreenWithArgument.SelectedTag.getRouteWithArgument(it)) {
                     launchSingleTop = true
                 }
             }
@@ -59,12 +59,12 @@ fun AppNavigation(
             }
             QuoteDetailScreen(quote)
         }
-        composable(ScreenWithArgument.CategoryDetail.route) { backStackEntry ->
-            val category: String = backStackEntry.arguments?.getString(
-                ScreenWithArgument.CategoryDetail.argument, ""
+        composable(ScreenWithArgument.SelectedTag.route) { backStackEntry ->
+            val tagName: String = backStackEntry.arguments?.getString(
+                ScreenWithArgument.SelectedTag.argument, ""
             ) ?: ""
-            val viewModel: CategoryItemsViewModel by activity.viewModels()
-            CategoryItemsScreen(viewModel = viewModel, categoryName = category) {
+            val viewModel: SelectedTagViewModel by activity.viewModels()
+            SelectedTagScreen(viewModel = viewModel, tagName = tagName) {
                 navHostController.currentBackStackEntry?.arguments?.putParcelable(
                     ScreenWithArgument.QuoteDetail.argument,
                     it

@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.screen.categories
+package com.jumrukovski.quotescompose.ui.screen.tags
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +12,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class CategoriesViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class TagsViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
     private val _items: MutableStateFlow<List<TagDTO>> = MutableStateFlow(emptyList())
     val items: StateFlow<List<TagDTO>> = _items
 
