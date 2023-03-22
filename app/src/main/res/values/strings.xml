@@ -11,4 +11,6 @@
     <string name="screen_quote_detail">Quote Detail</string>
     <string name="screen_category_detail">Category Detail</string>
     <string name="screen_random_quote">Random Quote</string>
+
+    <string name="screen_category_items_title">Tag: %1$s</string>
 </resources>
