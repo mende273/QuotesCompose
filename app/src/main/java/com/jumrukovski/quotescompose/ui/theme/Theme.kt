@@ -13,13 +13,13 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 private val DarkColorScheme = darkColorScheme(
     primary = BlackColor,
     secondary = GreyColor,
-    tertiary = GreyColor
+    tertiary = TertiaryColorDarkTheme
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = GreyColor,
     secondary = BlackColor,
-    tertiary = BlackColor
+    tertiary = TertiaryColorLightTheme
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

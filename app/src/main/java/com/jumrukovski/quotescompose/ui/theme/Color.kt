@@ -10,3 +10,6 @@ val MediumDarkGreyColor = Color(0xFF717171)
 
 val NavigationItemRippleColorLightTheme = Color(0x9DCACACA)
 val NavigationItemRippleColorDarkTheme = Color(0xFF000000)
+
+val TertiaryColorLightTheme = Color(0xFFe3f2fd)
+val TertiaryColorDarkTheme = Color(0xFF3f51b5)
