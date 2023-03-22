@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.screen.categories.details
+package com.jumrukovski.quotescompose.ui.screen.tags.selected
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,14 +23,14 @@ import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
-fun CategoryItemsScreen(
-    viewModel: CategoryItemsViewModel, categoryName: String,
+fun SelectedTagScreen(
+    viewModel: SelectedTagViewModel, tagName: String,
     onNavigateToQuoteDetails: (QuoteDTO) -> Unit
 ) {
-    val categoryItems by viewModel.items.collectAsState()
+    val tagItems by viewModel.items.collectAsState()
 
-    LaunchedEffect(key1 = ScreenWithArgument.CategoryDetail.argument) {
-        viewModel.getQuotesForTag(categoryName)
+    LaunchedEffect(key1 = ScreenWithArgument.SelectedTag.argument) {
+        viewModel.getQuotesForTag(tagName)
     }
 
     QuotesComposeTheme {
@@ -38,13 +38,13 @@ fun CategoryItemsScreen(
             topBar = {
                 Toolbar(
                     stringResource(
-                        id = R.string.screen_category_items_title,
-                        categoryName
+                        id = R.string.screen_selected_tag_title,
+                        tagName
                     )
                 )
             },
             content = { paddingValues ->
-                Contents(paddingValues, categoryItems, onNavigateToQuoteDetails)
+                Contents(paddingValues, tagItems, onNavigateToQuoteDetails)
             })
     }
 }
@@ -52,18 +52,18 @@ fun CategoryItemsScreen(
 @Composable
 private fun Contents(
     paddingValues: PaddingValues,
-    categoryItems: List<QuoteDTO>,
+    tagItems: List<QuoteDTO>,
     onNavigateToQuoteDetails: (QuoteDTO) -> Unit
 ) {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .padding(paddingValues)
             .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
             .padding(16.dp)
     ) {
         LazyColumn {
-            items(categoryItems) {
+            items(tagItems) {
                 Box(modifier = Modifier
                     .fillMaxSize()
                     .clickable { onNavigateToQuoteDetails(it) }) {

@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.screen.categories
+package com.jumrukovski.quotescompose.ui.screen.tags
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,9 +23,9 @@ import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
-fun CategoriesScreen(
-    viewModel: CategoriesViewModel,
-    onNavigateToCategoryItems: (String) -> Unit
+fun TagsScreen(
+    viewModel: TagsViewModel,
+    onNavigateToSelectedTag: (String) -> Unit
 ) {
 
     LaunchedEffect(key1 = "items") {
@@ -36,22 +36,22 @@ fun CategoriesScreen(
 
     QuotesComposeTheme {
         Scaffold(
-            topBar = { Toolbar(stringResource(id = R.string.screen_categories)) },
+            topBar = { Toolbar(stringResource(id = R.string.screen_tags)) },
             content = { paddingValues ->
-                CategoriesContents(
+                Contents(
                     paddingValues = paddingValues,
                     tagItems = tagItems,
-                    onNavigateToCategoryItems = onNavigateToCategoryItems
+                    onNavigateToSelectedTag = onNavigateToSelectedTag
                 )
             })
     }
 }
 
 @Composable
-private fun CategoriesContents(
+private fun Contents(
     paddingValues: PaddingValues,
     tagItems: List<TagDTO>,
-    onNavigateToCategoryItems: (String) -> Unit
+    onNavigateToSelectedTag: (String) -> Unit
 ) {
 
     Box(
@@ -60,14 +60,14 @@ private fun CategoriesContents(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
     ) {
-        LazyColumn() {
+        LazyColumn {
             items(tagItems) {
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
                         .clickable {
-                            onNavigateToCategoryItems(it.name)
+                            onNavigateToSelectedTag(it.name)
                         }, text = it.name, color = Color.Black
                 )
             }
