@@ -4,13 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Scaffold
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.rememberNavController
-import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.navigation.AppNavigation
-import com.jumrukovski.quotescompose.navigation.Screen
 import com.jumrukovski.quotescompose.ui.common.BottomNavigationBar
-import com.jumrukovski.quotescompose.ui.common.Toolbar
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,18 +21,9 @@ class MainActivity : ComponentActivity() {
 
             QuotesComposeTheme {
                 Scaffold(
-                    topBar = {
-                        Toolbar(
-                            stringResource(id = R.string.app_name),
-                            MainScreenMenuItem.values().asList()
-                        ){
-                            when(it){
-                                MainScreenMenuItem.RANDOM -> navController.navigate(Screen.RandomQuote.route)
-                            }
-                        }
-                    },
                     content = { innerPadding ->
-                        AppNavigation(this@MainActivity,
+                        AppNavigation(
+                            this@MainActivity,
                             navHostController = navController,
                             innerPadding = innerPadding
                         )
