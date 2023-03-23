@@ -4,8 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.State
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.jumrukovski.quotescompose.navigation.AppNavigation
+import com.jumrukovski.quotescompose.navigation.Screen
 import com.jumrukovski.quotescompose.ui.common.BottomNavigationBar
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,9 +33,20 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     bottomBar = {
-                        BottomNavigationBar(navController)
+                        if (isCurrentRouteFromBottomBarMenu(navController.currentBackStackEntryAsState())) {
+                            BottomNavigationBar(navController)
+                        }
                     })
             }
         }
     }
+}
+
+private fun isCurrentRouteFromBottomBarMenu(currentBackStackEntry: State<NavBackStackEntry?>): Boolean {
+    val currentRoute = currentBackStackEntry.value?.destination?.route
+    return currentRoute?.let { route ->
+        return@let (route == Screen.Home.route
+                || route == Screen.Tags.route
+                || route == Screen.Favourites.route)
+    } ?: false
 }
