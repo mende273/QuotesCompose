@@ -25,7 +25,8 @@ import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 @Composable
 fun SelectedTagScreen(
     viewModel: SelectedTagViewModel, tagName: String,
-    onNavigateToQuoteDetails: (QuoteDTO) -> Unit
+    onNavigateToQuoteDetails: (QuoteDTO) -> Unit,
+    onNavigateBack: () -> Unit
 ) {
     val tagItems by viewModel.items.collectAsState()
 
@@ -37,10 +38,12 @@ fun SelectedTagScreen(
         Scaffold(
             topBar = {
                 Toolbar(
-                    stringResource(
+                    title = stringResource(
                         id = R.string.screen_selected_tag_title,
                         tagName
-                    )
+                    ),
+                    isBackButtonEnabled = true,
+                    onNavigateBack = onNavigateBack
                 )
             },
             content = { paddingValues ->
