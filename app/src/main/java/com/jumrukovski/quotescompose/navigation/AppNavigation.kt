@@ -11,14 +11,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
-import com.jumrukovski.quotescompose.ui.screen.tags.TagsScreen
-import com.jumrukovski.quotescompose.ui.screen.tags.TagsViewModel
-import com.jumrukovski.quotescompose.ui.screen.tags.selected.SelectedTagScreen
-import com.jumrukovski.quotescompose.ui.screen.tags.selected.SelectedTagViewModel
 import com.jumrukovski.quotescompose.ui.screen.detail.QuoteDetailScreen
 import com.jumrukovski.quotescompose.ui.screen.favourites.FavouritesScreen
 import com.jumrukovski.quotescompose.ui.screen.home.HomeScreen
 import com.jumrukovski.quotescompose.ui.screen.random.RandomQuoteScreen
+import com.jumrukovski.quotescompose.ui.screen.tags.TagsScreen
+import com.jumrukovski.quotescompose.ui.screen.tags.TagsViewModel
+import com.jumrukovski.quotescompose.ui.screen.tags.selected.SelectedTagScreen
+import com.jumrukovski.quotescompose.ui.screen.tags.selected.SelectedTagViewModel
 
 @Composable
 fun AppNavigation(
@@ -66,15 +66,19 @@ fun AppNavigation(
                 ScreenWithArgument.SelectedTag.argument, ""
             ) ?: ""
             val viewModel: SelectedTagViewModel by activity.viewModels()
-            SelectedTagScreen(viewModel = viewModel, tagName = tagName) {
-                navHostController.currentBackStackEntry?.arguments?.putParcelable(
-                    ScreenWithArgument.QuoteDetail.argument,
-                    it
-                )
-                navHostController.navigate(ScreenWithArgument.QuoteDetail.route) {
-                    launchSingleTop = true
-                }
-            }
+            SelectedTagScreen(viewModel = viewModel,
+                tagName = tagName,
+                onNavigateToQuoteDetails = {
+                    navHostController.currentBackStackEntry?.arguments?.putParcelable(
+                        ScreenWithArgument.QuoteDetail.argument,
+                        it
+                    )
+                    navHostController.navigate(ScreenWithArgument.QuoteDetail.route) {
+                        launchSingleTop = true
+                    }
+                }, onNavigateBack = {
+                    navHostController.popBackStack()
+                })
         }
         composable(Screen.RandomQuote.route) {
             RandomQuoteScreen()
