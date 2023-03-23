@@ -57,7 +57,9 @@ fun AppNavigation(
             } else {
                 bundleArguments?.getParcelable(ScreenWithArgument.QuoteDetail.argument)
             }
-            QuoteDetailScreen(quote)
+            QuoteDetailScreen(quoteDTO = quote, onNavigateBack = {
+                navHostController.popBackStack()
+            })
         }
         composable(ScreenWithArgument.SelectedTag.route) { backStackEntry ->
             val tagName: String = backStackEntry.arguments?.getString(
