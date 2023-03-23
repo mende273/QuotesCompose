@@ -25,13 +25,14 @@ fun HomeScreen(onNavigateToQuoteDetails: (QuoteDTO) -> Unit,
         Scaffold(
             topBar = {
                 Toolbar(
-                    stringResource(id = R.string.screen_home),
-                    MainScreenMenuItem.values().asList()
-                ){
-                    when(it){
-                        MainScreenMenuItem.RANDOM -> onNavigateToRandomQuote()
+                    title = stringResource(id = R.string.screen_home),
+                    topMenuItems = MainScreenMenuItem.values().asList(),
+                    onActionClick = {
+                        when(it){
+                            MainScreenMenuItem.RANDOM -> onNavigateToRandomQuote()
+                        }
                     }
-                }
+                )
             },
             content = {paddingValues ->
                 Box(
