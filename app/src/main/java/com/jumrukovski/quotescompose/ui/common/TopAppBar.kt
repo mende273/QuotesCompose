@@ -1,6 +1,8 @@
 package com.jumrukovski.quotescompose.ui.common
 
 import androidx.compose.foundation.background
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,9 +15,11 @@ import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Toolbar(
-    title: String,
+    title: String = "",
     topMenuItems: List<MainScreenMenuItem> = emptyList(),
-    onActionClick: (MainScreenMenuItem) -> Unit = {}) {
+    isBackButtonEnabled:Boolean = false,
+    onActionClick: (MainScreenMenuItem) -> Unit = {},
+    onNavigateBack: () ->Unit = {}) {
     TopAppBar(
         modifier = Modifier.background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
         title = { Text(title) },
@@ -32,6 +36,13 @@ fun Toolbar(
                     this.forEach { topMenuItem ->
                         TopMenuItem(topMenuItem = topMenuItem, onActionClick = { onActionClick(it) })
                     }
+                }
+            }
+        },
+        navigationIcon = {
+            if(isBackButtonEnabled){
+                IconButton(onClick = {onNavigateBack()}) {
+                    Icon(Icons.Filled.ArrowBack, "backIcon")
                 }
             }
         }
