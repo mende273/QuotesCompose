@@ -6,11 +6,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
 import com.jumrukovski.quotescompose.ui.common.Toolbar
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
@@ -18,12 +16,13 @@ import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
-fun QuoteDetailScreen(quoteDTO: QuoteDTO?) {
+fun QuoteDetailScreen(quoteDTO: QuoteDTO?,onNavigateBack: () ->Unit) {
     QuotesComposeTheme {
         Scaffold(
             topBar = {
                 Toolbar(
-                    stringResource(id = R.string.screen_quote_detail)
+                    isBackButtonEnabled = true,
+                    onNavigateBack = onNavigateBack
                 )
             },
             content = { paddingValues ->
