@@ -11,9 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
 import com.jumrukovski.quotescompose.ui.common.Toolbar
-import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
-import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
-import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
+import com.jumrukovski.quotescompose.ui.theme.*
 
 @Composable
 fun QuoteDetailScreen(quoteDTO: QuoteDTO?,onNavigateBack: () ->Unit) {
@@ -46,7 +44,7 @@ private fun Contents(paddingValues: PaddingValues, quoteDTO: QuoteDTO?) {
                     .fillMaxSize(),
                 shape = MaterialTheme.shapes.medium,
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.tertiary,
+                    containerColor = MaterialTheme.colorScheme.TertiaryColor,
                 )
             ) {
                 Box(

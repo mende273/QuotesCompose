@@ -32,6 +32,10 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+val ColorScheme.TertiaryColor: Color
+    @Composable
+    get() = if (!isSystemInDarkTheme()) TertiaryColorLightTheme else TertiaryColorDarkTheme
+
 val ColorScheme.PrimaryTextColor: Color
     @Composable
     get() = if (!isSystemInDarkTheme()) BlackColor else GreyColor
