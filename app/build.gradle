@@ -76,9 +76,9 @@ dependencies {
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
 
     // lifecycle
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
 
     // navigation component
     implementation("androidx.navigation:navigation-compose:$nav_version")
