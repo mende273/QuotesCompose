@@ -31,11 +31,11 @@ fun TagsScreen(
     onNavigateToSelectedTag: (String) -> Unit
 ) {
 
+    val tagItems by viewModel.items.collectAsState()
+
     LaunchedEffect(key1 = "items") {
         viewModel.getAllTags()
     }
-
-    val tagItems by viewModel.items.collectAsState()
 
     QuotesComposeTheme {
         Scaffold(

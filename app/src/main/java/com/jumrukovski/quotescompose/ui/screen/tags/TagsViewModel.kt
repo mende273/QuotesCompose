@@ -16,14 +16,21 @@ class TagsViewModel @Inject constructor(private val repository: Repository) : Vi
     private val _items: MutableStateFlow<List<TagDTO>> = MutableStateFlow(emptyList())
     val items: StateFlow<List<TagDTO>> = _items
 
+    private var isTagsDataLoaded = false
+
     suspend fun getAllTags() {
         viewModelScope.launch {
+            if(isTagsDataLoaded){
+                return@launch
+            }
+
             repository.getAllTags()
             val response: Response<List<TagDTO>> = repository.getAllTags()
             if (response.isSuccessful) {
                 response.body()?.let {
                     _items.value = it
                 }
+                isTagsDataLoaded = true
             }
         }
     }
