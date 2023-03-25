@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.sp
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.TagDTO
 import com.jumrukovski.quotescompose.ui.common.Toolbar
+import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
+import com.jumrukovski.quotescompose.ui.common.state.UIState
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
@@ -31,7 +33,7 @@ fun TagsScreen(
     onNavigateToSelectedTag: (String) -> Unit
 ) {
 
-    val tagItems by viewModel.items.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
     LaunchedEffect(key1 = "items") {
         viewModel.getAllTags()
@@ -43,7 +45,7 @@ fun TagsScreen(
             content = { paddingValues ->
                 Contents(
                     paddingValues = paddingValues,
-                    tagItems = tagItems,
+                    uiState = uiState,
                     onNavigateToSelectedTag = onNavigateToSelectedTag
                 )
             })
@@ -53,7 +55,7 @@ fun TagsScreen(
 @Composable
 private fun Contents(
     paddingValues: PaddingValues,
-    tagItems: List<TagDTO>,
+    uiState: UIState<List<TagDTO>>,
     onNavigateToSelectedTag: (String) -> Unit
 ) {
     Box(
@@ -62,37 +64,47 @@ private fun Contents(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
     ) {
-        LazyVerticalGrid(
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-            columns = GridCells.Adaptive(minSize = 150.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            items(tagItems) {
-                Card(
-                    modifier = Modifier
-                        .align(Alignment.CenterStart)
-                        .background(color = MaterialTheme.colorScheme.PrimaryBackgroundColor)
-                        .fillMaxWidth()
-                        .clickable {
-                            onNavigateToSelectedTag(it.name)
-                        },
-                    shape = MaterialTheme.shapes.medium,
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.TertiaryColor,
-                    )
+        when (uiState) {
+            is UIState.Error -> ""
+            is UIState.Exception -> ""
+            is UIState.Loading -> {
+                ProgressBar()
+            }
+            UIState.SuccessWithNoData -> ""
+            is UIState.SuccessWithData -> {
+                LazyVerticalGrid(
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+                    columns = GridCells.Adaptive(minSize = 150.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    Box(modifier = Modifier.padding(16.dp)) {
-                        Text(
+                    items(uiState.data) {
+                        Card(
                             modifier = Modifier
-                                .wrapContentSize(),
-                            text = it.name,
-                            style = TextStyle(
-                                color = MaterialTheme.colorScheme.PrimaryTextColor,
-                                fontStyle = MaterialTheme.typography.bodyLarge.fontStyle,
-                                fontSize = 20.sp
+                                .align(Alignment.CenterStart)
+                                .background(color = MaterialTheme.colorScheme.PrimaryBackgroundColor)
+                                .fillMaxWidth()
+                                .clickable {
+                                    onNavigateToSelectedTag(it.name)
+                                },
+                            shape = MaterialTheme.shapes.medium,
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.TertiaryColor,
                             )
-                        )
+                        ) {
+                            Box(modifier = Modifier.padding(16.dp)) {
+                                Text(
+                                    modifier = Modifier
+                                        .wrapContentSize(),
+                                    text = it.name,
+                                    style = TextStyle(
+                                        color = MaterialTheme.colorScheme.PrimaryTextColor,
+                                        fontStyle = MaterialTheme.typography.bodyLarge.fontStyle,
+                                        fontSize = 20.sp
+                                    )
+                                )
+                            }
+                        }
                     }
                 }
             }

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jumrukovski.quotescompose.data.model.TagDTO
 import com.jumrukovski.quotescompose.data.repository.Repository
+import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,24 +14,34 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TagsViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
-    private val _items: MutableStateFlow<List<TagDTO>> = MutableStateFlow(emptyList())
-    val items: StateFlow<List<TagDTO>> = _items
-
-    private var isTagsDataLoaded = false
+    private val _uiState: MutableStateFlow<UIState<List<TagDTO>>> =
+        MutableStateFlow(UIState.Loading)
+    val uiState: StateFlow<UIState<List<TagDTO>>> = _uiState
 
     suspend fun getAllTags() {
         viewModelScope.launch {
-            if(isTagsDataLoaded){
+            if (_uiState.value is UIState.SuccessWithData) {
                 return@launch
             }
 
-            repository.getAllTags()
-            val response: Response<List<TagDTO>> = repository.getAllTags()
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    _items.value = it
+            _uiState.value = try {
+                val response: Response<List<TagDTO>> = repository.getAllTags()
+                when (response.isSuccessful) {
+                    true -> {
+                        response.body()?.let {
+                            if(it.isNotEmpty()){
+                                UIState.SuccessWithData(it)
+                            }else {
+                                UIState.SuccessWithNoData
+                            }
+                        } ?: UIState.SuccessWithNoData
+                    }
+                    false -> {
+                        UIState.Error(response.code())
+                    }
                 }
-                isTagsDataLoaded = true
+            } catch (e: java.lang.Exception) {
+                UIState.Exception(e)
             }
         }
     }
