@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
 import com.jumrukovski.quotescompose.data.model.QuotesResultsDTO
 import com.jumrukovski.quotescompose.data.repository.Repository
+import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,16 +16,40 @@ import javax.inject.Inject
 @HiltViewModel
 class SelectedTagViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    private val _items: MutableStateFlow<List<QuoteDTO>> = MutableStateFlow(emptyList())
-    val items: StateFlow<List<QuoteDTO>> = _items
+    private val _uiState: MutableStateFlow<UIState<List<QuoteDTO>>> =
+        MutableStateFlow(UIState.Loading)
+    val uiState: StateFlow<UIState<List<QuoteDTO>>> = _uiState
+
+    private var currentTag = ""
 
     suspend fun getQuotesForTag(tag: String) {
         viewModelScope.launch {
-            val response: Response<QuotesResultsDTO> = repository.getQuotesForTag(tag)
-            if (response.isSuccessful) {
-                response.body()?.let {
-                    _items.value = it.results
-                } ?: emptyList<List<QuoteDTO>>()
+            if (tag == currentTag) {
+                return@launch
+            }
+
+            currentTag = tag
+
+            if(_uiState.value !is UIState.Loading){
+                _uiState.value = UIState.Loading
+            }
+
+            _uiState.value = try {
+                val response: Response<QuotesResultsDTO> = repository.getQuotesForTag(tag)
+                when (response.isSuccessful) {
+                    true -> {
+                        response.body()?.let {
+                            if (it.results.isNullOrEmpty()) {
+                                UIState.SuccessWithNoData
+                            } else {
+                                UIState.SuccessWithData(it.results)
+                            }
+                        } ?: UIState.SuccessWithNoData
+                    }
+                    false -> UIState.Error(response.code())
+                }
+            } catch (e: java.lang.Exception) {
+                UIState.Exception(e)
             }
         }
     }

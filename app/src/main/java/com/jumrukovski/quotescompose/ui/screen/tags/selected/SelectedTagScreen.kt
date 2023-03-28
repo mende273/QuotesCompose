@@ -21,6 +21,8 @@ import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
 import com.jumrukovski.quotescompose.navigation.ScreenWithArgument
 import com.jumrukovski.quotescompose.ui.common.Toolbar
+import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
+import com.jumrukovski.quotescompose.ui.common.state.UIState
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
@@ -32,7 +34,7 @@ fun SelectedTagScreen(
     onNavigateToQuoteDetails: (QuoteDTO) -> Unit,
     onNavigateBack: () -> Unit
 ) {
-    val tagItems by viewModel.items.collectAsState()
+    val tagItems by viewModel.uiState.collectAsState()
 
     LaunchedEffect(key1 = ScreenWithArgument.SelectedTag.argument) {
         viewModel.getQuotesForTag(tagName)
@@ -59,7 +61,7 @@ fun SelectedTagScreen(
 @Composable
 private fun Contents(
     paddingValues: PaddingValues,
-    tagItems: List<QuoteDTO>,
+    state: UIState<List<QuoteDTO>>,
     onNavigateToQuoteDetails: (QuoteDTO) -> Unit
 ) {
     Box(
@@ -69,35 +71,42 @@ private fun Contents(
             .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
             .padding(16.dp)
     ) {
-        LazyColumn {
-            items(tagItems) {
-                Box(modifier = Modifier
-                    .padding(bottom = 16.dp)
-                    .clickable { onNavigateToQuoteDetails(it) }) {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.TertiaryColor,
-                        )
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .padding(16.dp)
-                                .height(100.dp),
-                            verticalArrangement = Arrangement.Center
-                        ) {
-                            Text(
-                                text = it.content,
-                                maxLines = 3,
-                                overflow = TextOverflow.Ellipsis,
-                                style = TextStyle(
-                                    color = MaterialTheme.colorScheme.PrimaryTextColor,
-                                    fontStyle = MaterialTheme.typography.bodyLarge.fontStyle,
-                                    fontSize = 20.sp,
-                                    textAlign = TextAlign.Start
+        when (state) {
+            is UIState.Error -> ""
+            is UIState.Exception -> ""
+            is UIState.Loading -> { ProgressBar() }
+            UIState.SuccessWithNoData -> ""
+            is UIState.SuccessWithData -> {
+                LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    items(state.data) {
+                        Box(modifier = Modifier
+                            .clickable { onNavigateToQuoteDetails(it) }) {
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = MaterialTheme.colorScheme.TertiaryColor,
                                 )
-                            )
+                            ) {
+                                Column(
+                                    modifier = Modifier
+                                        .padding(16.dp)
+                                        .height(100.dp),
+                                    verticalArrangement = Arrangement.Center
+                                ) {
+                                    Text(
+                                        text = it.content,
+                                        maxLines = 3,
+                                        overflow = TextOverflow.Ellipsis,
+                                        style = TextStyle(
+                                            color = MaterialTheme.colorScheme.PrimaryTextColor,
+                                            fontStyle = MaterialTheme.typography.bodyLarge.fontStyle,
+                                            fontSize = 20.sp,
+                                            textAlign = TextAlign.Start
+                                        )
+                                    )
+                                }
+                            }
                         }
                     }
                 }
