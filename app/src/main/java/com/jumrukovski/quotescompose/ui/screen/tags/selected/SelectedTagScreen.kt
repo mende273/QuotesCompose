@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -17,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
 import com.jumrukovski.quotescompose.navigation.ScreenWithArgument
@@ -34,7 +34,7 @@ fun SelectedTagScreen(
     onNavigateToQuoteDetails: (QuoteDTO) -> Unit,
     onNavigateBack: () -> Unit
 ) {
-    val tagItems by viewModel.uiState.collectAsState()
+    val tagItems by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = ScreenWithArgument.SelectedTag.argument) {
         viewModel.getQuotesForTag(tagName)
