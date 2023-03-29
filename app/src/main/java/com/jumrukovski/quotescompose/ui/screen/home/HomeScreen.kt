@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
 import com.jumrukovski.quotescompose.ui.common.Toolbar
-import com.jumrukovski.quotescompose.ui.screen.main.MainScreenMenuItem
+import com.jumrukovski.quotescompose.ui.screen.main.RandomQuoteMenuItem
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
@@ -26,10 +26,10 @@ fun HomeScreen(onNavigateToQuoteDetails: (QuoteDTO) -> Unit,
             topBar = {
                 Toolbar(
                     title = stringResource(id = R.string.screen_home),
-                    topMenuItems = MainScreenMenuItem.values().asList(),
+                    topMenuItems = RandomQuoteMenuItem.values().asList(),
                     onActionClick = {
                         when(it){
-                            MainScreenMenuItem.RANDOM -> onNavigateToRandomQuote()
+                            RandomQuoteMenuItem.RANDOM -> onNavigateToRandomQuote()
                         }
                     }
                 )
