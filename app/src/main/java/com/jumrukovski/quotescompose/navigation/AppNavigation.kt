@@ -15,6 +15,7 @@ import com.jumrukovski.quotescompose.ui.screen.detail.QuoteDetailScreen
 import com.jumrukovski.quotescompose.ui.screen.favourites.FavouritesScreen
 import com.jumrukovski.quotescompose.ui.screen.home.HomeScreen
 import com.jumrukovski.quotescompose.ui.screen.random.RandomQuoteScreen
+import com.jumrukovski.quotescompose.ui.screen.random.RandomQuoteViewModel
 import com.jumrukovski.quotescompose.ui.screen.tags.TagsScreen
 import com.jumrukovski.quotescompose.ui.screen.tags.TagsViewModel
 import com.jumrukovski.quotescompose.ui.screen.tags.selected.SelectedTagScreen
@@ -81,7 +82,10 @@ fun AppNavigation(
                 })
         }
         composable(Screen.RandomQuote.route) {
-            RandomQuoteScreen()
+            val viewModel: RandomQuoteViewModel by activity.viewModels()
+            RandomQuoteScreen(viewModel, onNavigateBack = {
+                navHostController.popBackStack()
+            })
         }
     }
 }
