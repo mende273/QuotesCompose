@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.jumrukovski.quotescompose.ui.screen.main.MainScreenMenuItem
+import com.jumrukovski.quotescompose.ui.screen.main.RandomQuoteMenuItem
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 
@@ -16,9 +16,9 @@ import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 @Composable
 fun Toolbar(
     title: String = "",
-    topMenuItems: List<MainScreenMenuItem> = emptyList(),
+    topMenuItems: List<RandomQuoteMenuItem> = emptyList(),
     isBackButtonEnabled:Boolean = false,
-    onActionClick: (MainScreenMenuItem) -> Unit = {},
+    onActionClick: (RandomQuoteMenuItem) -> Unit = {},
     onNavigateBack: () ->Unit = {}) {
     TopAppBar(
         modifier = Modifier.background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
@@ -51,8 +51,8 @@ fun Toolbar(
 
 @Composable
 private fun TopMenuItem(
-    topMenuItem: MainScreenMenuItem,
-    onActionClick: (MainScreenMenuItem) -> Unit = {}
+    topMenuItem: RandomQuoteMenuItem,
+    onActionClick: (RandomQuoteMenuItem) -> Unit = {}
 ) {
     IconButton(onClick = { onActionClick(topMenuItem) }) {
         Icon(
