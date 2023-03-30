@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
+import com.jumrukovski.quotescompose.navigation.RandomQuoteMenuItem
 import com.jumrukovski.quotescompose.ui.common.Toolbar
-import com.jumrukovski.quotescompose.ui.screen.main.RandomQuoteMenuItem
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
