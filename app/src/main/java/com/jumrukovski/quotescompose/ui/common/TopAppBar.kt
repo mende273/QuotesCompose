@@ -16,10 +16,11 @@ import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 @Composable
 fun Toolbar(
     title: String = "",
-    topMenuItems: List<RandomQuoteMenuItem> = emptyList(),
-    isBackButtonEnabled:Boolean = false,
-    onActionClick: (RandomQuoteMenuItem) -> Unit = {},
-    onNavigateBack: () ->Unit = {}) {
+    menuItems: List<RandomQuoteMenuItem> = emptyList(),
+    isBackButtonEnabled: Boolean = false,
+    onMenuItemClick: (RandomQuoteMenuItem) -> Unit = {},
+    onNavigateBack: () -> Unit = {}
+) {
     TopAppBar(
         modifier = Modifier.background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
         title = { Text(title) },
@@ -31,33 +32,40 @@ fun Toolbar(
             actionIconContentColor = MaterialTheme.colorScheme.PrimaryTextColor
         ),
         actions = {
-            with(topMenuItems){
-                if(this.isNotEmpty()){
-                    this.forEach { topMenuItem ->
-                        TopMenuItem(topMenuItem = topMenuItem, onActionClick = { onActionClick(it) })
+            with(menuItems) {
+                if (this.isNotEmpty()) {
+                    this.forEach { menuItem ->
+                        MenuItem(menuItem = menuItem, onMenuItemClick = { onMenuItemClick(it) })
                     }
                 }
             }
         },
         navigationIcon = {
-            if(isBackButtonEnabled){
-                IconButton(onClick = {onNavigateBack()}) {
-                    Icon(Icons.Filled.ArrowBack, "backIcon")
-                }
+            if (isBackButtonEnabled) {
+                BackButton(onBackPressed = {
+                    onNavigateBack()
+                })
             }
         }
     )
 }
 
 @Composable
-private fun TopMenuItem(
-    topMenuItem: RandomQuoteMenuItem,
-    onActionClick: (RandomQuoteMenuItem) -> Unit = {}
+private fun BackButton(onBackPressed: () -> Unit) {
+    IconButton(onClick = { onBackPressed() }) {
+        Icon(Icons.Filled.ArrowBack, "backIcon")
+    }
+}
+
+@Composable
+private fun MenuItem(
+    menuItem: RandomQuoteMenuItem,
+    onMenuItemClick: (RandomQuoteMenuItem) -> Unit = {}
 ) {
-    IconButton(onClick = { onActionClick(topMenuItem) }) {
+    IconButton(onClick = { onMenuItemClick(menuItem) }) {
         Icon(
-            painter = painterResource(id = topMenuItem.icon),
-            contentDescription = stringResource(id = topMenuItem.titleTextId),
+            painter = painterResource(id = menuItem.icon),
+            contentDescription = stringResource(id = menuItem.titleTextId),
             tint = MaterialTheme.colorScheme.onSurface
         )
     }
