@@ -36,7 +36,12 @@ fun RandomQuoteScreen(viewModel: RandomQuoteViewModel, onNavigateBack: () -> Uni
                     title = stringResource(id = R.string.screen_random_quote),
                     menuItems = RandomQuoteMenuItem.values().asList(),
                     isBackButtonEnabled = true,
-                    onNavigateBack = onNavigateBack
+                    onNavigateBack = onNavigateBack,
+                    onMenuItemClick = {
+                        if(it == RandomQuoteMenuItem.RANDOM){
+                            viewModel.getRandomQuote()
+                        }
+                    }
                 )
             },
             content = { paddingValues ->
