@@ -26,8 +26,8 @@ fun HomeScreen(onNavigateToQuoteDetails: (QuoteDTO) -> Unit,
             topBar = {
                 Toolbar(
                     title = stringResource(id = R.string.screen_home),
-                    topMenuItems = RandomQuoteMenuItem.values().asList(),
-                    onActionClick = {
+                    menuItems = RandomQuoteMenuItem.values().asList(),
+                    onMenuItemClick = {
                         when(it){
                             RandomQuoteMenuItem.RANDOM -> onNavigateToRandomQuote()
                         }
