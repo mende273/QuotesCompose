@@ -9,6 +9,10 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(private val apiService: ApiService) {
 
+    suspend fun getQuotes():Response<QuotesResultsDTO>{
+        return apiService.getQuotes()
+    }
+
     suspend fun getAllTags(): Response<List<TagDTO>> {
         return apiService.getAllTags()
     }
