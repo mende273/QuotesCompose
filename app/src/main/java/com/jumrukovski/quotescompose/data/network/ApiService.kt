@@ -9,6 +9,9 @@ import retrofit2.http.Query
 
 interface ApiService {
 
+    @GET("quotes")
+    suspend fun getQuotes(): Response<QuotesResultsDTO>
+
     @GET("tags")
     suspend fun getAllTags(): Response<List<TagDTO>>
 
