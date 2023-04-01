@@ -12,13 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jumrukovski.quotescompose.data.model.QuoteDTO
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 import com.jumrukovski.quotescompose.ui.theme.TertiaryColor
 
 @Composable
-fun LargeQuoteCard(quoteDTO: QuoteDTO) {
+fun LargeQuoteCard(content: String, author: String) {
     Card(
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.PrimaryBackgroundColor)
@@ -39,7 +38,7 @@ fun LargeQuoteCard(quoteDTO: QuoteDTO) {
                 Text(
                     modifier = Modifier
                         .wrapContentHeight(),
-                    text = quoteDTO.content,
+                    text = content,
                     style = TextStyle(
                         color = MaterialTheme.colorScheme.PrimaryTextColor,
                         fontStyle = MaterialTheme.typography.bodyLarge.fontStyle,
@@ -49,7 +48,7 @@ fun LargeQuoteCard(quoteDTO: QuoteDTO) {
                 Text(
                     modifier = Modifier
                         .wrapContentHeight(),
-                    text = quoteDTO.author,
+                    text = author,
                     style = TextStyle(
                         color = MaterialTheme.colorScheme.PrimaryTextColor,
                         fontStyle = MaterialTheme.typography.bodyLarge.fontStyle,
