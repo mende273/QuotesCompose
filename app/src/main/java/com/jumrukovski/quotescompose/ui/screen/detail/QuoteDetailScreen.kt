@@ -7,13 +7,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.jumrukovski.quotescompose.data.model.QuoteDTO
 import com.jumrukovski.quotescompose.ui.common.Toolbar
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
-fun QuoteDetailScreen(quoteDTO: QuoteDTO?, onNavigateBack: () -> Unit) {
+fun QuoteDetailScreen(id: String, content: String, author: String, onNavigateBack: () -> Unit) {
     QuotesComposeTheme {
         Scaffold(
             topBar = {
@@ -23,20 +22,18 @@ fun QuoteDetailScreen(quoteDTO: QuoteDTO?, onNavigateBack: () -> Unit) {
                 )
             },
             content = { paddingValues ->
-                Contents(paddingValues = paddingValues, quoteDTO)
+                Contents(paddingValues = paddingValues, content, author)
             })
     }
 }
 
 @Composable
-private fun Contents(paddingValues: PaddingValues, quoteDTO: QuoteDTO?) {
-    quoteDTO?.let {
-        Box(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize()
-        ) {
-            LargeQuoteCard(quoteDTO = it)
-        }
+private fun Contents(paddingValues: PaddingValues, content: String, author: String) {
+    Box(
+        modifier = Modifier
+            .padding(paddingValues)
+            .fillMaxSize()
+    ) {
+        LargeQuoteCard(content, author)
     }
 }
