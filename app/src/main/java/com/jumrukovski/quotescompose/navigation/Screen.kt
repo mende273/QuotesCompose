@@ -17,6 +17,6 @@ sealed class ScreenWithArgument(private val originalRoute: String, val argument:
         return originalRoute + argumentName
     }
 
-    object QuoteDetail: ScreenWithArgument("quote detail/", "quote",R.string.screen_quote_detail,null)
+  //  object QuoteDetail: ScreenWithArgument("quote_detail/", "{id}/{content}/{author}",R.string.screen_quote_detail,null)
     object SelectedTag: ScreenWithArgument("tag/","tagName",R.string.screen_selected_tag,null)
 }

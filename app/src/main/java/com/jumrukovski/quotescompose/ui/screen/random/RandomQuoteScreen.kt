@@ -62,7 +62,9 @@ private fun Contents(paddingValues: PaddingValues, uiState: UIState<QuoteDTO>) {
             is UIState.Exception -> ""
             UIState.Loading -> ProgressBar()
             UIState.SuccessWithNoData -> ""
-            is UIState.SuccessWithData -> LargeQuoteCard(quoteDTO = uiState.data)
+            is UIState.SuccessWithData -> {
+                LargeQuoteCard(uiState.data.content, uiState.data.author)
+            }
         }
     }
 }

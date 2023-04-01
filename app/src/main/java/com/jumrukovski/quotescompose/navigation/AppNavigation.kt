@@ -1,6 +1,5 @@
 package com.jumrukovski.quotescompose.navigation
 
-import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.PaddingValues
@@ -8,12 +7,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.jumrukovski.quotescompose.data.model.QuoteDTO
+import androidx.navigation.navArgument
 import com.jumrukovski.quotescompose.ui.screen.detail.QuoteDetailScreen
 import com.jumrukovski.quotescompose.ui.screen.favourites.FavouritesScreen
 import com.jumrukovski.quotescompose.ui.screen.home.HomeScreen
+import com.jumrukovski.quotescompose.ui.screen.home.HomeViewModel
 import com.jumrukovski.quotescompose.ui.screen.random.RandomQuoteScreen
 import com.jumrukovski.quotescompose.ui.screen.random.RandomQuoteViewModel
 import com.jumrukovski.quotescompose.ui.screen.tags.TagsScreen
@@ -32,13 +33,6 @@ fun AppNavigation(
         startDestination = Screen.Home.route,
         Modifier.padding(innerPadding)
     ) {
-        composable(Screen.Home.route) {
-            HomeScreen(onNavigateToQuoteDetails = {
-                //todo navigate to quote details
-            }, onNavigateToRandomQuote = {
-                navHostController.navigate(Screen.RandomQuote.route)
-            })
-        }
         composable(Screen.Tags.route) {
             val viewModel: TagsViewModel by activity.viewModels()
             TagsScreen(viewModel) {
@@ -47,21 +41,33 @@ fun AppNavigation(
                 }
             }
         }
+
         composable(Screen.Favourites.route) { FavouritesScreen(navHostController) }
-        composable(ScreenWithArgument.QuoteDetail.route) {
-            val bundleArguments = navHostController.previousBackStackEntry?.arguments
-            val quote = if (Build.VERSION.SDK_INT >= 33) {
-                bundleArguments?.getParcelable(
-                    ScreenWithArgument.QuoteDetail.argument,
-                    QuoteDTO::class.java
-                )
-            } else {
-                bundleArguments?.getParcelable(ScreenWithArgument.QuoteDetail.argument)
+
+        composable("quote_detail/{id}/{content}/{author}",
+            arguments = listOf(
+                navArgument("id") { type = NavType.StringType },
+                navArgument("content") { type = NavType.StringType },
+                navArgument("author") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val bundleArguments = backStackEntry.arguments
+
+            val id = bundleArguments?.getString("id")
+            val content = bundleArguments?.getString("content")
+            val author = bundleArguments?.getString("author")
+
+            if (id != null && content != null && author != null) {
+                QuoteDetailScreen(
+                    id = id,
+                    content = content,
+                    author = author,
+                    onNavigateBack = {
+                        navHostController.navigateUp()
+                    })
             }
-            QuoteDetailScreen(quoteDTO = quote, onNavigateBack = {
-                navHostController.popBackStack()
-            })
         }
+
         composable(ScreenWithArgument.SelectedTag.route) { backStackEntry ->
             val tagName: String = backStackEntry.arguments?.getString(
                 ScreenWithArgument.SelectedTag.argument, ""
@@ -70,21 +76,29 @@ fun AppNavigation(
             SelectedTagScreen(viewModel = viewModel,
                 tagName = tagName,
                 onNavigateToQuoteDetails = {
-                    navHostController.currentBackStackEntry?.arguments?.putParcelable(
-                        ScreenWithArgument.QuoteDetail.argument,
-                        it
-                    )
-                    navHostController.navigate(ScreenWithArgument.QuoteDetail.route) {
+                    navHostController.navigate(route = "quote_detail/${it._id}/${it.content}/${it.author}") {
                         launchSingleTop = true
                     }
                 }, onNavigateBack = {
-                    navHostController.popBackStack()
+                    navHostController.navigateUp()
                 })
         }
+
         composable(Screen.RandomQuote.route) {
             val viewModel: RandomQuoteViewModel by activity.viewModels()
             RandomQuoteScreen(viewModel, onNavigateBack = {
                 navHostController.popBackStack()
+            })
+        }
+
+        composable(Screen.Home.route) {
+            val viewModel: HomeViewModel by activity.viewModels()
+            HomeScreen(viewModel = viewModel, onNavigateToQuoteDetails = { quote ->
+                navHostController.navigate(route = "quote_detail/${quote._id}/${quote.content}/${quote.author}") {
+                    launchSingleTop = true
+                }
+            }, onNavigateToRandomQuote = {
+                navHostController.navigate(Screen.RandomQuote.route)
             })
         }
     }
