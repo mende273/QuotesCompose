@@ -22,9 +22,25 @@ sealed class ScreenWithArguments {
 
     protected abstract val route: String
 
-    abstract fun initializeRoute(): String
-
     abstract fun arguments(): List<NamedNavArgument>
+
+    private fun initRouteArguments(): String {
+        val args = arguments()
+        if (args.isEmpty()) {
+            return ""
+        }
+
+        val builder = StringBuilder()
+        args.map { navArgument -> navArgument.name }.forEach {
+            builder.append("/{${it}}")
+        }
+
+        return builder.toString()
+    }
+
+    fun initializeRoute(): String {
+        return "${route}${initRouteArguments()}"
+    }
 
     @Throws(Exception::class)
     fun getRouteWith(vararg arguments: String): String {
@@ -39,24 +55,11 @@ sealed class ScreenWithArguments {
         return route + builder.toString()
     }
 
-    protected fun initRouteArguments(): String {
-        val builder = StringBuilder()
-        arguments().map { navArgument -> navArgument.name }.forEach {
-            builder.append("/{${it}}")
-        }
-
-        return builder.toString()
-    }
-
     object SelectedTag : ScreenWithArguments() {
 
         const val ARGUMENT_TAG_NAME = "tagName"
 
         override val route: String = "tag"
-
-        override fun initializeRoute(): String {
-            return "$route${initRouteArguments()}"
-        }
 
         override fun arguments(): List<NamedNavArgument> {
             return listOf(navArgument(ARGUMENT_TAG_NAME) { type = NavType.StringType })
@@ -70,10 +73,6 @@ sealed class ScreenWithArguments {
         const val ARGUMENT_AUTHOR = "author"
 
         override val route: String = "quote_detail"
-
-        override fun initializeRoute(): String {
-            return "${route}${initRouteArguments()}"
-        }
 
         override fun arguments(): List<NamedNavArgument> {
             return listOf(
