@@ -26,6 +26,7 @@ sealed class ScreenWithArguments {
 
     abstract fun arguments(): List<NamedNavArgument>
 
+    @Throws(Exception::class)
     fun getRouteWith(vararg arguments: String): String {
         if (arguments.size != arguments().size) {
             throw Exception("Provided arguments number is greater or lower than the specified navArgument list")
@@ -47,7 +48,6 @@ sealed class ScreenWithArguments {
         return builder.toString()
     }
 
-    //  object QuoteDetail: ScreenWithArgument("quote_detail/", "{id}/{content}/{author}",R.string.screen_quote_detail,null)
     object SelectedTag : ScreenWithArguments() {
 
         const val ARGUMENT_TAG_NAME = "tagName"
@@ -60,6 +60,27 @@ sealed class ScreenWithArguments {
 
         override fun arguments(): List<NamedNavArgument> {
             return listOf(navArgument(ARGUMENT_TAG_NAME) { type = NavType.StringType })
+        }
+    }
+
+    object QuoteDetail : ScreenWithArguments() {
+
+        const val ARGUMENT_ID = "id"
+        const val ARGUMENT_CONTENT = "content"
+        const val ARGUMENT_AUTHOR = "author"
+
+        override val route: String = "quote_detail"
+
+        override fun initializeRoute(): String {
+            return "${route}${initRouteArguments()}"
+        }
+
+        override fun arguments(): List<NamedNavArgument> {
+            return listOf(
+                navArgument(ARGUMENT_ID) { type = NavType.StringType },
+                navArgument(ARGUMENT_CONTENT) { type = NavType.StringType },
+                navArgument(ARGUMENT_AUTHOR) { type = NavType.StringType }
+            )
         }
     }
 }
