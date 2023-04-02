@@ -36,7 +36,7 @@ fun AppNavigation(
         composable(Screen.Tags.route) {
             val viewModel: TagsViewModel by activity.viewModels()
             TagsScreen(viewModel) {
-                navHostController.navigate(ScreenWithArgument.SelectedTag.getRouteWithArgument(it)) {
+                navHostController.navigate(ScreenWithArguments.SelectedTagScreen.getRouteWith(it)) {
                     launchSingleTop = true
                 }
             }
@@ -68,9 +68,12 @@ fun AppNavigation(
             }
         }
 
-        composable(ScreenWithArgument.SelectedTag.route) { backStackEntry ->
+        composable(
+            route = ScreenWithArguments.SelectedTagScreen.initializeRoute(),
+            arguments = ScreenWithArguments.SelectedTagScreen.arguments()
+        ) { backStackEntry ->
             val tagName: String = backStackEntry.arguments?.getString(
-                ScreenWithArgument.SelectedTag.argument, ""
+                ScreenWithArguments.SelectedTagScreen.ARGUMENT_TAG_NAME, ""
             ) ?: ""
             val viewModel: SelectedTagViewModel by activity.viewModels()
             SelectedTagScreen(viewModel = viewModel,

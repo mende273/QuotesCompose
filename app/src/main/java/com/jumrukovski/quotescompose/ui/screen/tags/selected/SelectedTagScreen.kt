@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
-import com.jumrukovski.quotescompose.navigation.ScreenWithArgument
+import com.jumrukovski.quotescompose.navigation.ScreenWithArguments
 import com.jumrukovski.quotescompose.ui.common.Toolbar
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.SmallQuoteCard
@@ -30,7 +30,7 @@ fun SelectedTagScreen(
 ) {
     val tagItems by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(key1 = ScreenWithArgument.SelectedTag.argument) {
+    LaunchedEffect(key1 = ScreenWithArguments.SelectedTagScreen.ARGUMENT_TAG_NAME) {
         viewModel.getQuotesForTag(tagName)
     }
 
