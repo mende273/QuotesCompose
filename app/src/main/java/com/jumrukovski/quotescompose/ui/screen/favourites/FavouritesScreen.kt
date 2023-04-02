@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.jumrukovski.quotescompose.R
-import com.jumrukovski.quotescompose.ui.common.AppBar
+import com.jumrukovski.quotescompose.ui.common.TopBar
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
@@ -23,7 +23,7 @@ fun FavouritesScreen(navHostController: NavHostController) {
     QuotesComposeTheme {
         Scaffold(
             topBar = {
-                AppBar(
+                TopBar(
                     stringResource(id = R.string.screen_favourites)
                 )
             },
