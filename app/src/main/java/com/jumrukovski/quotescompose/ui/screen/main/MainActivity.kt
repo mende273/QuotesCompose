@@ -48,8 +48,8 @@ class MainActivity : ComponentActivity() {
 private fun isCurrentRouteFromBottomBarMenu(currentBackStackEntry: State<NavBackStackEntry?>): Boolean {
     val currentRoute = currentBackStackEntry.value?.destination?.route
     return currentRoute?.let { route ->
-        return@let (route == Screen.Home.route
-                || route == Screen.Tags.route
-                || route == Screen.Favourites.route)
+        return@let (route == Screen.WithoutArguments.Home.route
+                || route == Screen.WithoutArguments.Tags.route
+                || route == Screen.WithoutArguments.Favourites.route)
     } ?: false
 }
