@@ -15,7 +15,7 @@ import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Toolbar(
+fun AppBar(
     title: String = "",
     menuItems: List<RandomQuoteMenuItem> = emptyList(),
     isBackButtonEnabled: Boolean = false,

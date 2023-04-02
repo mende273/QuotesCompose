@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.common
+package com.jumrukovski.quotescompose.ui.common.bottombar
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -11,23 +11,17 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.jumrukovski.quotescompose.navigation.Screen
 import com.jumrukovski.quotescompose.ui.theme.MediumDarkGreyColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarItemRippleColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarSelectedItemColor
 
+
 @Composable
 fun BottomNavigationBar(
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    bottomNavigationItems: Array<BottomNavigationItem>
 ) {
-
-    val items = listOf(
-        Screen.Home,
-        Screen.Tags,
-        Screen.Favourites
-    )
-
     NavigationBar(
         modifier = Modifier,
         contentColor = MaterialTheme.colorScheme.NavigationBarItemRippleColor,
@@ -37,7 +31,7 @@ fun BottomNavigationBar(
             val navBackStackEntry by navHostController.currentBackStackEntryAsState()
             val currentDestination = navBackStackEntry?.destination
 
-            items.forEach { screen ->
+            bottomNavigationItems.forEach { screen ->
                 NavigationBarItem(
                     selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                     onClick = {

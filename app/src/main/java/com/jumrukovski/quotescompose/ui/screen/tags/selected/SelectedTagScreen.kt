@@ -15,7 +15,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
 import com.jumrukovski.quotescompose.navigation.ScreenWithArguments
-import com.jumrukovski.quotescompose.ui.common.Toolbar
+import com.jumrukovski.quotescompose.ui.common.AppBar
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.SmallQuoteCard
 import com.jumrukovski.quotescompose.ui.common.state.UIState
@@ -37,7 +37,7 @@ fun SelectedTagScreen(
     QuotesComposeTheme {
         Scaffold(
             topBar = {
-                Toolbar(
+                AppBar(
                     title = stringResource(
                         id = R.string.screen_selected_tag_title,
                         tagName
