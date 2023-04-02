@@ -40,7 +40,7 @@ sealed class ScreenWithArguments {
 
     protected fun initRouteArguments(): String {
         val builder = StringBuilder()
-        SelectedTag.arguments().map { navArgument -> navArgument.name }.forEach {
+        arguments().map { navArgument -> navArgument.name }.forEach {
             builder.append("/{${it}}")
         }
 
