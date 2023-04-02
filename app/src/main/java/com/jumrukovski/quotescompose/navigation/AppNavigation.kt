@@ -7,10 +7,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import com.jumrukovski.quotescompose.ui.screen.detail.QuoteDetailScreen
 import com.jumrukovski.quotescompose.ui.screen.favourites.FavouritesScreen
 import com.jumrukovski.quotescompose.ui.screen.home.HomeScreen
@@ -44,18 +42,15 @@ fun AppNavigation(
 
         composable(Screen.Favourites.route) { FavouritesScreen(navHostController) }
 
-        composable("quote_detail/{id}/{content}/{author}",
-            arguments = listOf(
-                navArgument("id") { type = NavType.StringType },
-                navArgument("content") { type = NavType.StringType },
-                navArgument("author") { type = NavType.StringType }
-            )
+        composable(
+            route = ScreenWithArguments.QuoteDetail.initializeRoute(),
+            arguments = ScreenWithArguments.QuoteDetail.arguments()
         ) { backStackEntry ->
             val bundleArguments = backStackEntry.arguments
 
-            val id = bundleArguments?.getString("id")
-            val content = bundleArguments?.getString("content")
-            val author = bundleArguments?.getString("author")
+            val id = bundleArguments?.getString(ScreenWithArguments.QuoteDetail.ARGUMENT_ID)
+            val content = bundleArguments?.getString(ScreenWithArguments.QuoteDetail.ARGUMENT_CONTENT)
+            val author = bundleArguments?.getString(ScreenWithArguments.QuoteDetail.ARGUMENT_AUTHOR)
 
             if (id != null && content != null && author != null) {
                 QuoteDetailScreen(
@@ -79,7 +74,7 @@ fun AppNavigation(
             SelectedTagScreen(viewModel = viewModel,
                 tagName = tagName,
                 onNavigateToQuoteDetails = {
-                    navHostController.navigate(route = "quote_detail/${it._id}/${it.content}/${it.author}") {
+                    navHostController.navigate(route = ScreenWithArguments.QuoteDetail.getRouteWith(it._id,it.content,it.author)) {
                         launchSingleTop = true
                     }
                 }, onNavigateBack = {
@@ -97,7 +92,7 @@ fun AppNavigation(
         composable(Screen.Home.route) {
             val viewModel: HomeViewModel by activity.viewModels()
             HomeScreen(viewModel = viewModel, onNavigateToQuoteDetails = { quote ->
-                navHostController.navigate(route = "quote_detail/${quote._id}/${quote.content}/${quote.author}") {
+                navHostController.navigate(route = ScreenWithArguments.QuoteDetail.getRouteWith(quote._id,quote.content,quote.author)) {
                     launchSingleTop = true
                 }
             }, onNavigateToRandomQuote = {
