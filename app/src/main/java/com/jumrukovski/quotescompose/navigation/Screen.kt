@@ -40,7 +40,7 @@ sealed class ScreenWithArguments {
 
     protected fun initRouteArguments(): String {
         val builder = StringBuilder()
-        SelectedTagScreen.arguments().map { navArgument -> navArgument.name }.forEach {
+        SelectedTag.arguments().map { navArgument -> navArgument.name }.forEach {
             builder.append("/{${it}}")
         }
 
@@ -48,7 +48,7 @@ sealed class ScreenWithArguments {
     }
 
     //  object QuoteDetail: ScreenWithArgument("quote_detail/", "{id}/{content}/{author}",R.string.screen_quote_detail,null)
-    object SelectedTagScreen : ScreenWithArguments() {
+    object SelectedTag : ScreenWithArguments() {
 
         const val ARGUMENT_TAG_NAME = "tagName"
 

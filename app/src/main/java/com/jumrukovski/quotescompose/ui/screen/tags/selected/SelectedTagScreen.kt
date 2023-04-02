@@ -30,7 +30,7 @@ fun SelectedTagScreen(
 ) {
     val tagItems by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(key1 = ScreenWithArguments.SelectedTagScreen.ARGUMENT_TAG_NAME) {
+    LaunchedEffect(key1 = ScreenWithArguments.SelectedTag.ARGUMENT_TAG_NAME) {
         viewModel.getQuotesForTag(tagName)
     }
 
