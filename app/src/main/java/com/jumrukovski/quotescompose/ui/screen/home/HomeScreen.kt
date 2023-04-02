@@ -16,7 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
 import com.jumrukovski.quotescompose.navigation.RandomQuoteMenuItem
-import com.jumrukovski.quotescompose.ui.common.AppBar
+import com.jumrukovski.quotescompose.ui.common.TopBar
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.SmallQuoteCard
 import com.jumrukovski.quotescompose.ui.common.state.UIState
@@ -38,7 +38,7 @@ fun HomeScreen(
     QuotesComposeTheme {
         Scaffold(
             topBar = {
-                AppBar(
+                TopBar(
                     title = stringResource(id = R.string.screen_home),
                     menuItems = RandomQuoteMenuItem.values().asList(),
                     onMenuItemClick = {

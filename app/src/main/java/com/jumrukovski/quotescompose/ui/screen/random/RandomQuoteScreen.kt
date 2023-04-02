@@ -13,7 +13,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
 import com.jumrukovski.quotescompose.navigation.RandomQuoteMenuItem
-import com.jumrukovski.quotescompose.ui.common.AppBar
+import com.jumrukovski.quotescompose.ui.common.TopBar
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.state.UIState
@@ -32,7 +32,7 @@ fun RandomQuoteScreen(viewModel: RandomQuoteViewModel, onNavigateBack: () -> Uni
     QuotesComposeTheme {
         Scaffold(
             topBar = {
-                AppBar(
+                TopBar(
                     title = stringResource(id = R.string.screen_random_quote),
                     menuItems = RandomQuoteMenuItem.values().asList(),
                     isBackButtonEnabled = true,

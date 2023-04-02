@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.jumrukovski.quotescompose.ui.common.AppBar
+import com.jumrukovski.quotescompose.ui.common.TopBar
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
@@ -16,7 +16,7 @@ fun QuoteDetailScreen(id: String, content: String, author: String, onNavigateBac
     QuotesComposeTheme {
         Scaffold(
             topBar = {
-                AppBar(
+                TopBar(
                     isBackButtonEnabled = true,
                     onNavigateBack = onNavigateBack
                 )

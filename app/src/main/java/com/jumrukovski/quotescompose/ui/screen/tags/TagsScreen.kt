@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.TagDTO
-import com.jumrukovski.quotescompose.ui.common.AppBar
+import com.jumrukovski.quotescompose.ui.common.TopBar
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
@@ -41,7 +41,7 @@ fun TagsScreen(
 
     QuotesComposeTheme {
         Scaffold(
-            topBar = { AppBar(stringResource(id = R.string.screen_tags)) },
+            topBar = { TopBar(stringResource(id = R.string.screen_tags)) },
             content = { paddingValues ->
                 Contents(
                     paddingValues = paddingValues,
