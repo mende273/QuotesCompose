@@ -10,7 +10,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.jumrukovski.quotescompose.navigation.AppNavigation
 import com.jumrukovski.quotescompose.navigation.Screen
-import com.jumrukovski.quotescompose.ui.common.BottomNavigationBar
+import com.jumrukovski.quotescompose.ui.common.bottombar.BottomNavigationBar
+import com.jumrukovski.quotescompose.ui.common.bottombar.BottomNavigationItem
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,6 +20,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val bottomNavigationItems = enumValues<BottomNavigationItem>()
 
         setContent {
             val navController = rememberNavController()
@@ -34,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     },
                     bottomBar = {
                         if (isCurrentRouteFromBottomBarMenu(navController.currentBackStackEntryAsState())) {
-                            BottomNavigationBar(navController)
+                            BottomNavigationBar(navController,bottomNavigationItems)
                         }
                     })
             }
