@@ -8,44 +8,34 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.jumrukovski.quotescompose.data.model.QuoteDTO
-import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 import com.jumrukovski.quotescompose.ui.theme.TertiaryColor
+import com.jumrukovski.quotescompose.ui.theme.mediumTextStyle
 
 @Composable
 fun SmallQuoteCard(quoteDTO: QuoteDTO, onNavigateToQuoteDetails: (QuoteDTO) -> Unit) {
-    Box(modifier = Modifier
-        .clickable { onNavigateToQuoteDetails(quoteDTO) }) {
-        Card(
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onNavigateToQuoteDetails(quoteDTO) },
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.TertiaryColor,
+        )
+    ) {
+        Column(
             modifier = Modifier
-                .fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.TertiaryColor,
-            )
+                .padding(16.dp)
+                .height(100.dp),
+            verticalArrangement = Arrangement.Center
         ) {
-            Column(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .height(100.dp),
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = quoteDTO.content,
-                    maxLines = 3,
-                    overflow = TextOverflow.Ellipsis,
-                    style = TextStyle(
-                        color = MaterialTheme.colorScheme.PrimaryTextColor,
-                        fontStyle = MaterialTheme.typography.bodyLarge.fontStyle,
-                        fontSize = 20.sp,
-                        textAlign = TextAlign.Start
-                    )
-                )
-            }
+            Text(
+                text = quoteDTO.content,
+                maxLines = 3,
+                overflow = TextOverflow.Ellipsis,
+                style = mediumTextStyle()
+            )
         }
     }
 }
