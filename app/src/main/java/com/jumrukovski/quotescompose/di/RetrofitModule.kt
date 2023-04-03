@@ -3,6 +3,7 @@ package com.jumrukovski.quotescompose.di
 import android.content.Context
 import com.jumrukovski.quotescompose.BuildConfig
 import com.jumrukovski.quotescompose.data.network.ApiService
+import com.jumrukovski.quotescompose.data.network.NoConnectionInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -68,4 +69,6 @@ class RetrofitModule {
         val cacheSize = 10 * 1024 * 1024
         return Cache(context.cacheDir, cacheSize.toLong())
     }
+
+    fun provideNoConnectionInterceptor(): NoConnectionInterceptor = NoConnectionInterceptor()
 }
