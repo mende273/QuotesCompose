@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
-import com.jumrukovski.quotescompose.data.model.QuoteDTO
+import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
 import com.jumrukovski.quotescompose.navigation.RandomQuoteMenuItem
 import com.jumrukovski.quotescompose.ui.common.TopBar
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard

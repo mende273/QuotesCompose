@@ -1,8 +1,8 @@
 package com.jumrukovski.quotescompose.data.repository
 
-import com.jumrukovski.quotescompose.data.model.QuoteDTO
-import com.jumrukovski.quotescompose.data.model.QuotesResultsDTO
-import com.jumrukovski.quotescompose.data.model.TagDTO
+import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
+import com.jumrukovski.quotescompose.data.model.dto.QuotesResultsDTO
+import com.jumrukovski.quotescompose.data.model.dto.TagDTO
 import com.jumrukovski.quotescompose.data.network.ApiService
 import retrofit2.Response
 import javax.inject.Inject

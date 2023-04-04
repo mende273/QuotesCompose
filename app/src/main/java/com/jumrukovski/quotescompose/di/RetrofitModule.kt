@@ -70,5 +70,7 @@ class RetrofitModule {
         return Cache(context.cacheDir, cacheSize.toLong())
     }
 
+    @Provides
+    @Singleton
     fun provideNoConnectionInterceptor(): NoConnectionInterceptor = NoConnectionInterceptor()
 }

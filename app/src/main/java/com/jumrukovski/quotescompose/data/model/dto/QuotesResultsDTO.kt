@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.data.model
+package com.jumrukovski.quotescompose.data.model.dto
 
 data class QuotesResultsDTO(
     val count: Int,
