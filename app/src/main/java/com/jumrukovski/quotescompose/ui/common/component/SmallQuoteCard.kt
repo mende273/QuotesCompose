@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.jumrukovski.quotescompose.data.model.QuoteDTO
+import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
 import com.jumrukovski.quotescompose.ui.theme.TertiaryColor
 import com.jumrukovski.quotescompose.ui.theme.mediumTextStyle
 

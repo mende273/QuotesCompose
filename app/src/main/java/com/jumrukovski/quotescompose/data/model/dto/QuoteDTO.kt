@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.data.model
+package com.jumrukovski.quotescompose.data.model.dto
 
 import android.os.Parcel
 import android.os.Parcelable
