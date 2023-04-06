@@ -2,7 +2,9 @@ package com.jumrukovski.quotescompose.di
 
 import android.app.Application
 import android.content.Context
+import com.jumrukovski.quotescompose.data.db.LocalDB
 import com.jumrukovski.quotescompose.data.network.ApiService
+import com.jumrukovski.quotescompose.data.repository.LocalRepository
 import com.jumrukovski.quotescompose.data.repository.Repository
 import dagger.Module
 import dagger.Provides
@@ -12,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
+object AppModule {
 
     @Provides
     @Singleton
@@ -24,5 +26,11 @@ class AppModule {
     @Singleton
     fun provideRepository(apiService: ApiService): Repository {
         return Repository(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalRepository(localDB: LocalDB): LocalRepository {
+        return LocalRepository(localDB)
     }
 }
