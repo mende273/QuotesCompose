@@ -8,8 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.jumrukovski.quotescompose.navigation.MenuItem
-import com.jumrukovski.quotescompose.navigation.RandomQuoteMenuItem
+import com.jumrukovski.quotescompose.data.model.MenuItem
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 
@@ -17,7 +16,7 @@ import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 @Composable
 fun TopBar(
     title: String = "",
-    menuItems: List<RandomQuoteMenuItem> = emptyList(),
+    menuItems: List<MenuItem> = emptyList(),
     isBackButtonEnabled: Boolean = false,
     onMenuItemClick: (MenuItem) -> Unit = {},
     onNavigateBack: () -> Unit = {}
@@ -60,8 +59,8 @@ private fun BackButton(onBackPressed: () -> Unit) {
 
 @Composable
 private fun MenuItem(
-    menuItem: RandomQuoteMenuItem,
-    onMenuItemClick: (RandomQuoteMenuItem) -> Unit = {}
+    menuItem: MenuItem,
+    onMenuItemClick: (MenuItem) -> Unit = {}
 ) {
     IconButton(onClick = { onMenuItemClick(menuItem) }) {
         Icon(
