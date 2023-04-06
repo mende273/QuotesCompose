@@ -62,9 +62,14 @@ private fun MenuItem(
     menuItem: MenuItem,
     onMenuItemClick: (MenuItem) -> Unit = {}
 ) {
+    val menuIcon = when (menuItem.isSelected) {
+        true -> menuItem.selectedIcon
+        false -> menuItem.icon
+    }
+
     IconButton(onClick = { onMenuItemClick(menuItem) }) {
         Icon(
-            painter = painterResource(id = menuItem.icon),
+            painter = painterResource(id = menuIcon),
             contentDescription = stringResource(id = menuItem.titleTextId),
             tint = MaterialTheme.colorScheme.onSurface
         )
