@@ -3,6 +3,7 @@
 
     <!-- action items -->
     <string name="action_random">Random</string>
+    <string name="action_favourite">Favourite</string>
 
     <!-- Screens -->
     <string name="screen_home">Home</string>
