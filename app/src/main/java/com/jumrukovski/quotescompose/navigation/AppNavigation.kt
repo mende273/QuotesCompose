@@ -10,6 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.jumrukovski.quotescompose.ui.screen.detail.QuoteDetailScreen
+import com.jumrukovski.quotescompose.ui.screen.detail.QuoteDetailViewModel
 import com.jumrukovski.quotescompose.ui.screen.favourites.FavouritesScreen
 import com.jumrukovski.quotescompose.ui.screen.home.HomeScreen
 import com.jumrukovski.quotescompose.ui.screen.home.HomeViewModel
@@ -53,7 +54,9 @@ fun AppNavigation(
             val author = bundleArguments?.getString(Screen.WithArguments.QuoteDetail.ARGUMENT_AUTHOR)
 
             if (id != null && content != null && author != null) {
+                val viewModel: QuoteDetailViewModel by activity.viewModels()
                 QuoteDetailScreen(
+                    viewModel = viewModel,
                     id = id,
                     content = content,
                     author = author,
