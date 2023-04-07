@@ -14,8 +14,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
+import com.jumrukovski.quotescompose.data.model.MenuItem
 import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
-import com.jumrukovski.quotescompose.navigation.RandomQuoteMenuItem
 import com.jumrukovski.quotescompose.ui.common.TopBar
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.SmallQuoteCard
@@ -40,16 +40,23 @@ fun HomeScreen(
             topBar = {
                 TopBar(
                     title = stringResource(id = R.string.screen_home),
-                    menuItems = RandomQuoteMenuItem.values().asList(),
+                    menuItems = listOf(
+                        MenuItem(
+                            R.string.action_random,
+                            R.drawable.baseline_random,
+                            0,
+                            false
+                        )
+                    ),
                     onMenuItemClick = {
-                        when (it) {
-                            RandomQuoteMenuItem.RANDOM -> onNavigateToRandomQuote()
+                        if (it.titleTextId == R.string.action_random) {
+                            onNavigateToRandomQuote()
                         }
                     }
                 )
             },
             content = { paddingValues ->
-                Contents(paddingValues = paddingValues, state = uiState, onItemClicked ={
+                Contents(paddingValues = paddingValues, state = uiState, onItemClicked = {
                     onNavigateToQuoteDetails(it)
                 })
             })
