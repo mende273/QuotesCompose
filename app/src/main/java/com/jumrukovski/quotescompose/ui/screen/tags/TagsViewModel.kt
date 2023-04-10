@@ -3,6 +3,7 @@ package com.jumrukovski.quotescompose.ui.screen.tags
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jumrukovski.quotescompose.data.model.dto.TagDTO
+import com.jumrukovski.quotescompose.data.model.middleware.Tag
 import com.jumrukovski.quotescompose.data.repository.Repository
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,9 +15,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TagsViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
-    private val _uiState: MutableStateFlow<UIState<List<TagDTO>>> =
+    private val _uiState: MutableStateFlow<UIState<List<Tag>>> =
         MutableStateFlow(UIState.Loading)
-    val uiState: StateFlow<UIState<List<TagDTO>>> = _uiState
+    val uiState: StateFlow<UIState<List<Tag>>> = _uiState
 
     suspend fun getAllTags() {
         viewModelScope.launch {
@@ -29,9 +30,9 @@ class TagsViewModel @Inject constructor(private val repository: Repository) : Vi
                 when (response.isSuccessful) {
                     true -> {
                         response.body()?.let {
-                            if(it.isNotEmpty()){
-                                UIState.SuccessWithData(it)
-                            }else {
+                            if (it.isNotEmpty()) {
+                                UIState.SuccessWithData(it.map { Tag(it._id, it.name) })
+                            } else {
                                 UIState.SuccessWithNoData
                             }
                         } ?: UIState.SuccessWithNoData
