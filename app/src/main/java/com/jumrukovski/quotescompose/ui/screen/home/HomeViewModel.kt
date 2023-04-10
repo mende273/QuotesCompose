@@ -2,7 +2,7 @@ package com.jumrukovski.quotescompose.ui.screen.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
+import com.jumrukovski.quotescompose.data.model.middleware.Quote
 import com.jumrukovski.quotescompose.data.repository.Repository
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository:Repository):ViewModel(){
-    private val _uiState:MutableStateFlow<UIState<List<QuoteDTO>>> = MutableStateFlow(UIState.Loading)
-    val uiState:StateFlow<UIState<List<QuoteDTO>>> = _uiState
+    private val _uiState:MutableStateFlow<UIState<List<Quote>>> = MutableStateFlow(UIState.Loading)
+    val uiState:StateFlow<UIState<List<Quote>>> = _uiState
 
     // todo get paginated quotes list
     suspend fun getQuotes(){
@@ -31,7 +31,7 @@ class HomeViewModel @Inject constructor(private val repository:Repository):ViewM
                             if (it.results.isNullOrEmpty()) {
                                 UIState.SuccessWithNoData
                             } else {
-                                UIState.SuccessWithData(it.results)
+                                UIState.SuccessWithData(it.results.map { Quote(it._id,it.content,it.author) })
                             }
                         } ?: UIState.SuccessWithNoData
                     }

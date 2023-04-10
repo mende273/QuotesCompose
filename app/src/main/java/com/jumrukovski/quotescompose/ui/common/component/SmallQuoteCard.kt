@@ -10,16 +10,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
+import com.jumrukovski.quotescompose.data.model.middleware.Quote
 import com.jumrukovski.quotescompose.ui.theme.TertiaryColor
 import com.jumrukovski.quotescompose.ui.theme.mediumTextStyle
 
 @Composable
-fun SmallQuoteCard(quoteDTO: QuoteDTO, onNavigateToQuoteDetails: (QuoteDTO) -> Unit) {
+fun SmallQuoteCard(quote: Quote, onNavigateToQuoteDetails: (Quote) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onNavigateToQuoteDetails(quoteDTO) },
+            .clickable { onNavigateToQuoteDetails(quote) },
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.TertiaryColor,
         )
@@ -31,7 +31,7 @@ fun SmallQuoteCard(quoteDTO: QuoteDTO, onNavigateToQuoteDetails: (QuoteDTO) -> U
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = quoteDTO.content,
+                text = quote.content,
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis,
                 style = mediumTextStyle()

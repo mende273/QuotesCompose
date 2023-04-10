@@ -2,8 +2,8 @@ package com.jumrukovski.quotescompose.ui.screen.tags.selected
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
 import com.jumrukovski.quotescompose.data.model.dto.QuotesResultsDTO
+import com.jumrukovski.quotescompose.data.model.middleware.Quote
 import com.jumrukovski.quotescompose.data.repository.Repository
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,9 +16,9 @@ import javax.inject.Inject
 @HiltViewModel
 class SelectedTagViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    private val _uiState: MutableStateFlow<UIState<List<QuoteDTO>>> =
+    private val _uiState: MutableStateFlow<UIState<List<Quote>>> =
         MutableStateFlow(UIState.Loading)
-    val uiState: StateFlow<UIState<List<QuoteDTO>>> = _uiState
+    val uiState: StateFlow<UIState<List<Quote>>> = _uiState
 
     private var currentTag = ""
 
@@ -30,7 +30,7 @@ class SelectedTagViewModel @Inject constructor(private val repository: Repositor
 
             currentTag = tag
 
-            if(_uiState.value !is UIState.Loading){
+            if (_uiState.value !is UIState.Loading) {
                 _uiState.value = UIState.Loading
             }
 
@@ -42,7 +42,13 @@ class SelectedTagViewModel @Inject constructor(private val repository: Repositor
                             if (it.results.isNullOrEmpty()) {
                                 UIState.SuccessWithNoData
                             } else {
-                                UIState.SuccessWithData(it.results)
+                                UIState.SuccessWithData(it.results.map {
+                                    Quote(
+                                        it._id,
+                                        it.content,
+                                        it.author
+                                    )
+                                })
                             }
                         } ?: UIState.SuccessWithNoData
                     }
