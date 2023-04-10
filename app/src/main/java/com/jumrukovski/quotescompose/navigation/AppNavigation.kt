@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import com.jumrukovski.quotescompose.ui.screen.detail.QuoteDetailScreen
 import com.jumrukovski.quotescompose.ui.screen.detail.QuoteDetailViewModel
 import com.jumrukovski.quotescompose.ui.screen.favourites.FavouritesScreen
+import com.jumrukovski.quotescompose.ui.screen.favourites.FavouritesViewModel
 import com.jumrukovski.quotescompose.ui.screen.home.HomeScreen
 import com.jumrukovski.quotescompose.ui.screen.home.HomeViewModel
 import com.jumrukovski.quotescompose.ui.screen.random.RandomQuoteScreen
@@ -41,7 +42,23 @@ fun AppNavigation(
             }
         }
 
-        composable(Screen.WithoutArguments.Favourites.route) { FavouritesScreen(navHostController) }
+        composable(Screen.WithoutArguments.Favourites.route) {
+            val viewModel: FavouritesViewModel by activity.viewModels()
+            FavouritesScreen(viewModel,
+                onNavigateToQuoteDetails = {
+                    navHostController.navigate(
+                        route = Screen.WithArguments.QuoteDetail.getRouteWith(
+                            it.id,
+                            it.content,
+                            it.author
+                        )
+                    ) {
+                        launchSingleTop = true
+                    }
+                }, onNavigateBack = {
+                    navHostController.navigateUp()
+                })
+        }
 
         composable(
             route = Screen.WithArguments.QuoteDetail.routeWithArguments,
@@ -50,8 +67,10 @@ fun AppNavigation(
             val bundleArguments = backStackEntry.arguments
 
             val id = bundleArguments?.getString(Screen.WithArguments.QuoteDetail.ARGUMENT_ID)
-            val content = bundleArguments?.getString(Screen.WithArguments.QuoteDetail.ARGUMENT_CONTENT)
-            val author = bundleArguments?.getString(Screen.WithArguments.QuoteDetail.ARGUMENT_AUTHOR)
+            val content =
+                bundleArguments?.getString(Screen.WithArguments.QuoteDetail.ARGUMENT_CONTENT)
+            val author =
+                bundleArguments?.getString(Screen.WithArguments.QuoteDetail.ARGUMENT_AUTHOR)
 
             if (id != null && content != null && author != null) {
                 val viewModel: QuoteDetailViewModel by activity.viewModels()
@@ -77,7 +96,13 @@ fun AppNavigation(
             SelectedTagScreen(viewModel = viewModel,
                 tagName = tagName,
                 onNavigateToQuoteDetails = {
-                    navHostController.navigate(route = Screen.WithArguments.QuoteDetail.getRouteWith(it._id,it.content,it.author)) {
+                    navHostController.navigate(
+                        route = Screen.WithArguments.QuoteDetail.getRouteWith(
+                            it.id,
+                            it.content,
+                            it.author
+                        )
+                    ) {
                         launchSingleTop = true
                     }
                 }, onNavigateBack = {
@@ -95,7 +120,13 @@ fun AppNavigation(
         composable(Screen.WithoutArguments.Home.route) {
             val viewModel: HomeViewModel by activity.viewModels()
             HomeScreen(viewModel = viewModel, onNavigateToQuoteDetails = { quote ->
-                navHostController.navigate(route = Screen.WithArguments.QuoteDetail.getRouteWith(quote._id,quote.content,quote.author)) {
+                navHostController.navigate(
+                    route = Screen.WithArguments.QuoteDetail.getRouteWith(
+                        quote.id,
+                        quote.content,
+                        quote.author
+                    )
+                ) {
                     launchSingleTop = true
                 }
             }, onNavigateToRandomQuote = {
