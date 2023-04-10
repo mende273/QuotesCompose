@@ -12,7 +12,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RandomQuoteViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class RandomQuoteViewModel @Inject constructor(
+    private val repository: Repository
+) :
+    ViewModel() {
 
     private val _uiState: MutableStateFlow<UIState<QuoteDTO>> = MutableStateFlow(UIState.Loading)
     val uiState: StateFlow<UIState<QuoteDTO>> = _uiState

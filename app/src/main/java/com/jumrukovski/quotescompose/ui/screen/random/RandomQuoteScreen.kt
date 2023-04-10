@@ -21,23 +21,23 @@ import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 @Composable
 fun RandomQuoteScreen(viewModel: RandomQuoteViewModel, onNavigateBack: () -> Unit) {
 
-    LaunchedEffect(key1 = "random_quote",
-        block = {
-            viewModel.getRandomQuote()
-        })
-
     val menuItems by remember {
         mutableStateOf(
             listOf(
                 MenuItem(
                     R.string.action_random,
-                    R.drawable.baseline_random,
+                    R.drawable.baseline_refresh_24,
                     0,
                     false
                 )
             )
         )
     }
+
+    LaunchedEffect(Unit,
+        block = {
+            viewModel.getRandomQuote()
+        })
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
