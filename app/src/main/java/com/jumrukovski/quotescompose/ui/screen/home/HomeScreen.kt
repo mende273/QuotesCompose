@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.MenuItem
-import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
+import com.jumrukovski.quotescompose.data.model.middleware.Quote
 import com.jumrukovski.quotescompose.ui.common.TopBar
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.SmallQuoteCard
@@ -25,7 +25,7 @@ import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel, onNavigateToQuoteDetails: (QuoteDTO) -> Unit,
+    viewModel: HomeViewModel, onNavigateToQuoteDetails: (Quote) -> Unit,
     onNavigateToRandomQuote: () -> Unit
 ) {
 
@@ -66,8 +66,8 @@ fun HomeScreen(
 @Composable
 private fun Contents(
     paddingValues: PaddingValues,
-    state: UIState<List<QuoteDTO>>,
-    onItemClicked: (QuoteDTO) -> Unit
+    state: UIState<List<Quote>>,
+    onItemClicked: (Quote) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -87,7 +87,7 @@ private fun Contents(
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     items(state.data) { quote ->
                         SmallQuoteCard(
-                            quoteDTO = quote,
+                            quote = quote,
                             onNavigateToQuoteDetails = {
                                 onItemClicked(it)
                             })
