@@ -12,19 +12,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.jumrukovski.quotescompose.data.model.dto.TagDTO
+import com.jumrukovski.quotescompose.data.model.middleware.Tag
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.TertiaryColor
 import com.jumrukovski.quotescompose.ui.theme.mediumTextStyle
 
 @Composable
-fun TagCard(tagDTO: TagDTO, onItemClicked: (String) -> Unit) {
+fun TagCard(tag: Tag, onItemClicked: (String) -> Unit) {
     Card(
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.PrimaryBackgroundColor)
             .fillMaxWidth()
             .clickable {
-                onItemClicked(tagDTO.name)
+                onItemClicked(tag.name)
             },
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
@@ -35,7 +35,7 @@ fun TagCard(tagDTO: TagDTO, onItemClicked: (String) -> Unit) {
             modifier = Modifier
                 .wrapContentSize()
                 .padding(16.dp),
-            text = tagDTO.name,
+            text = tag.name,
             style = mediumTextStyle()
         )
     }
