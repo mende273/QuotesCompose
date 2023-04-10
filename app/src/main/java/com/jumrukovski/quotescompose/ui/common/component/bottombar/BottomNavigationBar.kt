@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.common.bottombar
+package com.jumrukovski.quotescompose.ui.common.component.bottombar
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable

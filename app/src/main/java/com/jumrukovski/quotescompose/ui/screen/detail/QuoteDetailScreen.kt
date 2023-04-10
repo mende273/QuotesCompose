@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.MenuItem
 import com.jumrukovski.quotescompose.data.model.entity.FavouriteQuoteEntity
-import com.jumrukovski.quotescompose.ui.common.TopBar
+import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import kotlinx.coroutines.flow.collectLatest
