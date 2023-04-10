@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.common.bottombar
+package com.jumrukovski.quotescompose.ui.common.component.bottombar
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
