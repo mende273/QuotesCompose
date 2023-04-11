@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jumrukovski.quotescompose.data.model.dto.QuotesResultsDTO
 import com.jumrukovski.quotescompose.data.model.middleware.Quote
-import com.jumrukovski.quotescompose.data.repository.Repository
+import com.jumrukovski.quotescompose.data.repository.RemoteRepository
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class SelectedTagViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class SelectedTagViewModel @Inject constructor(private val remoteRepository: RemoteRepository) : ViewModel() {
 
     private val _uiState: MutableStateFlow<UIState<List<Quote>>> =
         MutableStateFlow(UIState.Loading)
@@ -35,7 +35,7 @@ class SelectedTagViewModel @Inject constructor(private val repository: Repositor
             }
 
             _uiState.value = try {
-                val response: Response<QuotesResultsDTO> = repository.getQuotesForTag(tag)
+                val response: Response<QuotesResultsDTO> = remoteRepository.getQuotesForTag(tag)
                 when (response.isSuccessful) {
                     true -> {
                         response.body()?.let {

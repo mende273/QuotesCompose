@@ -7,7 +7,7 @@ import com.jumrukovski.quotescompose.data.network.ApiService
 import retrofit2.Response
 import javax.inject.Inject
 
-class Repository @Inject constructor(private val apiService: ApiService) {
+class RemoteRepository @Inject constructor(private val apiService: ApiService) {
 
     suspend fun getQuotes():Response<QuotesResultsDTO>{
         return apiService.getQuotes()
