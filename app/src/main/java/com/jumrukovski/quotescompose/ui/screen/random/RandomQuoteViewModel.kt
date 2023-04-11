@@ -3,7 +3,7 @@ package com.jumrukovski.quotescompose.ui.screen.random
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
-import com.jumrukovski.quotescompose.data.repository.Repository
+import com.jumrukovski.quotescompose.data.repository.RemoteRepository
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RandomQuoteViewModel @Inject constructor(
-    private val repository: Repository
+    private val remoteRepository: RemoteRepository
 ) :
     ViewModel() {
 
@@ -26,7 +26,7 @@ class RandomQuoteViewModel @Inject constructor(
             _uiState.value = UIState.Loading
 
             _uiState.value = try {
-                val response = repository.getRandomQuote()
+                val response = remoteRepository.getRandomQuote()
                 when (response.isSuccessful) {
                     true -> {
                         response.body()?.let {
