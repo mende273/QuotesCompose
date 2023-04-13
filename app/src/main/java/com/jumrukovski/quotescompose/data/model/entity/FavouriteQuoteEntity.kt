@@ -10,7 +10,3 @@ data class FavouriteQuoteEntity(
     val content: String,
     val author: String
 )
-
-fun mapToFavouriteQuoteEntity(id: String, content: String, author: String): FavouriteQuoteEntity {
-    return FavouriteQuoteEntity(id, content, author)
-}
