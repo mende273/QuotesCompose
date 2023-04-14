@@ -14,4 +14,7 @@
     <string name="screen_random_quote">Random Quote</string>
 
     <string name="screen_selected_tag_title">Tag: %1$s</string>
+
+    <string name="no_data">Nothing here!</string>
+    <string name="error">Something went wrong!</string>
 </resources>
