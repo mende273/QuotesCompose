@@ -32,4 +32,16 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideGetAllFavouriteQuotesUseCase(localRepository: LocalRepository) = GetAllFavouriteQuotesUseCase(localRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetFavouriteQuoteUseCase(localRepository: LocalRepository) = GetFavouriteQuoteUseCase(localRepository)
+
+    @Provides
+    @Singleton
+    fun provideAddFavouriteQuoteToDBUseCase(localRepository: LocalRepository) = AddFavouriteQuoteToDBUseCase(localRepository)
+
+    @Provides
+    @Singleton
+    fun provideRemoveQuoteFromFavouritesDBUseCase(localRepository: LocalRepository) = RemoveQuoteFromFavouritesDBUseCase(localRepository)
 }
