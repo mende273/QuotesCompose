@@ -14,11 +14,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
-import com.jumrukovski.quotescompose.data.model.entity.FavouriteQuoteEntity
 import com.jumrukovski.quotescompose.data.model.middleware.Quote
-import com.jumrukovski.quotescompose.ui.common.component.TopBar
+import com.jumrukovski.quotescompose.ui.common.component.EmptyDataCard
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.SmallQuoteCard
+import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
@@ -59,7 +59,7 @@ fun FavouritesScreen(
 @Composable
 private fun Contents(
     paddingValues: PaddingValues,
-    state: UIState<List<FavouriteQuoteEntity>>,
+    state: UIState<List<Quote>>,
     onNavigateToQuoteDetails: (Quote) -> Unit
 ) {
     Box(
@@ -75,7 +75,7 @@ private fun Contents(
             is UIState.Loading -> {
                 ProgressBar()
             }
-            UIState.SuccessWithNoData -> ""
+            UIState.SuccessWithNoData -> EmptyDataCard(reason = stringResource(id = R.string.no_data))
             is UIState.SuccessWithData -> {
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     items(state.data) { quote ->
