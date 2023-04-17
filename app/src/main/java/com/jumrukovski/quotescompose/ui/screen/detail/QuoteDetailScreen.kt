@@ -9,9 +9,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.MenuItem
-import com.jumrukovski.quotescompose.data.model.entity.FavouriteQuoteEntity
-import com.jumrukovski.quotescompose.ui.common.component.TopBar
+import com.jumrukovski.quotescompose.data.model.middleware.Quote
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
+import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import kotlinx.coroutines.flow.collectLatest
 
@@ -23,9 +23,7 @@ fun QuoteDetailScreen(
     author: String,
     onNavigateBack: () -> Unit
 ) {
-    var isFavourite by remember {
-        mutableStateOf<FavouriteQuoteEntity?>(null)
-    }
+    var isFavourite by remember { mutableStateOf<Quote?>(null) }
 
     var menuItems by remember {
         mutableStateOf(
