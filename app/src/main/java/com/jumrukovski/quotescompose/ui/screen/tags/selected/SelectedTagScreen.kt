@@ -15,10 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.middleware.Quote
-import com.jumrukovski.quotescompose.navigation.Screen
-import com.jumrukovski.quotescompose.ui.common.component.TopBar
+import com.jumrukovski.quotescompose.ui.common.component.EmptyDataCard
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.SmallQuoteCard
+import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
@@ -31,7 +31,7 @@ fun SelectedTagScreen(
 ) {
     val tagItems by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(key1 = Screen.WithArguments.SelectedTag.ARGUMENT_TAG_NAME) {
+    LaunchedEffect(key1 = tagName) {
         viewModel.getQuotesForTag(tagName)
     }
 
@@ -40,8 +40,7 @@ fun SelectedTagScreen(
             topBar = {
                 TopBar(
                     title = stringResource(
-                        id = R.string.screen_selected_tag_title,
-                        tagName
+                        id = R.string.screen_selected_tag_title, tagName
                     ),
                     isBackButtonEnabled = true,
                     onNavigateBack = onNavigateBack
@@ -72,7 +71,7 @@ private fun Contents(
             is UIState.Loading -> {
                 ProgressBar()
             }
-            UIState.SuccessWithNoData -> ""
+            UIState.SuccessWithNoData -> EmptyDataCard(reason = stringResource(id = R.string.no_data))
             is UIState.SuccessWithData -> {
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     items(state.data) { quote ->
