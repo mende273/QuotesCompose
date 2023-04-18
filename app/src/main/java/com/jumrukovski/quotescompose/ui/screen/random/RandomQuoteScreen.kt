@@ -5,16 +5,20 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.MenuItem
-import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
-import com.jumrukovski.quotescompose.ui.common.component.TopBar
+import com.jumrukovski.quotescompose.data.model.middleware.Quote
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
+import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
@@ -63,7 +67,7 @@ fun RandomQuoteScreen(viewModel: RandomQuoteViewModel, onNavigateBack: () -> Uni
 }
 
 @Composable
-private fun Contents(paddingValues: PaddingValues, uiState: UIState<QuoteDTO>) {
+private fun Contents(paddingValues: PaddingValues, uiState: UIState<Quote>) {
     Box(
         modifier = Modifier
             .padding(paddingValues)
