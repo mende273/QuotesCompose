@@ -24,15 +24,15 @@ class TagsViewModel @Inject constructor(private val getAllTagsUseCase: GetAllTag
                 return@launch
             }
 
-            val response: ResponseResult<List<Tag>> = getAllTagsUseCase()
-
-            _uiState.value = when (response) {
-                is ResponseResult.Error -> UIState.Error(response.code)
-                is ResponseResult.Exception -> UIState.Exception(response.exception)
-                is ResponseResult.Success -> {
-                    when (response.data.isEmpty()) {
-                        true -> UIState.SuccessWithNoData
-                        false -> UIState.SuccessWithData(response.data)
+            with(getAllTagsUseCase()) {
+                _uiState.value = when (this) {
+                    is ResponseResult.Error -> UIState.Error(code)
+                    is ResponseResult.Exception -> UIState.Exception(exception)
+                    is ResponseResult.Success -> {
+                        when (data.isEmpty()) {
+                            true -> UIState.SuccessWithNoData
+                            false -> UIState.SuccessWithData(data)
+                        }
                     }
                 }
             }
