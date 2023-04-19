@@ -1,7 +1,11 @@
 package com.jumrukovski.quotescompose.ui.screen.tags.selected
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -66,11 +70,9 @@ private fun Contents(
             .padding(16.dp)
     ) {
         when (state) {
-            is UIState.Error -> ""
-            is UIState.Exception -> ""
-            is UIState.Loading -> {
-                ProgressBar()
-            }
+            is UIState.Error -> EmptyDataCard(reason = stringResource(id = R.string.error))
+            is UIState.Exception -> EmptyDataCard(reason = stringResource(id = R.string.error))
+            is UIState.Loading -> ProgressBar()
             UIState.SuccessWithNoData -> EmptyDataCard(reason = stringResource(id = R.string.no_data))
             is UIState.SuccessWithData -> {
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
