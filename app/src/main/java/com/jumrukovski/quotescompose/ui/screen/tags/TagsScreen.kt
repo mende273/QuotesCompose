@@ -1,7 +1,11 @@
 package com.jumrukovski.quotescompose.ui.screen.tags
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -16,9 +20,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.middleware.Tag
-import com.jumrukovski.quotescompose.ui.common.component.TopBar
+import com.jumrukovski.quotescompose.ui.common.component.EmptyDataCard
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.TagCard
+import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
@@ -61,12 +66,10 @@ private fun Contents(
             .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
     ) {
         when (uiState) {
-            is UIState.Error -> ""
-            is UIState.Exception -> ""
-            is UIState.Loading -> {
-                ProgressBar()
-            }
-            UIState.SuccessWithNoData -> ""
+            is UIState.Error -> EmptyDataCard(reason = stringResource(id = R.string.error))
+            is UIState.Exception -> EmptyDataCard(reason = stringResource(id = R.string.error))
+            is UIState.Loading -> ProgressBar()
+            UIState.SuccessWithNoData -> EmptyDataCard(reason = stringResource(id = R.string.no_data))
             is UIState.SuccessWithData -> {
                 LazyVerticalGrid(
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp),
