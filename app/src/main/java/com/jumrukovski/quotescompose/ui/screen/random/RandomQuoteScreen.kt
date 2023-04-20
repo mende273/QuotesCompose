@@ -16,6 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.MenuItem
 import com.jumrukovski.quotescompose.data.model.middleware.Quote
+import com.jumrukovski.quotescompose.ui.common.component.EmptyDataCard
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.TopBar
@@ -74,13 +75,11 @@ private fun Contents(paddingValues: PaddingValues, uiState: UIState<Quote>) {
             .fillMaxSize()
     ) {
         when (uiState) {
-            is UIState.Error -> ""
-            is UIState.Exception -> ""
+            is UIState.Error -> EmptyDataCard(reason = stringResource(id = R.string.error))
+            is UIState.Exception -> EmptyDataCard(reason = stringResource(id = R.string.error))
             UIState.Loading -> ProgressBar()
-            UIState.SuccessWithNoData -> ""
-            is UIState.SuccessWithData -> {
-                LargeQuoteCard(uiState.data.content, uiState.data.author)
-            }
+            UIState.SuccessWithNoData -> EmptyDataCard(reason = stringResource(id = R.string.no_data))
+            is UIState.SuccessWithData -> LargeQuoteCard(uiState.data.content, uiState.data.author)
         }
     }
 }
