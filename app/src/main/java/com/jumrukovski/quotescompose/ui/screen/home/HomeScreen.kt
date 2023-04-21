@@ -20,6 +20,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.MenuItem
 import com.jumrukovski.quotescompose.data.model.middleware.Quote
+import com.jumrukovski.quotescompose.ui.common.component.EmptyDataCard
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.SmallQuoteCard
 import com.jumrukovski.quotescompose.ui.common.component.TopBar
@@ -81,12 +82,10 @@ private fun Contents(
             .padding(16.dp)
     ) {
         when (state) {
-            is UIState.Error -> ""
-            is UIState.Exception -> ""
-            is UIState.Loading -> {
-                ProgressBar()
-            }
-            UIState.SuccessWithNoData -> ""
+            is UIState.Error -> EmptyDataCard(reason = stringResource(id = R.string.error))
+            is UIState.Exception -> EmptyDataCard(reason = stringResource(id = R.string.error))
+            is UIState.Loading -> ProgressBar()
+            UIState.SuccessWithNoData -> EmptyDataCard(reason = stringResource(id = R.string.no_data))
             is UIState.SuccessWithData -> {
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     items(state.data) { quote ->
