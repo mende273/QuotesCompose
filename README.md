@@ -5,6 +5,8 @@
 
 Android application demonstrating the use of JetPack Compose with Hilt, Navigation Component and MVVM architecture
 
+The project is using the free api from [quotable.io](https://github.com/lukePeavey/quotable)
+
 ## App Screenshots
 | Light Theme | Dark Theme |
 | --- | --- |
