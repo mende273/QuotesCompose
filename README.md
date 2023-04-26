@@ -1,6 +1,7 @@
 # QuotesCompose
 ![Min API](https://img.shields.io/badge/API-26%2B-orange.svg?style=flat)
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](http://developer.android.com/index.html)
+[![Release](https://img.shields.io/github/v/release/mende273/quotescompose)](https://github.com/mende273/QuotesCompose/releases)
 
 Android application demonstrating the use of JetPack Compose with Hilt, Navigation Component and MVVM architecture
 
