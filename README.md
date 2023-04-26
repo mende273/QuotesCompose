@@ -1,4 +1,7 @@
 # QuotesCompose
+![Min API](https://img.shields.io/badge/API-26%2B-orange.svg?style=flat)
+[![Platform](https://img.shields.io/badge/platform-Android-green.svg)](http://developer.android.com/index.html)
+
 Android application demonstrating the use of JetPack Compose with Hilt, Navigation Component and MVVM architecture
 
 ## App Screenshots
@@ -28,6 +31,8 @@ Android application demonstrating the use of JetPack Compose with Hilt, Navigati
 
 ## Build-tool
 You need to have [Android Studio Flamingo or above](https://developer.android.com/studio/preview) to build this project.
+
+
 
 ## Future Plans
 - Add support for [Paging3 Library](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
