@@ -34,9 +34,3 @@ The project is using the free api from [quotable.io](https://github.com/lukePeav
 
 ## Build-tool
 You need to have [Android Studio Flamingo or above](https://developer.android.com/studio/preview) to build this project.
-
-
-
-## Future Plans
-- Add support for [Paging3 Library](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
-- Add App [Modularization](https://developer.android.com/topic/modularization)
