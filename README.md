@@ -10,11 +10,11 @@ The project is using the free api from [quotable.io](https://github.com/lukePeav
 ## App Screenshots
 | Light Theme | Dark Theme |
 | --- | --- |
-| <img src="/screenshots/1_light.png" width="250">) | <img src="/screenshots/1_dark.png" width="250"> |
+| <img src="/screenshots/1_light.png" width="250"> | <img src="/screenshots/1_dark.png" width="250"> |
 |  |  |
-| <img src="/screenshots/2_light.png" width="250">) | <img src="/screenshots/2_dark.png" width="250"> |
+| <img src="/screenshots/2_light.png" width="250"> | <img src="/screenshots/2_dark.png" width="250"> |
 |  |  |
-| <img src="/screenshots/3_light.png" width="250">) | <img src="/screenshots/3_dark.png" width="250"> |
+| <img src="/screenshots/3_light.png" width="250"> | <img src="/screenshots/3_dark.png" width="250"> |
 
 ## Built With
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
