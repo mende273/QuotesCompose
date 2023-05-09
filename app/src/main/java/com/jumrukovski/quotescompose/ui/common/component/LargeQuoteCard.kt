@@ -2,6 +2,8 @@ package com.jumrukovski.quotescompose.ui.common.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -28,8 +30,9 @@ fun LargeQuoteCard(content: String, author: String) {
     ) {
         Column(
             modifier = Modifier
+                .fillMaxSize()
                 .padding(16.dp)
-                .fillMaxSize(),
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Center
         ) {
             Text(
