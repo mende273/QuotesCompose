@@ -3,13 +3,13 @@ package com.jumrukovski.quotescompose.ui.screen.home
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -26,7 +26,6 @@ import com.jumrukovski.quotescompose.ui.common.component.SmallQuoteCard
 import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
-import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
 fun HomeScreen(
@@ -40,31 +39,26 @@ fun HomeScreen(
         viewModel.getQuotes()
     }
 
-    QuotesComposeTheme {
-        Scaffold(
-            topBar = {
-                TopBar(
-                    title = stringResource(id = R.string.screen_home),
-                    menuItems = listOf(
-                        MenuItem(
-                            R.string.action_random,
-                            R.drawable.baseline_random,
-                            0,
-                            false
-                        )
-                    ),
-                    onMenuItemClick = {
-                        if (it.titleTextId == R.string.action_random) {
-                            onNavigateToRandomQuote()
-                        }
-                    }
+    Column {
+        TopBar(
+            title = stringResource(id = R.string.screen_home),
+            menuItems = listOf(
+                MenuItem(
+                    R.string.action_random,
+                    R.drawable.baseline_random,
+                    0,
+                    false
                 )
-            },
-            content = { paddingValues ->
-                Contents(paddingValues = paddingValues, state = uiState, onItemClicked = {
-                    onNavigateToQuoteDetails(it)
-                })
-            })
+            ),
+            onMenuItemClick = {
+                if (it.titleTextId == R.string.action_random) {
+                    onNavigateToRandomQuote()
+                }
+            }
+        )
+        Contents(paddingValues = PaddingValues(16.dp), state = uiState, onItemClicked = {
+            onNavigateToQuoteDetails(it)
+        })
     }
 }
 
@@ -77,9 +71,8 @@ private fun Contents(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(paddingValues)
             .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
-            .padding(16.dp)
+            .padding(paddingValues)
     ) {
         when (state) {
             is UIState.Error -> EmptyDataCard(reason = stringResource(id = R.string.error))

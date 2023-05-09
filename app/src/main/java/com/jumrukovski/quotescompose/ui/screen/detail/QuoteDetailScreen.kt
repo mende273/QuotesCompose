@@ -1,18 +1,22 @@
 package com.jumrukovski.quotescompose.ui.screen.detail
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.data.model.MenuItem
 import com.jumrukovski.quotescompose.data.model.middleware.Quote
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
 import com.jumrukovski.quotescompose.ui.common.component.TopBar
-import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -51,27 +55,22 @@ fun QuoteDetailScreen(
         }
     })
 
-    QuotesComposeTheme {
-        Scaffold(
-            topBar = {
-                TopBar(
-                    isBackButtonEnabled = true,
-                    onNavigateBack = onNavigateBack,
-                    menuItems = menuItems,
-                    onMenuItemClick = {
-                        if (it.titleTextId == R.string.action_favourite) {
-                            if (isFavourite == null) {
-                                viewModel.addQuoteToFavourites(id, content, author)
-                            } else {
-                                viewModel.removeQuoteFromFavourites(id, content, author)
-                            }
-                        }
+    Column {
+        TopBar(
+            isBackButtonEnabled = true,
+            onNavigateBack = onNavigateBack,
+            menuItems = menuItems,
+            onMenuItemClick = {
+                if (it.titleTextId == R.string.action_favourite) {
+                    if (isFavourite == null) {
+                        viewModel.addQuoteToFavourites(id, content, author)
+                    } else {
+                        viewModel.removeQuoteFromFavourites(id, content, author)
                     }
-                )
-            },
-            content = { paddingValues ->
-                Contents(paddingValues = paddingValues, content, author)
-            })
+                }
+            }
+        )
+        Contents(paddingValues = PaddingValues(), content, author)
     }
 }
 

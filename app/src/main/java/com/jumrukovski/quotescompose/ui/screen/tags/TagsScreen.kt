@@ -3,6 +3,7 @@ package com.jumrukovski.quotescompose.ui.screen.tags
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -10,7 +11,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -26,7 +26,6 @@ import com.jumrukovski.quotescompose.ui.common.component.TagCard
 import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
-import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
 fun TagsScreen(
@@ -40,16 +39,13 @@ fun TagsScreen(
         viewModel.getAllTags()
     }
 
-    QuotesComposeTheme {
-        Scaffold(
-            topBar = { TopBar(stringResource(id = R.string.screen_tags)) },
-            content = { paddingValues ->
-                Contents(
-                    paddingValues = paddingValues,
-                    uiState = uiState,
-                    onNavigateToSelectedTag = onNavigateToSelectedTag
-                )
-            })
+    Column {
+        TopBar(stringResource(id = R.string.screen_tags))
+        Contents(
+            paddingValues = PaddingValues(),
+            uiState = uiState,
+            onNavigateToSelectedTag = onNavigateToSelectedTag
+        )
     }
 }
 
@@ -61,9 +57,9 @@ private fun Contents(
 ) {
     Box(
         modifier = Modifier
-            .padding(paddingValues)
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
+            .padding(paddingValues)
     ) {
         when (uiState) {
             is UIState.Error -> EmptyDataCard(reason = stringResource(id = R.string.error))

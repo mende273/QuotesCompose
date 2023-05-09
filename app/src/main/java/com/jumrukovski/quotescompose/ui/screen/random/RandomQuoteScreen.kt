@@ -1,10 +1,10 @@
 package com.jumrukovski.quotescompose.ui.screen.random
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -21,7 +21,6 @@ import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import com.jumrukovski.quotescompose.ui.common.state.UIState
-import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
 fun RandomQuoteScreen(viewModel: RandomQuoteViewModel, onNavigateBack: () -> Unit) {
@@ -46,24 +45,19 @@ fun RandomQuoteScreen(viewModel: RandomQuoteViewModel, onNavigateBack: () -> Uni
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
-    QuotesComposeTheme {
-        Scaffold(
-            topBar = {
-                TopBar(
-                    title = stringResource(id = R.string.screen_random_quote),
-                    menuItems = menuItems,
-                    isBackButtonEnabled = true,
-                    onNavigateBack = onNavigateBack,
-                    onMenuItemClick = {
-                        if (it.titleTextId == R.string.action_random) {
-                            viewModel.getRandomQuote()
-                        }
-                    }
-                )
-            },
-            content = { paddingValues ->
-                Contents(paddingValues = paddingValues, uiState.value)
-            })
+    Column {
+        TopBar(
+            title = stringResource(id = R.string.screen_random_quote),
+            menuItems = menuItems,
+            isBackButtonEnabled = true,
+            onNavigateBack = onNavigateBack,
+            onMenuItemClick = {
+                if (it.titleTextId == R.string.action_random) {
+                    viewModel.getRandomQuote()
+                }
+            }
+        )
+        Contents(paddingValues = PaddingValues(), uiState.value)
     }
 }
 

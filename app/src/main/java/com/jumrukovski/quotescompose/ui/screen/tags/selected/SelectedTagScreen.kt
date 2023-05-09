@@ -3,13 +3,13 @@ package com.jumrukovski.quotescompose.ui.screen.tags.selected
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -25,7 +25,6 @@ import com.jumrukovski.quotescompose.ui.common.component.SmallQuoteCard
 import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
-import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
 fun SelectedTagScreen(
@@ -39,20 +38,15 @@ fun SelectedTagScreen(
         viewModel.getQuotesForTag(tagName)
     }
 
-    QuotesComposeTheme {
-        Scaffold(
-            topBar = {
-                TopBar(
-                    title = stringResource(
-                        id = R.string.screen_selected_tag_title, tagName
-                    ),
-                    isBackButtonEnabled = true,
-                    onNavigateBack = onNavigateBack
-                )
-            },
-            content = { paddingValues ->
-                Contents(paddingValues, tagItems, onNavigateToQuoteDetails)
-            })
+    Column {
+        TopBar(
+            title = stringResource(
+                id = R.string.screen_selected_tag_title, tagName
+            ),
+            isBackButtonEnabled = true,
+            onNavigateBack = onNavigateBack
+        )
+        Contents(paddingValues = PaddingValues(16.dp), tagItems, onNavigateToQuoteDetails)
     }
 }
 
@@ -65,9 +59,8 @@ private fun Contents(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(paddingValues)
             .background(MaterialTheme.colorScheme.PrimaryBackgroundColor)
-            .padding(16.dp)
+            .padding(paddingValues)
     ) {
         when (state) {
             is UIState.Error -> EmptyDataCard(reason = stringResource(id = R.string.error))
