@@ -4,33 +4,33 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 
-sealed class Screen {
-    protected abstract val route: String
+sealed interface Screen {
+    val route: String
 
-    sealed class WithoutArguments : Screen() {
+    sealed interface WithoutArguments : Screen {
 
-        object Home : WithoutArguments() {
-            public override val route: String = "home"
+        object Home : WithoutArguments {
+            override val route: String = "home"
         }
 
-        object Tags : WithoutArguments() {
-            public override val route: String = "tags"
+        object Tags : WithoutArguments {
+            override val route: String = "tags"
         }
 
-        object Favourites : WithoutArguments() {
-            public override val route: String = "favourites"
+        object Favourites : WithoutArguments {
+            override val route: String = "favourites"
         }
 
-        object RandomQuote : WithoutArguments() {
-            public override val route: String = "random quote"
+        object RandomQuote : WithoutArguments {
+            override val route: String = "random quote"
         }
     }
 
-    sealed class WithArguments : Screen() {
+    sealed interface WithArguments : Screen {
         val routeWithArguments: String
             get() = "${route}${prepareArguments()}"
 
-        abstract fun arguments(): List<NamedNavArgument>
+        fun arguments(): List<NamedNavArgument>
 
         private fun prepareArguments(): String {
             val args = arguments()
@@ -59,7 +59,7 @@ sealed class Screen {
             return route + builder.toString()
         }
 
-        object SelectedTag : WithArguments() {
+        object SelectedTag : WithArguments {
 
             const val ARGUMENT_TAG_NAME = "tagName"
 
@@ -70,7 +70,7 @@ sealed class Screen {
             }
         }
 
-        object QuoteDetail : WithArguments() {
+        object QuoteDetail : WithArguments {
 
             const val ARGUMENT_ID = "id"
             const val ARGUMENT_CONTENT = "content"
