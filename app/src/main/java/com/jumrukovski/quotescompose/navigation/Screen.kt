@@ -27,28 +27,12 @@ sealed interface Screen {
     }
 
     sealed interface WithArguments : Screen {
-        val routeWithArguments: String
-            get() = "${route}${prepareArguments()}"
 
-        fun arguments(): List<NamedNavArgument>
-
-        private fun prepareArguments(): String {
-            val args = arguments()
-            if (args.isEmpty()) {
-                return ""
-            }
-
-            val builder = StringBuilder()
-            args.map { navArgument -> navArgument.name }.forEach {
-                builder.append("/{${it}}")
-            }
-
-            return builder.toString()
-        }
+        fun getNavArguments(): List<NamedNavArgument>
 
         @Throws(Exception::class)
-        fun getRouteWith(vararg values: String): String {
-            if (values.size != arguments().size) {
+        fun getRouteWithArguments(vararg values: String): String {
+            if (values.size != getNavArguments().size) {
                 throw Exception("Provided arguments number is greater or lower than the specified navArgument list")
             }
 
@@ -56,16 +40,16 @@ sealed interface Screen {
             values.forEach {
                 builder.append("/$it")
             }
-            return route + builder.toString()
+            return route.substringBefore("/") + builder.toString()
         }
 
         object SelectedTag : WithArguments {
 
             const val ARGUMENT_TAG_NAME = "tagName"
 
-            override val route: String = "tag"
+            override val route: String = "tag/{$ARGUMENT_TAG_NAME}"
 
-            override fun arguments(): List<NamedNavArgument> {
+            override fun getNavArguments(): List<NamedNavArgument> {
                 return listOf(navArgument(ARGUMENT_TAG_NAME) { type = NavType.StringType })
             }
         }
@@ -76,9 +60,9 @@ sealed interface Screen {
             const val ARGUMENT_CONTENT = "content"
             const val ARGUMENT_AUTHOR = "author"
 
-            override val route: String = "quote_detail"
+            override val route: String = "quote_detail/{$ARGUMENT_ID}/{$ARGUMENT_CONTENT}/{$ARGUMENT_AUTHOR}"
 
-            override fun arguments(): List<NamedNavArgument> {
+            override fun getNavArguments(): List<NamedNavArgument> {
                 return listOf(
                     navArgument(ARGUMENT_ID) { type = NavType.StringType },
                     navArgument(ARGUMENT_CONTENT) { type = NavType.StringType },
