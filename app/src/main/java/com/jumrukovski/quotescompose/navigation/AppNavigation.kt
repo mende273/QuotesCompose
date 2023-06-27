@@ -36,7 +36,7 @@ fun AppNavigation(
         composable(Screen.WithoutArguments.Tags.route) {
             val viewModel: TagsViewModel by activity.viewModels()
             TagsScreen(viewModel) {
-                navHostController.navigate(Screen.WithArguments.SelectedTag.getRouteWith(it)) {
+                navHostController.navigate(Screen.WithArguments.SelectedTag.getRouteWithArguments(it)) {
                     launchSingleTop = true
                 }
             }
@@ -47,7 +47,7 @@ fun AppNavigation(
             FavouritesScreen(viewModel,
                 onNavigateToQuoteDetails = {
                     navHostController.navigate(
-                        route = Screen.WithArguments.QuoteDetail.getRouteWith(
+                        route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
                             it.id,
                             it.content,
                             it.author
@@ -61,8 +61,8 @@ fun AppNavigation(
         }
 
         composable(
-            route = Screen.WithArguments.QuoteDetail.routeWithArguments,
-            arguments = Screen.WithArguments.QuoteDetail.arguments()
+            route = Screen.WithArguments.QuoteDetail.route,
+            arguments = Screen.WithArguments.QuoteDetail.getNavArguments()
         ) { backStackEntry ->
             val bundleArguments = backStackEntry.arguments
 
@@ -86,8 +86,8 @@ fun AppNavigation(
         }
 
         composable(
-            route = Screen.WithArguments.SelectedTag.routeWithArguments,
-            arguments = Screen.WithArguments.SelectedTag.arguments()
+            route = Screen.WithArguments.SelectedTag.route,
+            arguments = Screen.WithArguments.SelectedTag.getNavArguments()
         ) { backStackEntry ->
             val tagName: String = backStackEntry.arguments?.getString(
                 Screen.WithArguments.SelectedTag.ARGUMENT_TAG_NAME, ""
@@ -97,7 +97,7 @@ fun AppNavigation(
                 tagName = tagName,
                 onNavigateToQuoteDetails = {
                     navHostController.navigate(
-                        route = Screen.WithArguments.QuoteDetail.getRouteWith(
+                        route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
                             it.id,
                             it.content,
                             it.author
@@ -121,7 +121,7 @@ fun AppNavigation(
             val viewModel: HomeViewModel by activity.viewModels()
             HomeScreen(viewModel = viewModel, onNavigateToQuoteDetails = { quote ->
                 navHostController.navigate(
-                    route = Screen.WithArguments.QuoteDetail.getRouteWith(
+                    route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
                         quote.id,
                         quote.content,
                         quote.author
