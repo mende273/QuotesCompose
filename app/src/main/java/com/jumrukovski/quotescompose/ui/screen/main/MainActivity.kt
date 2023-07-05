@@ -36,7 +36,10 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     bottomBar = {
-                        if (isCurrentRouteFromBottomBarMenu(navController.currentBackStackEntryAsState())) {
+                        if (isCurrentRouteFromBottomBarMenu(
+                                navController.currentBackStackEntryAsState()
+                            )
+                        ) {
                             BottomNavigationBar(navController, bottomNavigationItems)
                         }
                     }

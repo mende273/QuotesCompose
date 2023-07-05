@@ -2,8 +2,8 @@ package com.jumrukovski.quotescompose.data.repository
 
 import com.jumrukovski.quotescompose.data.db.LocalDB
 import com.jumrukovski.quotescompose.data.model.entity.FavouriteQuoteEntity
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
 class LocalRepository @Inject constructor(private val localDB: LocalDB) {
 

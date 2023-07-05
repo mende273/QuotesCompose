@@ -7,12 +7,12 @@ import com.jumrukovski.quotescompose.domain.usecase.AddFavouriteQuoteToDBUseCase
 import com.jumrukovski.quotescompose.domain.usecase.GetFavouriteQuoteUseCase
 import com.jumrukovski.quotescompose.domain.usecase.RemoveQuoteFromFavouritesDBUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class QuoteDetailViewModel @Inject constructor(

@@ -33,7 +33,9 @@ sealed interface Screen {
         @Throws(Exception::class)
         fun getRouteWithArguments(vararg values: String): String {
             if (values.size != getNavArguments().size) {
-                throw Exception("Provided arguments number is greater or lower than the specified navArgument list")
+                throw Exception(
+                    "Provided arguments number is greater or lower than the specified navArgument list"
+                )
             }
 
             val builder = StringBuilder()

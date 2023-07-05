@@ -6,14 +6,16 @@ import com.jumrukovski.quotescompose.data.model.middleware.Quote
 import com.jumrukovski.quotescompose.domain.usecase.GetAllFavouriteQuotesUseCase
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
-class FavouritesViewModel @Inject constructor(private val getAllFavouriteQuotesUseCase: GetAllFavouriteQuotesUseCase) :
+class FavouritesViewModel @Inject constructor(
+    private val getAllFavouriteQuotesUseCase: GetAllFavouriteQuotesUseCase
+) :
     ViewModel() {
 
     private val _uiState: MutableStateFlow<UIState<List<Quote>>> =

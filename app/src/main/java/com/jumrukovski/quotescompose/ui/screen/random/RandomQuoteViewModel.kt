@@ -7,10 +7,10 @@ import com.jumrukovski.quotescompose.data.network.ResponseResult
 import com.jumrukovski.quotescompose.domain.usecase.GetRandomQuoteUseCase
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class RandomQuoteViewModel @Inject constructor(

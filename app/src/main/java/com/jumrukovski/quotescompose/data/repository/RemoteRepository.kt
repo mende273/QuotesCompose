@@ -4,8 +4,8 @@ import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
 import com.jumrukovski.quotescompose.data.model.dto.QuotesResultsDTO
 import com.jumrukovski.quotescompose.data.model.dto.TagDTO
 import com.jumrukovski.quotescompose.data.network.ApiService
-import retrofit2.Response
 import javax.inject.Inject
+import retrofit2.Response
 
 class RemoteRepository @Inject constructor(private val apiService: ApiService) {
 

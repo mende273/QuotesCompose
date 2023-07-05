@@ -7,13 +7,15 @@ import com.jumrukovski.quotescompose.data.network.ResponseResult
 import com.jumrukovski.quotescompose.domain.usecase.GetQuotesForTagUseCase
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
-class SelectedTagViewModel @Inject constructor(private val getQuotesForTagUseCase: GetQuotesForTagUseCase) :
+class SelectedTagViewModel @Inject constructor(
+    private val getQuotesForTagUseCase: GetQuotesForTagUseCase
+) :
     ViewModel() {
 
     private val _uiState: MutableStateFlow<UIState<List<Quote>>> = MutableStateFlow(UIState.Loading)

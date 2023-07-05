@@ -45,4 +45,8 @@ private fun List<TagDTO>.mapToTags(): List<Tag> = this.map { Tag(id = it._id, na
 
 private fun List<QuoteDTO>.mapToQuotes(): List<Quote> = this.map { it.mapToQuote() }
 
-private fun QuoteDTO.mapToQuote(): Quote = Quote(id = this._id, content = this.content, author = this.author)
+private fun QuoteDTO.mapToQuote(): Quote = Quote(
+    id = this._id,
+    content = this.content,
+    author = this.author
+)

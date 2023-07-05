@@ -36,7 +36,9 @@ fun AppNavigation(
         composable(Screen.WithoutArguments.Tags.route) {
             val viewModel: TagsViewModel by activity.viewModels()
             TagsScreen(viewModel) {
-                navHostController.navigate(Screen.WithArguments.SelectedTag.getRouteWithArguments(it)) {
+                navHostController.navigate(
+                    Screen.WithArguments.SelectedTag.getRouteWithArguments(it)
+                ) {
                     launchSingleTop = true
                 }
             }

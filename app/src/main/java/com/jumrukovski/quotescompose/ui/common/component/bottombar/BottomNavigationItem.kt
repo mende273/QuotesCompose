@@ -12,5 +12,9 @@ enum class BottomNavigationItem(
 ) {
     HOME(Screen.WithoutArguments.Home.route, R.string.screen_home, R.drawable.baseline_home_24),
     TAGS(Screen.WithoutArguments.Tags.route, R.string.screen_tags, R.drawable.baseline_tag_24),
-    FAVORITES(Screen.WithoutArguments.Favourites.route, R.string.screen_favourites, R.drawable.baseline_favorite_24)
+    FAVORITES(
+        Screen.WithoutArguments.Favourites.route,
+        R.string.screen_favourites,
+        R.drawable.baseline_favorite_24
+    )
 }
