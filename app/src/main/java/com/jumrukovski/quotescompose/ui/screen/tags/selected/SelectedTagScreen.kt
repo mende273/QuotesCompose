@@ -28,7 +28,8 @@ import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 
 @Composable
 fun SelectedTagScreen(
-    viewModel: SelectedTagViewModel, tagName: String,
+    viewModel: SelectedTagViewModel,
+    tagName: String,
     onNavigateToQuoteDetails: (Quote) -> Unit,
     onNavigateBack: () -> Unit
 ) {
@@ -41,7 +42,8 @@ fun SelectedTagScreen(
     Column {
         TopBar(
             title = stringResource(
-                id = R.string.screen_selected_tag_title, tagName
+                id = R.string.screen_selected_tag_title,
+                tagName
             ),
             isBackButtonEnabled = true,
             onNavigateBack = onNavigateBack
@@ -74,7 +76,8 @@ private fun Contents(
                             quote = quote,
                             onNavigateToQuoteDetails = {
                                 onNavigateToQuoteDetails(it)
-                            })
+                            }
+                        )
                     }
                 }
             }

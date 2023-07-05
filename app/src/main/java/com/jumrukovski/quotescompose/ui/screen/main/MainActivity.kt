@@ -37,9 +37,10 @@ class MainActivity : ComponentActivity() {
                     },
                     bottomBar = {
                         if (isCurrentRouteFromBottomBarMenu(navController.currentBackStackEntryAsState())) {
-                            BottomNavigationBar(navController,bottomNavigationItems)
+                            BottomNavigationBar(navController, bottomNavigationItems)
                         }
-                    })
+                    }
+                )
             }
         }
     }
@@ -48,8 +49,10 @@ class MainActivity : ComponentActivity() {
 private fun isCurrentRouteFromBottomBarMenu(currentBackStackEntry: State<NavBackStackEntry?>): Boolean {
     val currentRoute = currentBackStackEntry.value?.destination?.route
     return currentRoute?.let { route ->
-        return@let (route == Screen.WithoutArguments.Home.route
-                || route == Screen.WithoutArguments.Tags.route
-                || route == Screen.WithoutArguments.Favourites.route)
+        return@let (
+            route == Screen.WithoutArguments.Home.route ||
+                route == Screen.WithoutArguments.Tags.route ||
+                route == Screen.WithoutArguments.Favourites.route
+            )
     } ?: false
 }

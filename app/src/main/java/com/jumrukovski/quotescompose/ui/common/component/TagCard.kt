@@ -28,7 +28,7 @@ fun TagCard(tag: Tag, onItemClicked: (String) -> Unit) {
             },
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.TertiaryColor,
+            containerColor = MaterialTheme.colorScheme.TertiaryColor
         )
     ) {
         Text(

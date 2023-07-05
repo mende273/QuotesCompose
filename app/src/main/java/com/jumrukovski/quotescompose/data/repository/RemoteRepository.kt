@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class RemoteRepository @Inject constructor(private val apiService: ApiService) {
 
-    suspend fun getQuotes():Response<QuotesResultsDTO>{
+    suspend fun getQuotes(): Response<QuotesResultsDTO> {
         return apiService.getQuotes()
     }
 
