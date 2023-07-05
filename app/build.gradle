@@ -44,6 +44,19 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
+    tasks.getByPath("preBuild").dependsOn("ktlintFormat")
+
+    ktlint{
+        android = true
+        ignoreFailures = false
+        disabledRules = ["max-line-length"]
+        reporters{
+            reporter "plain"
+            reporter "checkstyle"
+            reporter "sarif"
+        }
+    }
+
     buildFeatures {
         compose true
     }
