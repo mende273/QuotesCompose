@@ -44,7 +44,8 @@ fun AppNavigation(
 
         composable(Screen.WithoutArguments.Favourites.route) {
             val viewModel: FavouritesViewModel by activity.viewModels()
-            FavouritesScreen(viewModel,
+            FavouritesScreen(
+                viewModel,
                 onNavigateToQuoteDetails = {
                     navHostController.navigate(
                         route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
@@ -55,9 +56,11 @@ fun AppNavigation(
                     ) {
                         launchSingleTop = true
                     }
-                }, onNavigateBack = {
+                },
+                onNavigateBack = {
                     navHostController.navigateUp()
-                })
+                }
+            )
         }
 
         composable(
@@ -81,7 +84,8 @@ fun AppNavigation(
                     author = author,
                     onNavigateBack = {
                         navHostController.navigateUp()
-                    })
+                    }
+                )
             }
         }
 
@@ -90,10 +94,12 @@ fun AppNavigation(
             arguments = Screen.WithArguments.SelectedTag.getNavArguments()
         ) { backStackEntry ->
             val tagName: String = backStackEntry.arguments?.getString(
-                Screen.WithArguments.SelectedTag.ARGUMENT_TAG_NAME, ""
+                Screen.WithArguments.SelectedTag.ARGUMENT_TAG_NAME,
+                ""
             ) ?: ""
             val viewModel: SelectedTagViewModel by activity.viewModels()
-            SelectedTagScreen(viewModel = viewModel,
+            SelectedTagScreen(
+                viewModel = viewModel,
                 tagName = tagName,
                 onNavigateToQuoteDetails = {
                     navHostController.navigate(
@@ -105,9 +111,11 @@ fun AppNavigation(
                     ) {
                         launchSingleTop = true
                     }
-                }, onNavigateBack = {
+                },
+                onNavigateBack = {
                     navHostController.navigateUp()
-                })
+                }
+            )
         }
 
         composable(Screen.WithoutArguments.RandomQuote.route) {
@@ -130,8 +138,8 @@ fun AppNavigation(
                     launchSingleTop = true
                 }
             }, onNavigateToRandomQuote = {
-                navHostController.navigate(Screen.WithoutArguments.RandomQuote.route)
-            })
+                    navHostController.navigate(Screen.WithoutArguments.RandomQuote.route)
+                })
         }
     }
 }

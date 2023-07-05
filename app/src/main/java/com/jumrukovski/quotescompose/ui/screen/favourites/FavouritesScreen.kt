@@ -32,7 +32,6 @@ fun FavouritesScreen(
     onNavigateToQuoteDetails: (Quote) -> Unit,
     onNavigateBack: () -> Unit
 ) {
-
     val favouriteItems by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
@@ -50,7 +49,8 @@ fun FavouritesScreen(
             state = favouriteItems,
             onNavigateToQuoteDetails = {
                 onNavigateToQuoteDetails(it)
-            })
+            }
+        )
     }
 }
 
@@ -79,7 +79,8 @@ private fun Contents(
                             quote = Quote(quote.id, quote.content, quote.author),
                             onNavigateToQuoteDetails = {
                                 onNavigateToQuoteDetails(it)
-                            })
+                            }
+                        )
                     }
                 }
             }

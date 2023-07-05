@@ -32,7 +32,6 @@ fun TagsScreen(
     viewModel: TagsViewModel,
     onNavigateToSelectedTag: (String) -> Unit
 ) {
-
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = "items") {

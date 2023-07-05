@@ -29,10 +29,10 @@ import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel, onNavigateToQuoteDetails: (Quote) -> Unit,
+    viewModel: HomeViewModel,
+    onNavigateToQuoteDetails: (Quote) -> Unit,
     onNavigateToRandomQuote: () -> Unit
 ) {
-
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
@@ -86,7 +86,8 @@ private fun Contents(
                             quote = quote,
                             onNavigateToQuoteDetails = {
                                 onItemClicked(it)
-                            })
+                            }
+                        )
                     }
                 }
             }

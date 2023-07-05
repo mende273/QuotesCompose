@@ -13,7 +13,7 @@ fun Flow<List<FavouriteQuoteEntity>>.mapToQuotes(): Flow<List<Quote>> {
     }
 }
 
-fun Flow<FavouriteQuoteEntity?>.mapToQuote():Flow<Quote?>{
+fun Flow<FavouriteQuoteEntity?>.mapToQuote(): Flow<Quote?> {
     return this.map {
         it?.let {
             Quote(id = it.id, content = it.content, author = it.author)

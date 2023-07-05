@@ -47,10 +47,11 @@ fun QuoteDetailScreen(
             isFavourite = it
 
             menuItems = menuItems.map { item ->
-                if (item.titleTextId == R.string.action_favourite)
+                if (item.titleTextId == R.string.action_favourite) {
                     item.copy(isSelected = it != null)
-                else
+                } else {
                     item
+                }
             }
         }
     })

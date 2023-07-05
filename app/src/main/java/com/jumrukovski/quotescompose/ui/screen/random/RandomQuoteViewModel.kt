@@ -23,7 +23,6 @@ class RandomQuoteViewModel @Inject constructor(
 
     fun getRandomQuote() {
         viewModelScope.launch {
-
             _uiState.value = UIState.Loading
 
             with(getRandomQuoteUseCase()) {
