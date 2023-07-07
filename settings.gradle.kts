@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Quotes Compose"
-include ':app'
+include("app")
