@@ -28,14 +28,14 @@ fun TopBar(
     onNavigateBack: () -> Unit = {}
 ) {
     TopAppBar(
-        modifier = Modifier.background(MaterialTheme.colorScheme.PrimaryBackgroundColor),
+        modifier = Modifier.background(PrimaryBackgroundColor),
         title = { Text(title) },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.PrimaryBackgroundColor,
-            scrolledContainerColor = MaterialTheme.colorScheme.PrimaryBackgroundColor,
-            navigationIconContentColor = MaterialTheme.colorScheme.PrimaryTextColor,
-            titleContentColor = MaterialTheme.colorScheme.PrimaryTextColor,
-            actionIconContentColor = MaterialTheme.colorScheme.PrimaryTextColor
+            containerColor = PrimaryBackgroundColor,
+            scrolledContainerColor = PrimaryBackgroundColor,
+            navigationIconContentColor = PrimaryTextColor,
+            titleContentColor = PrimaryTextColor,
+            actionIconContentColor = PrimaryTextColor
         ),
         actions = {
             with(menuItems) {

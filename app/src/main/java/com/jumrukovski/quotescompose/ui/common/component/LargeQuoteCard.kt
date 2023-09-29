@@ -25,11 +25,11 @@ fun LargeQuoteCard(content: String, author: String) {
     Card(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.PrimaryBackgroundColor)
+            .background(color = PrimaryBackgroundColor)
             .padding(16.dp),
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.TertiaryColor
+            containerColor = TertiaryColor
         )
     ) {
         Column(
