@@ -53,13 +53,17 @@ val ColorScheme.NavigationBarBackgroundColor: Color
     @Composable
     get() = if (!isSystemInDarkTheme()) WhiteColor else DarkGreyColor
 
-val ColorScheme.NavigationBarSelectedItemColor: Color
+val ColorScheme.NavigationBarSelectedColor: Color
     @Composable
     get() = if (!isSystemInDarkTheme()) BlackColor else WhiteColor
 
 val ColorScheme.NavigationBarItemRippleColor: Color
     @Composable
-    get() = if (!isSystemInDarkTheme()) NavigationItemRippleColorLightTheme else NavigationItemRippleColorDarkTheme
+    get() = if (!isSystemInDarkTheme()) {
+        NavigationItemRippleColorLightTheme
+    } else {
+        NavigationItemRippleColorDarkTheme
+    }
 
 @Composable
 fun QuotesComposeTheme(

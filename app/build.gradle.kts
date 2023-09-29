@@ -47,7 +47,6 @@ android {
     ktlint {
         this.android.set(true)
         this.ignoreFailures.set(false)
-        this.disabledRules.add("max-line-length")
         this.reporters {
             this.reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
             this.reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)

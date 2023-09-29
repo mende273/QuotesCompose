@@ -5,5 +5,6 @@ import com.jumrukovski.quotescompose.domain.mapper.wrapQuotesAsResponseResult
 
 class GetQuotesForTagUseCase(private val remoteRepository: RemoteRepository) {
 
-    suspend operator fun invoke(tag: String) = remoteRepository.getQuotesForTag(tag).wrapQuotesAsResponseResult()
+    suspend operator fun invoke(tag: String) =
+        remoteRepository.getQuotesForTag(tag).wrapQuotesAsResponseResult()
 }

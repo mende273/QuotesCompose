@@ -19,7 +19,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.jumrukovski.quotescompose.ui.theme.MediumDarkGreyColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarItemRippleColor
-import com.jumrukovski.quotescompose.ui.theme.NavigationBarSelectedItemColor
+import com.jumrukovski.quotescompose.ui.theme.NavigationBarSelectedColor
 
 @Composable
 fun BottomNavigationBar(
@@ -33,11 +33,11 @@ fun BottomNavigationBar(
         containerColor = MaterialTheme.colorScheme.NavigationBarBackgroundColor,
         content = {
             val navBackStackEntry by navHostController.currentBackStackEntryAsState()
-            val currentDestination = navBackStackEntry?.destination
+            val hierarchy = navBackStackEntry?.destination?.hierarchy
 
             bottomNavigationItems.forEach { screen ->
                 NavigationBarItem(
-                    selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                    selected = hierarchy?.any { it.route == screen.route } == true,
                     onClick = {
                         navHostController.navigate(screen.route) {
                             popUpTo(navHostController.graph.findStartDestination().id) {
@@ -59,9 +59,9 @@ fun BottomNavigationBar(
                     },
                     alwaysShowLabel = true,
                     colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
+                        selectedIconColor = MaterialTheme.colorScheme.NavigationBarSelectedColor,
                         unselectedIconColor = MediumDarkGreyColor,
-                        selectedTextColor = MaterialTheme.colorScheme.NavigationBarSelectedItemColor,
+                        selectedTextColor = MaterialTheme.colorScheme.NavigationBarSelectedColor,
                         unselectedTextColor = MediumDarkGreyColor,
                         indicatorColor = MaterialTheme.colorScheme.NavigationBarBackgroundColor
                     )
