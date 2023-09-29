@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.0"
 }
 
@@ -22,13 +22,8 @@ android {
             useSupportLibrary = true
         }
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += mapOf(
-                    "room.schemaLocation" to "$projectDir/schemas",
-                    "room.incremental" to "true"
-                )
-            }
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
         }
     }
 
@@ -65,7 +60,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.8"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
 
     packaging {
@@ -108,15 +103,15 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.3")
 
     // dagger Hilt dependency injection
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    implementation("com.google.dagger:hilt-android:2.48")
+    ksp("com.google.dagger:hilt-compiler:2.48")
 
     // Activity KTX for viewModels()
     implementation("androidx.activity:activity-ktx:1.7.2")
 
     // Moshi
-    implementation("com.squareup.moshi:moshi-kotlin:1.8.0")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
 
     // Retrofit2
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -133,5 +128,5 @@ dependencies {
     // Room
     implementation("androidx.room:room-runtime:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
-    kapt("androidx.room:room-compiler:2.5.2")
+    ksp("androidx.room:room-compiler:2.5.2")
 }

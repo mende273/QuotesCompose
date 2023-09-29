@@ -4,6 +4,8 @@ import android.content.Context
 import com.jumrukovski.quotescompose.BuildConfig
 import com.jumrukovski.quotescompose.data.network.ApiService
 import com.jumrukovski.quotescompose.data.network.NoConnectionInterceptor
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,10 +37,24 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, @Named("apiEndpoint") apiEndpoint: String): Retrofit {
+    fun provideMoshiConverterFactory(): MoshiConverterFactory {
+        return MoshiConverterFactory.create(
+            Moshi.Builder()
+                .add(KotlinJsonAdapterFactory())
+                .build()
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        moshiConverterFactory: MoshiConverterFactory,
+        @Named("apiEndpoint") apiEndpoint: String
+    ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(apiEndpoint)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(moshiConverterFactory)
             .client(okHttpClient)
             .build()
     }
