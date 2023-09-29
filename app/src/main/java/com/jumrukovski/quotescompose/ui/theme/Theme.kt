@@ -2,7 +2,6 @@ package com.jumrukovski.quotescompose.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -15,49 +14,39 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-private val DarkColorScheme = darkColorScheme(
+private val darkColorScheme = darkColorScheme(
     primary = BlackColor,
     secondary = GreyColor,
     tertiary = TertiaryColorDarkTheme
 )
 
-private val LightColorScheme = lightColorScheme(
+private val lightColorScheme = lightColorScheme(
     primary = GreyColor,
     secondary = BlackColor,
     tertiary = TertiaryColorLightTheme
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
 )
 
-val ColorScheme.TertiaryColor: Color
+val TertiaryColor: Color
     @Composable
     get() = if (!isSystemInDarkTheme()) TertiaryColorLightTheme else TertiaryColorDarkTheme
 
-val ColorScheme.PrimaryTextColor: Color
+val PrimaryTextColor: Color
     @Composable
     get() = if (!isSystemInDarkTheme()) BlackColor else GreyColor
 
-val ColorScheme.PrimaryBackgroundColor: Color
+val PrimaryBackgroundColor: Color
     @Composable
     get() = if (!isSystemInDarkTheme()) GreyColor else BlackColor
 
-val ColorScheme.NavigationBarBackgroundColor: Color
+val NavigationBarBackgroundColor: Color
     @Composable
     get() = if (!isSystemInDarkTheme()) WhiteColor else DarkGreyColor
 
-val ColorScheme.NavigationBarSelectedColor: Color
+val NavigationBarSelectedColor: Color
     @Composable
     get() = if (!isSystemInDarkTheme()) BlackColor else WhiteColor
 
-val ColorScheme.NavigationBarItemRippleColor: Color
+val NavigationBarItemRippleColor: Color
     @Composable
     get() = if (!isSystemInDarkTheme()) {
         NavigationItemRippleColorLightTheme
@@ -78,8 +67,8 @@ fun QuotesComposeTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> darkColorScheme
+        else -> lightColorScheme
     }
     val view = LocalView.current
     if (!view.isInEditMode) {

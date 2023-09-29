@@ -1,7 +1,6 @@
 package com.jumrukovski.quotescompose.ui.common.component.bottombar
 
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -28,9 +27,9 @@ fun BottomNavigationBar(
 ) {
     NavigationBar(
         modifier = Modifier,
-        contentColor = MaterialTheme.colorScheme.NavigationBarItemRippleColor,
+        contentColor = NavigationBarItemRippleColor,
         tonalElevation = 0.dp,
-        containerColor = MaterialTheme.colorScheme.NavigationBarBackgroundColor,
+        containerColor = NavigationBarBackgroundColor,
         content = {
             val navBackStackEntry by navHostController.currentBackStackEntryAsState()
             val hierarchy = navBackStackEntry?.destination?.hierarchy
@@ -59,11 +58,11 @@ fun BottomNavigationBar(
                     },
                     alwaysShowLabel = true,
                     colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = MaterialTheme.colorScheme.NavigationBarSelectedColor,
+                        selectedIconColor = NavigationBarSelectedColor,
                         unselectedIconColor = MediumDarkGreyColor,
-                        selectedTextColor = MaterialTheme.colorScheme.NavigationBarSelectedColor,
+                        selectedTextColor = NavigationBarSelectedColor,
                         unselectedTextColor = MediumDarkGreyColor,
-                        indicatorColor = MaterialTheme.colorScheme.NavigationBarBackgroundColor
+                        indicatorColor = NavigationBarBackgroundColor
                     )
                 )
             }

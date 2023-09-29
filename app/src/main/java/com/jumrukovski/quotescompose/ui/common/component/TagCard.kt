@@ -21,14 +21,14 @@ import com.jumrukovski.quotescompose.ui.theme.mediumTextStyle
 fun TagCard(tag: Tag, onItemClicked: (String) -> Unit) {
     Card(
         modifier = Modifier
-            .background(color = MaterialTheme.colorScheme.PrimaryBackgroundColor)
+            .background(color = PrimaryBackgroundColor)
             .fillMaxWidth()
             .clickable {
                 onItemClicked(tag.name)
             },
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.TertiaryColor
+            containerColor = TertiaryColor
         )
     ) {
         Text(

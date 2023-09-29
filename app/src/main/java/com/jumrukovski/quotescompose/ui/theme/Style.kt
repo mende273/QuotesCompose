@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun largeTextStyle(): TextStyle {
     return TextStyle(
-        color = MaterialTheme.colorScheme.PrimaryTextColor,
+        color = PrimaryTextColor,
         fontStyle = MaterialTheme.typography.bodyLarge.fontStyle,
         fontSize = 30.sp,
         textAlign = TextAlign.Start
@@ -19,7 +19,7 @@ fun largeTextStyle(): TextStyle {
 @Composable
 fun mediumTextStyle(): TextStyle {
     return TextStyle(
-        color = MaterialTheme.colorScheme.PrimaryTextColor,
+        color = PrimaryTextColor,
         fontStyle = MaterialTheme.typography.bodyLarge.fontStyle,
         fontSize = 20.sp,
         textAlign = TextAlign.Start
