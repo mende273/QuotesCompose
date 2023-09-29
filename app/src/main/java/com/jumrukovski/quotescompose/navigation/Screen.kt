@@ -34,7 +34,8 @@ sealed interface Screen {
         fun getRouteWithArguments(vararg values: String): String {
             if (values.size != getNavArguments().size) {
                 throw Exception(
-                    "Provided arguments number is greater or lower than the specified navArgument list"
+                    "Provided arguments number is greater or " +
+                        "lower than the specified navArgument list"
                 )
             }
 
@@ -62,7 +63,8 @@ sealed interface Screen {
             const val ARGUMENT_CONTENT = "content"
             const val ARGUMENT_AUTHOR = "author"
 
-            override val route: String = "quote_detail/{$ARGUMENT_ID}/{$ARGUMENT_CONTENT}/{$ARGUMENT_AUTHOR}"
+            override val route: String =
+                "quote_detail/{$ARGUMENT_ID}/{$ARGUMENT_CONTENT}/{$ARGUMENT_AUTHOR}"
 
             override fun getNavArguments(): List<NamedNavArgument> {
                 return listOf(

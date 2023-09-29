@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     bottomBar = {
-                        if (isCurrentRouteFromBottomBarMenu(
+                        if (isRouteFromBottomBarMenu(
                                 navController.currentBackStackEntryAsState()
                             )
                         ) {
@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private fun isCurrentRouteFromBottomBarMenu(currentBackStackEntry: State<NavBackStackEntry?>): Boolean {
+private fun isRouteFromBottomBarMenu(currentBackStackEntry: State<NavBackStackEntry?>): Boolean {
     val currentRoute = currentBackStackEntry.value?.destination?.route
     return currentRoute?.let { route ->
         return@let (

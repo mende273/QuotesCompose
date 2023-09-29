@@ -61,7 +61,10 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, cache: Cache): OkHttpClient {
+    fun provideOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        cache: Cache
+    ): OkHttpClient {
         val builder = OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
             .cache(cache)
