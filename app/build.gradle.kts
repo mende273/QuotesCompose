@@ -4,6 +4,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.0"
+    id("io.gitlab.arturbosch.detekt") version ("1.22.0")
 }
 
 android {
@@ -52,6 +53,15 @@ android {
             this.reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
             this.reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.SARIF)
         }
+    }
+
+    tasks.getByPath("preBuild").dependsOn("detekt")
+
+    detekt {
+        buildUponDefaultConfig = true
+        allRules = false
+        config.setFrom("$projectDir/config/detekt.yml")
+        baseline = file("$projectDir/config/baseline.xml")
     }
 
     buildFeatures {
