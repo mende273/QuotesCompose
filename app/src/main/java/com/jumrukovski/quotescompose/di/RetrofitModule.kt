@@ -10,7 +10,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Named
 import javax.inject.Singleton
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -22,17 +21,12 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
 
+    private const val cacheSize = 10 * 1024 * 1024
+
     @Provides
     @Singleton
     fun provideService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
-    }
-
-    @Provides
-    @Singleton
-    @Named("apiEndpoint")
-    fun provideApiEndpoint(): String {
-        return "https://api.quotable.io/"
     }
 
     @Provides
@@ -49,11 +43,10 @@ object RetrofitModule {
     @Singleton
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        moshiConverterFactory: MoshiConverterFactory,
-        @Named("apiEndpoint") apiEndpoint: String
+        moshiConverterFactory: MoshiConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(apiEndpoint)
+            .baseUrl("https://api.quotable.io/")
             .addConverterFactory(moshiConverterFactory)
             .client(okHttpClient)
             .build()
@@ -86,7 +79,6 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun provideHttpCache(context: Context): Cache {
-        val cacheSize = 10 * 1024 * 1024
         return Cache(context.cacheDir, cacheSize.toLong())
     }
 

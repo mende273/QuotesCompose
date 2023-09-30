@@ -8,6 +8,10 @@ import okhttp3.ResponseBody.Companion.toResponseBody
 
 class NoConnectionInterceptor : Interceptor {
 
+    companion object {
+        const val errorCode: Int = 503
+    }
+
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         return try {
@@ -17,7 +21,7 @@ class NoConnectionInterceptor : Interceptor {
             Response.Builder()
                 .request(request)
                 .protocol(Protocol.HTTP_1_1)
-                .code(503)
+                .code(errorCode)
                 .message(message)
                 .body(message.toResponseBody(null))
                 .build()

@@ -22,11 +22,15 @@ class QuoteDetailViewModel @Inject constructor(
 ) :
     ViewModel() {
 
+    companion object {
+        private const val stopTimeoutMillis: Long = 5_000
+    }
+
     fun checkIfQuoteIsInFavouritesDB(id: String): StateFlow<Quote?> {
         return getFavouriteQuoteUseCase(id).stateIn(
             scope = viewModelScope,
             initialValue = null,
-            started = SharingStarted.WhileSubscribed(5_000)
+            started = SharingStarted.WhileSubscribed(stopTimeoutMillis)
         )
     }
 

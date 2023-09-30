@@ -41,12 +41,12 @@ fun Response<QuoteDTO>.wrapQuoteAsResponseResult(): ResponseResult<Quote?> {
     }
 }
 
-private fun List<TagDTO>.mapToTags(): List<Tag> = this.map { Tag(id = it._id, name = it.name) }
+private fun List<TagDTO>.mapToTags(): List<Tag> = this.map { Tag(id = it.id, name = it.name) }
 
 private fun List<QuoteDTO>.mapToQuotes(): List<Quote> = this.map { it.mapToQuote() }
 
 private fun QuoteDTO.mapToQuote(): Quote = Quote(
-    id = this._id,
+    id = this.id,
     content = this.content,
     author = this.author
 )
