@@ -1,7 +1,10 @@
 package com.jumrukovski.quotescompose.data.model.dto
 
+import com.squareup.moshi.Json
+
 data class QuoteDTO(
-    val _id: String,
+    @Json(name = "_id")
+    val id: String,
     val author: String,
     val content: String,
     val tags: List<String>,
