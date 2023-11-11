@@ -109,7 +109,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
 
     // navigation component
-    implementation("androidx.navigation:navigation-compose:2.7.4")
+    implementation("androidx.navigation:navigation-compose:2.7.5")
 
     // dagger Hilt dependency injection
     implementation("com.google.dagger:hilt-android:2.48")
