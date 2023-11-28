@@ -6,8 +6,6 @@
 
 Android application demonstrating the use of JetPack Compose with Hilt, Navigation Component and MVVM architecture
 
-The project is using the free api from [quotable.io](https://github.com/lukePeavey/quotable)
-
 ## App Screenshots
 | Light Theme | Dark Theme |
 | --- | --- |
@@ -17,6 +15,12 @@ The project is using the free api from [quotable.io](https://github.com/lukePeav
 |  |  |
 | <img src="/screenshots/3_light.png" width="250"> | <img src="/screenshots/3_dark.png" width="250"> |
 
+## Api
+The project is using the free api from [quotable.io](https://github.com/lukePeavey/quotable)
+
+## PreBuild
+The preBuild depends on 2 tasks: <b>ktlint</b> and <b>Detekt</b>. You can manually run the tasks with <code>./gradlew ktlintFormat</code> and <code>./gradlew detekt</code>
+
 ## Built With
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
 - [Jetpack Compose](https://developer.android.com/jetpack/compose) - Android’s modern toolkit for building native UI.
@@ -25,8 +29,6 @@ The project is using the free api from [quotable.io](https://github.com/lukePeav
 - [Navigation Compose](https://developer.android.com/jetpack/compose/navigation) - Navigation Compose is a framework for navigating between composables while taking advantage of the Navigation component’s infrastructure and features.
 - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - The ViewModel is designed to store and manage UI-related data in a lifecycle conscious way.
 - [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#stateflow) - StateFlow is a state-holder observable flow that emits the current and new state updates to its collectors.
-- [Ktlint](https://github.com/JLLeitschuh/ktlint-gradle) - A library for formatting Kotlin code according to official guidelines.
-- [Detekt](https://github.com/detekt/detekt) - A static code analysis library for Kotlin.
 - [Room](https://developer.android.com/topic/libraries/architecture/room) - The Room library provides an abstraction layer over SQLite to allow for more robust database access.
 - [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - Hilt is a dependency injection library for Android.
 - [Accompanist](https://github.com/google/accompanist) - A collection of extension libraries for Jetpack Compose.
@@ -35,5 +37,6 @@ The project is using the free api from [quotable.io](https://github.com/lukePeav
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
 - [Material Components for Android](https://github.com/material-components/material-components-android) - Modular and customizable Material Design UI components for Android.
 
-## Build-tool
-You need to have [Android Studio Flamingo or above](https://developer.android.com/studio/preview) to build this project.
+## Static Code Analysis
+- [Ktlint](https://github.com/JLLeitschuh/ktlint-gradle) - A library for formatting Kotlin code according to official guidelines.
+- [Detekt](https://github.com/detekt/detekt) - A static code analysis library for Kotlin.
