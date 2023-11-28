@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.tasks.factory.dependsOn
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -43,8 +45,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    tasks.getByPath("preBuild").dependsOn("ktlintFormat")
-
     ktlint {
         this.android.set(true)
         this.ignoreFailures.set(false)
@@ -55,7 +55,10 @@ android {
         }
     }
 
-    tasks.getByPath("preBuild").dependsOn("detekt")
+    tasks.preBuild {
+        dependsOn("ktlintFormat", "detekt")
+    }
+    tasks.detekt.dependsOn("ktlintFormat")
 
     detekt {
         buildUponDefaultConfig = true
@@ -90,12 +93,11 @@ dependencies {
 
     // compose
     implementation("androidx.activity:activity-compose:1.8.1")
-    implementation("androidx.compose.material3:material3:1.2.0-alpha10")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha11")
     platform("androidx.compose:compose-bom:2023.10.01")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
