@@ -13,8 +13,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.jumrukovski.quotescompose.R
-import com.jumrukovski.quotescompose.data.model.MenuItem
-import com.jumrukovski.quotescompose.data.model.middleware.Quote
+import com.jumrukovski.quotescompose.domain.model.MenuItem
+import com.jumrukovski.quotescompose.domain.model.Quote
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
 import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import kotlinx.coroutines.flow.collectLatest

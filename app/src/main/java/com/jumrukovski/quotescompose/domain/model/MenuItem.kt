@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.data.model
+package com.jumrukovski.quotescompose.domain.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

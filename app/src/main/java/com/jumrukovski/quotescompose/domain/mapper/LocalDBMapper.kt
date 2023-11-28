@@ -1,7 +1,7 @@
 package com.jumrukovski.quotescompose.domain.mapper
 
 import com.jumrukovski.quotescompose.data.model.entity.FavouriteQuoteEntity
-import com.jumrukovski.quotescompose.data.model.middleware.Quote
+import com.jumrukovski.quotescompose.domain.model.Quote
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
