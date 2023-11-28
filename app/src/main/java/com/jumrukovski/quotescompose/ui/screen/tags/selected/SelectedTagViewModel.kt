@@ -2,9 +2,9 @@ package com.jumrukovski.quotescompose.ui.screen.tags.selected
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jumrukovski.quotescompose.data.model.middleware.Quote
 import com.jumrukovski.quotescompose.data.network.ResponseResult
-import com.jumrukovski.quotescompose.domain.usecase.GetQuotesForTagUseCase
+import com.jumrukovski.quotescompose.domain.model.Quote
+import com.jumrukovski.quotescompose.domain.repository.RemoteRepositoryImpl
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class SelectedTagViewModel @Inject constructor(
-    private val getQuotesForTagUseCase: GetQuotesForTagUseCase
+    private val remoteRepository: RemoteRepositoryImpl
 ) :
     ViewModel() {
 
@@ -35,7 +35,7 @@ class SelectedTagViewModel @Inject constructor(
                 _uiState.value = UIState.Loading
             }
 
-            with(getQuotesForTagUseCase(tag)) {
+            with(remoteRepository.getQuotesForTag(tag)) {
                 _uiState.value = when (this) {
                     is ResponseResult.Error -> UIState.Error(code)
                     is ResponseResult.Exception -> UIState.Exception(exception)

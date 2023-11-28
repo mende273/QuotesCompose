@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.jumrukovski.quotescompose.data.model.middleware.Quote
+import com.jumrukovski.quotescompose.domain.model.Quote
 import com.jumrukovski.quotescompose.ui.theme.TertiaryColor
 import com.jumrukovski.quotescompose.ui.theme.mediumTextStyle
 

@@ -2,9 +2,9 @@ package com.jumrukovski.quotescompose.ui.screen.random
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jumrukovski.quotescompose.data.model.middleware.Quote
 import com.jumrukovski.quotescompose.data.network.ResponseResult
-import com.jumrukovski.quotescompose.domain.usecase.GetRandomQuoteUseCase
+import com.jumrukovski.quotescompose.domain.model.Quote
+import com.jumrukovski.quotescompose.domain.repository.RemoteRepositoryImpl
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class RandomQuoteViewModel @Inject constructor(
-    private val getRandomQuoteUseCase: GetRandomQuoteUseCase
+    private val remoteRepository: RemoteRepositoryImpl
 ) :
     ViewModel() {
 
@@ -25,14 +25,11 @@ class RandomQuoteViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = UIState.Loading
 
-            with(getRandomQuoteUseCase()) {
+            with(remoteRepository.getRandomQuote()) {
                 _uiState.value = when (this) {
                     is ResponseResult.Error -> UIState.Error(code)
                     is ResponseResult.Exception -> UIState.Exception(exception)
-                    is ResponseResult.Success -> when (data == null) {
-                        true -> UIState.SuccessWithNoData
-                        false -> UIState.SuccessWithData(data)
-                    }
+                    is ResponseResult.Success -> UIState.SuccessWithData(data)
                 }
             }
         }

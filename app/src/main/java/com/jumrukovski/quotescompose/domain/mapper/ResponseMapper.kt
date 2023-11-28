@@ -3,12 +3,12 @@ package com.jumrukovski.quotescompose.domain.mapper
 import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
 import com.jumrukovski.quotescompose.data.model.dto.QuotesResultsDTO
 import com.jumrukovski.quotescompose.data.model.dto.TagDTO
-import com.jumrukovski.quotescompose.data.model.middleware.Quote
-import com.jumrukovski.quotescompose.data.model.middleware.Tag
 import com.jumrukovski.quotescompose.data.network.ResponseResult
+import com.jumrukovski.quotescompose.domain.model.Quote
+import com.jumrukovski.quotescompose.domain.model.Tag
 import retrofit2.Response
 
-fun Response<List<TagDTO>>.wrapTagsAsResponseResult(): ResponseResult<List<Tag>> {
+fun Response<List<TagDTO>>.mapTagsAsResponseResult(): ResponseResult<List<Tag>> {
     return try {
         return when (this.isSuccessful) {
             true -> ResponseResult.Success(this.body()?.mapToTags() ?: emptyList())
@@ -19,7 +19,7 @@ fun Response<List<TagDTO>>.wrapTagsAsResponseResult(): ResponseResult<List<Tag>>
     }
 }
 
-fun Response<QuotesResultsDTO>.wrapQuotesAsResponseResult(): ResponseResult<List<Quote>> {
+fun Response<QuotesResultsDTO>.mapQuotesAsResponseResult(): ResponseResult<List<Quote>> {
     return try {
         return when (this.isSuccessful) {
             true -> ResponseResult.Success(this.body()?.results?.mapToQuotes() ?: emptyList())
@@ -30,10 +30,15 @@ fun Response<QuotesResultsDTO>.wrapQuotesAsResponseResult(): ResponseResult<List
     }
 }
 
-fun Response<QuoteDTO>.wrapQuoteAsResponseResult(): ResponseResult<Quote?> {
+fun Response<QuoteDTO>.mapQuoteAsResponseResult(): ResponseResult<Quote> {
     return try {
         return when (this.isSuccessful) {
-            true -> ResponseResult.Success(this.body()?.mapToQuote())
+            true -> {
+                this.body()?.let {
+                    ResponseResult.Success(it.mapToQuote())
+                } ?: ResponseResult.Exception(Exception("Quote is null"))
+            }
+
             false -> ResponseResult.Error(this.errorBody(), this.code())
         }
     } catch (throwable: Throwable) {

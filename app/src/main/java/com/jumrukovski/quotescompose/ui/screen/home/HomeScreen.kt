@@ -17,8 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
-import com.jumrukovski.quotescompose.data.model.MenuItem
-import com.jumrukovski.quotescompose.data.model.middleware.Quote
+import com.jumrukovski.quotescompose.domain.model.MenuItem
+import com.jumrukovski.quotescompose.domain.model.Quote
 import com.jumrukovski.quotescompose.ui.common.component.EmptyDataCard
 import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.SmallQuoteCard
