@@ -40,3 +40,7 @@ The preBuild depends on 2 tasks: <b>ktlint</b> and <b>Detekt</b>. You can manual
 ## Static Code Analysis
 - [Ktlint](https://github.com/JLLeitschuh/ktlint-gradle) - A library for formatting Kotlin code according to official guidelines.
 - [Detekt](https://github.com/detekt/detekt) - A static code analysis library for Kotlin.
+
+## Testing
+- [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver) - A scriptable web server for testing HTTP clients.
+- [Truth](https://truth.dev/) - A library for performing assertions in tests.
