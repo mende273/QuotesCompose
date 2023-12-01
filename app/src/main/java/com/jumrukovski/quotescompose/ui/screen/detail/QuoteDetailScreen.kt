@@ -1,20 +1,16 @@
 package com.jumrukovski.quotescompose.ui.screen.detail
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.domain.model.MenuItem
 import com.jumrukovski.quotescompose.domain.model.Quote
+import com.jumrukovski.quotescompose.ui.common.component.FullSizeBox
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
 import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import kotlinx.coroutines.flow.collectLatest
@@ -71,17 +67,9 @@ fun QuoteDetailScreen(
                 }
             }
         )
-        Contents(paddingValues = PaddingValues(), content, author)
-    }
-}
 
-@Composable
-private fun Contents(paddingValues: PaddingValues, content: String, author: String) {
-    Box(
-        modifier = Modifier
-            .padding(paddingValues)
-            .fillMaxSize()
-    ) {
-        LargeQuoteCard(content, author)
+        FullSizeBox {
+            LargeQuoteCard(content, author)
+        }
     }
 }

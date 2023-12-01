@@ -17,24 +17,24 @@ class HomeViewModel @Inject constructor(private val remoteRepository: RemoteRepo
     private val _uiState: MutableStateFlow<UIState<List<Quote>>> = MutableStateFlow(UIState.Loading)
     val uiState: StateFlow<UIState<List<Quote>>> = _uiState
 
-    // todo get paginated quotes list
-    suspend fun getQuotes() {
+    init {
         viewModelScope.launch {
-            if (_uiState.value is UIState.SuccessWithData) {
-                return@launch
-            }
-
-            _uiState.value = remoteRepository.getQuotes().fold(
-                onSuccess = {
-                    when (it.isEmpty()) {
-                        true -> UIState.SuccessWithNoData
-                        false -> UIState.SuccessWithData(it)
-                    }
-                },
-                onFailure = {
-                    UIState.ErrorRetrievingData
-                }
-            )
+            getQuotes()
         }
+    }
+
+    // todo get paginated quotes list
+    private suspend fun getQuotes() {
+        _uiState.value = remoteRepository.getQuotes().fold(
+            onSuccess = {
+                when (it.isEmpty()) {
+                    true -> UIState.SuccessWithNoData
+                    false -> UIState.SuccessWithData(it)
+                }
+            },
+            onFailure = {
+                UIState.ErrorRetrievingData
+            }
+        )
     }
 }

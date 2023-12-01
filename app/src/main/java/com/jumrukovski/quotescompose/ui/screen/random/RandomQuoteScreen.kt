@@ -1,26 +1,19 @@
 package com.jumrukovski.quotescompose.ui.screen.random
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.domain.model.MenuItem
-import com.jumrukovski.quotescompose.domain.model.Quote
-import com.jumrukovski.quotescompose.ui.common.component.EmptyDataCard
+import com.jumrukovski.quotescompose.ui.common.component.FullSizeBox
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
-import com.jumrukovski.quotescompose.ui.common.component.ProgressBar
 import com.jumrukovski.quotescompose.ui.common.component.TopBar
-import com.jumrukovski.quotescompose.ui.common.state.UIState
+import com.jumrukovski.quotescompose.ui.common.component.UiStateWrapper
 
 @Composable
 fun RandomQuoteScreen(viewModel: RandomQuoteViewModel, onNavigateBack: () -> Unit) {
@@ -44,7 +37,7 @@ fun RandomQuoteScreen(viewModel: RandomQuoteViewModel, onNavigateBack: () -> Uni
         }
     )
 
-    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Column {
         TopBar(
@@ -58,28 +51,14 @@ fun RandomQuoteScreen(viewModel: RandomQuoteViewModel, onNavigateBack: () -> Uni
                 }
             }
         )
-        Contents(paddingValues = PaddingValues(), uiState.value)
-    }
-}
 
-@Composable
-private fun Contents(paddingValues: PaddingValues, uiState: UIState<Quote>) {
-    Box(
-        modifier = Modifier
-            .padding(paddingValues)
-            .fillMaxSize()
-    ) {
-        when (uiState) {
-            UIState.ErrorRetrievingData -> EmptyDataCard(
-                reason = stringResource(id = R.string.error)
-            )
-
-            UIState.Loading -> ProgressBar()
-            UIState.SuccessWithNoData -> EmptyDataCard(
-                reason = stringResource(id = R.string.no_data)
-            )
-
-            is UIState.SuccessWithData -> LargeQuoteCard(uiState.data.content, uiState.data.author)
-        }
+        UiStateWrapper(
+            uiState = uiState,
+            onSuccessWithData = { quote ->
+                FullSizeBox {
+                    LargeQuoteCard(quote.content, quote.author)
+                }
+            }
+        )
     }
 }
