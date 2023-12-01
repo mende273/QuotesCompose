@@ -9,14 +9,14 @@ import com.jumrukovski.quotescompose.ui.common.state.UIState
 fun <T> UiStateWrapper(
     uiState: UIState<T>,
     onErrorRetrievingData: @Composable () -> Unit = {
-        FullSizeBox { EmptyDataCard(reason = stringResource(id = R.string.error)) }
+        FullSizeBox { ErrorText(reason = stringResource(id = R.string.error)) }
     },
     onLoading: @Composable () -> Unit = {
         FullSizeBox { ProgressBar() }
     },
     onSuccessWithData: @Composable (T) -> Unit,
     onSuccessWithoutData: @Composable () -> Unit = {
-        FullSizeBox { EmptyDataCard(reason = stringResource(id = R.string.no_data)) }
+        FullSizeBox { ErrorText(reason = stringResource(id = R.string.no_data)) }
     }
 ) {
     when (uiState) {
