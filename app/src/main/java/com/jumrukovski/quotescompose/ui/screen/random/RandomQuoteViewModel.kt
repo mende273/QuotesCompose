@@ -2,7 +2,6 @@ package com.jumrukovski.quotescompose.ui.screen.random
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jumrukovski.quotescompose.data.network.ResponseResult
 import com.jumrukovski.quotescompose.domain.model.Quote
 import com.jumrukovski.quotescompose.domain.repository.RemoteRepositoryImpl
 import com.jumrukovski.quotescompose.ui.common.state.UIState
@@ -25,13 +24,14 @@ class RandomQuoteViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = UIState.Loading
 
-            with(remoteRepository.getRandomQuote()) {
-                _uiState.value = when (this) {
-                    is ResponseResult.Error -> UIState.Error(code)
-                    is ResponseResult.Exception -> UIState.Exception(exception)
-                    is ResponseResult.Success -> UIState.SuccessWithData(data)
+            _uiState.value = remoteRepository.getRandomQuote().fold(
+                onSuccess = {
+                    UIState.SuccessWithData(it)
+                },
+                onFailure = {
+                    UIState.ErrorRetrievingData
                 }
-            }
+            )
         }
     }
 }

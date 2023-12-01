@@ -64,12 +64,15 @@ private fun Contents(
             .padding(paddingValues)
     ) {
         when (state) {
-            is UIState.Error -> EmptyDataCard(reason = stringResource(id = R.string.error))
-            is UIState.Exception -> EmptyDataCard(reason = stringResource(id = R.string.error))
             is UIState.Loading -> ProgressBar()
+            UIState.ErrorRetrievingData -> EmptyDataCard(
+                reason = stringResource(id = R.string.error)
+            )
+
             UIState.SuccessWithNoData -> EmptyDataCard(
                 reason = stringResource(id = R.string.no_data)
             )
+
             is UIState.SuccessWithData -> {
                 LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                     items(state.data) { quote ->

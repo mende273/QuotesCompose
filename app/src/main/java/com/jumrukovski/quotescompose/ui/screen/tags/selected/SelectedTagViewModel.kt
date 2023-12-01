@@ -2,7 +2,6 @@ package com.jumrukovski.quotescompose.ui.screen.tags.selected
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jumrukovski.quotescompose.data.network.ResponseResult
 import com.jumrukovski.quotescompose.domain.model.Quote
 import com.jumrukovski.quotescompose.domain.repository.RemoteRepositoryImpl
 import com.jumrukovski.quotescompose.ui.common.state.UIState
@@ -35,16 +34,17 @@ class SelectedTagViewModel @Inject constructor(
                 _uiState.value = UIState.Loading
             }
 
-            with(remoteRepository.getQuotesForTag(tag)) {
-                _uiState.value = when (this) {
-                    is ResponseResult.Error -> UIState.Error(code)
-                    is ResponseResult.Exception -> UIState.Exception(exception)
-                    is ResponseResult.Success -> when (data.isEmpty()) {
+            _uiState.value = remoteRepository.getQuotesForTag(tag).fold(
+                onSuccess = {
+                    when (it.isEmpty()) {
                         true -> UIState.SuccessWithNoData
-                        false -> UIState.SuccessWithData(data)
+                        false -> UIState.SuccessWithData(it)
                     }
+                },
+                onFailure = {
+                    UIState.ErrorRetrievingData
                 }
-            }
+            )
         }
     }
 }
