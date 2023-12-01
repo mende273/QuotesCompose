@@ -15,20 +15,21 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class FavouritesViewModel @Inject constructor(
     private val localRepository: LocalRepositoryImpl
-) :
-    ViewModel() {
+) : ViewModel() {
 
     private val _uiState: MutableStateFlow<UIState<List<Quote>>> =
         MutableStateFlow(UIState.Loading)
     val uiState: StateFlow<UIState<List<Quote>>> = _uiState
 
-    fun getAllFavourites() {
-        viewModelScope.launch {
-            localRepository.getAllFavouriteQuotesAsync().collectLatest {
-                when (it.isEmpty()) {
-                    true -> _uiState.value = UIState.SuccessWithNoData
-                    false -> _uiState.value = UIState.SuccessWithData(it)
-                }
+    init {
+        viewModelScope.launch { getAllFavourites() }
+    }
+
+    private suspend fun getAllFavourites() {
+        localRepository.getAllFavouriteQuotesAsync().collectLatest {
+            _uiState.value = when (it.isEmpty()) {
+                true -> UIState.SuccessWithNoData
+                false -> UIState.SuccessWithData(it)
             }
         }
     }

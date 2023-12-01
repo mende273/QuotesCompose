@@ -18,9 +18,7 @@ class HomeViewModel @Inject constructor(private val remoteRepository: RemoteRepo
     val uiState: StateFlow<UIState<List<Quote>>> = _uiState
 
     init {
-        viewModelScope.launch {
-            getQuotes()
-        }
+        viewModelScope.launch { getQuotes() }
     }
 
     // todo get paginated quotes list

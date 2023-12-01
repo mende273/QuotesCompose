@@ -30,10 +30,6 @@ class SelectedTagViewModel @Inject constructor(
 
             currentTag = tag
 
-            if (_uiState.value !is UIState.Loading) {
-                _uiState.value = UIState.Loading
-            }
-
             _uiState.value = remoteRepository.getQuotesForTag(tag).fold(
                 onSuccess = {
                     when (it.isEmpty()) {

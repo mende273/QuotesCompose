@@ -17,23 +17,21 @@ class TagsViewModel @Inject constructor(private val remoteRepository: RemoteRepo
     private val _uiState: MutableStateFlow<UIState<List<Tag>>> = MutableStateFlow(UIState.Loading)
     val uiState: StateFlow<UIState<List<Tag>>> = _uiState
 
-    suspend fun getAllTags() {
-        viewModelScope.launch {
-            if (_uiState.value is UIState.SuccessWithData) {
-                return@launch
-            }
+    init {
+        viewModelScope.launch { getAllTags() }
+    }
 
-            _uiState.value = remoteRepository.getAllTags().fold(
-                onSuccess = {
-                    when (it.isEmpty()) {
-                        true -> UIState.SuccessWithNoData
-                        false -> UIState.SuccessWithData(it)
-                    }
-                },
-                onFailure = {
-                    UIState.ErrorRetrievingData
+    private suspend fun getAllTags() {
+        _uiState.value = remoteRepository.getAllTags().fold(
+            onSuccess = {
+                when (it.isEmpty()) {
+                    true -> UIState.SuccessWithNoData
+                    false -> UIState.SuccessWithData(it)
                 }
-            )
-        }
+            },
+            onFailure = {
+                UIState.ErrorRetrievingData
+            }
+        )
     }
 }
