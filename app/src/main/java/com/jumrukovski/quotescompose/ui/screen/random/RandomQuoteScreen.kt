@@ -70,12 +70,15 @@ private fun Contents(paddingValues: PaddingValues, uiState: UIState<Quote>) {
             .fillMaxSize()
     ) {
         when (uiState) {
-            is UIState.Error -> EmptyDataCard(reason = stringResource(id = R.string.error))
-            is UIState.Exception -> EmptyDataCard(reason = stringResource(id = R.string.error))
+            UIState.ErrorRetrievingData -> EmptyDataCard(
+                reason = stringResource(id = R.string.error)
+            )
+
             UIState.Loading -> ProgressBar()
             UIState.SuccessWithNoData -> EmptyDataCard(
                 reason = stringResource(id = R.string.no_data)
             )
+
             is UIState.SuccessWithData -> LargeQuoteCard(uiState.data.content, uiState.data.author)
         }
     }

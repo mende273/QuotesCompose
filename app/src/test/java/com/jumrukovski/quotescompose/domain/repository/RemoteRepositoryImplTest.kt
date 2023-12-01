@@ -2,7 +2,6 @@ package com.jumrukovski.quotescompose.domain.repository
 
 import com.google.common.truth.Truth.assertThat
 import com.jumrukovski.quotescompose.data.network.ApiService
-import com.jumrukovski.quotescompose.data.network.ResponseResult
 import com.jumrukovski.quotescompose.domain.model.Quote
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -49,8 +48,9 @@ class RemoteRepositoryImplTest {
                     .setBody(MOCK_RESPONSE_GET_QUOTES)
             )
 
-            val actualResponse = remoteRepository.getQuotes() as ResponseResult.Success
-            assertThat(actualResponse.data).hasSize(20)
+            val actualResponse = remoteRepository.getQuotes()
+            assertThat(actualResponse.isSuccess).isTrue()
+            assertThat(actualResponse.getOrNull()).hasSize(20)
         }
 
     @Test
@@ -62,8 +62,9 @@ class RemoteRepositoryImplTest {
                     .setBody(MOCK_RESPONSE_GET_ALL_TAGS)
             )
 
-            val actualResponse = remoteRepository.getAllTags() as ResponseResult.Success
-            assertThat(actualResponse.data).hasSize(67)
+            val actualResponse = remoteRepository.getAllTags()
+            assertThat(actualResponse.isSuccess).isTrue()
+            assertThat(actualResponse.getOrNull()).hasSize(67)
         }
 
     @Test
@@ -75,8 +76,9 @@ class RemoteRepositoryImplTest {
                     .setBody(MOCK_RESPONSE_GET_QUOTES_FOR_TAG)
             )
 
-            val actualResponse = remoteRepository.getQuotesForTag("age") as ResponseResult.Success
-            assertThat(actualResponse.data).hasSize(1)
+            val actualResponse = remoteRepository.getQuotesForTag("age")
+            assertThat(actualResponse.isSuccess).isTrue()
+            assertThat(actualResponse.getOrNull()).hasSize(1)
         }
 
     @Test
@@ -96,8 +98,9 @@ class RemoteRepositoryImplTest {
                 author = "The Buddha"
             )
 
-            val actualResponse = remoteRepository.getRandomQuote() as ResponseResult.Success
-            assertThat(actualResponse.data).isEqualTo(expectedResult)
+            val actualResponse = remoteRepository.getRandomQuote()
+            assertThat(actualResponse.isSuccess).isTrue()
+            assertThat(actualResponse.getOrNull()).isEqualTo(expectedResult)
         }
 }
 
