@@ -1,5 +1,6 @@
 package com.jumrukovski.quotescompose.ui.common.component
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,8 +15,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
+import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import com.jumrukovski.quotescompose.ui.theme.TertiaryColor
 import com.jumrukovski.quotescompose.ui.theme.largeTextStyle
 import com.jumrukovski.quotescompose.ui.theme.mediumTextStyle
@@ -25,8 +28,7 @@ fun LargeQuoteCard(content: String, author: String) {
     Card(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = PrimaryBackgroundColor)
-            .padding(16.dp),
+            .background(color = PrimaryBackgroundColor),
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
             containerColor = TertiaryColor
@@ -52,5 +54,21 @@ fun LargeQuoteCard(content: String, author: String) {
                 style = mediumTextStyle()
             )
         }
+    }
+}
+
+@Preview
+@Composable
+private fun LargeQuoteCardPreview() {
+    QuotesComposeTheme {
+        LargeQuoteCard("this is a preview quote", "author name")
+    }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun LargeQuoteCardDarkPreview() {
+    QuotesComposeTheme {
+        LargeQuoteCard("this is a preview quote", "author name")
     }
 }
