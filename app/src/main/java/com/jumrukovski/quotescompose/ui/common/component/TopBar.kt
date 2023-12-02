@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.domain.model.MenuItem
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
@@ -56,11 +58,59 @@ fun TopBar(
     )
 }
 
+@Preview
+@Composable
+private fun TopBarWithMenuItemPreview() {
+    TopBar(
+        title = "Home",
+        menuItems = listOf(
+            MenuItem(
+                R.string.action_random,
+                R.drawable.baseline_random,
+                0,
+                false
+            )
+        )
+    )
+}
+
+@Preview
+@Composable
+private fun TopBarWithBackButtonAndMenuItemPreview() {
+    TopBar(
+        title = "Home",
+        menuItems = listOf(
+            MenuItem(
+                R.string.action_random,
+                R.drawable.baseline_random,
+                0,
+                false
+            )
+        ),
+        isBackButtonEnabled = true
+    )
+}
+
+@Preview
+@Composable
+private fun TopBarWithBackButtonPreview() {
+    TopBar(
+        title = "Home",
+        isBackButtonEnabled = true
+    )
+}
+
 @Composable
 private fun BackButton(onBackPressed: () -> Unit) {
     IconButton(onClick = { onBackPressed() }) {
         Icon(Icons.AutoMirrored.Filled.ArrowBack, "backIcon")
     }
+}
+
+@Preview
+@Composable
+private fun BackButtonPreview() {
+    BackButton(onBackPressed = {})
 }
 
 @Composable
@@ -80,4 +130,17 @@ private fun MenuItem(
             tint = MaterialTheme.colorScheme.onSurface
         )
     }
+}
+
+@Preview
+@Composable
+private fun MenuItemPreview() {
+    MenuItem(
+        menuItem = MenuItem(
+            R.string.action_favourite,
+            R.drawable.baseline_favorite_border_24,
+            R.drawable.baseline_favorite_24,
+            false
+        )
+    )
 }
