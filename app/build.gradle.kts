@@ -6,7 +6,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.0"
-    id("io.gitlab.arturbosch.detekt") version ("1.22.0")
+    id("io.gitlab.arturbosch.detekt") version "1.22.0"
 }
 
 android {
