@@ -1,5 +1,6 @@
 package com.jumrukovski.quotescompose.ui.common.component.bottombar
 
+import android.content.res.Configuration
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -10,11 +11,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.jumrukovski.quotescompose.ui.theme.MediumDarkGreyColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.NavigationBarItemRippleColor
@@ -67,5 +70,23 @@ fun BottomNavigationBar(
                 )
             }
         }
+    )
+}
+
+@Preview
+@Composable
+private fun BottomNavigationBarPreview() {
+    BottomNavigationBar(
+        navHostController = rememberNavController(),
+        bottomNavigationItems = enumValues<BottomNavigationItem>()
+    )
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun BottomNavigationBarDarkPreview() {
+    BottomNavigationBar(
+        navHostController = rememberNavController(),
+        bottomNavigationItems = enumValues<BottomNavigationItem>()
     )
 }
