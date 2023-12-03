@@ -9,15 +9,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.jumrukovski.quotescompose.domain.model.Quote
+import com.jumrukovski.quotescompose.ui.preview.parameter.QuotePreviewParameter
 import com.jumrukovski.quotescompose.ui.theme.TertiaryColor
 import com.jumrukovski.quotescompose.ui.theme.mediumTextStyle
+import com.jumrukovski.quotescompose.ui.theme.spacing
 
 @Composable
 fun SmallQuoteCard(quote: Quote, onNavigateToQuoteDetails: (Quote) -> Unit) {
@@ -31,7 +35,7 @@ fun SmallQuoteCard(quote: Quote, onNavigateToQuoteDetails: (Quote) -> Unit) {
     ) {
         Column(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(MaterialTheme.spacing.normal)
                 .height(100.dp),
             verticalArrangement = Arrangement.Center
         ) {
@@ -47,18 +51,22 @@ fun SmallQuoteCard(quote: Quote, onNavigateToQuoteDetails: (Quote) -> Unit) {
 
 @Preview
 @Composable
-private fun SmallQuoteCardPreview() {
+private fun SmallQuoteCardPreview(
+    @PreviewParameter(QuotePreviewParameter::class) quote: Quote
+) {
     SmallQuoteCard(
-        quote = Quote("123", "quote content goes here", "author name"),
+        quote = quote,
         onNavigateToQuoteDetails = {}
     )
 }
 
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
-private fun SmallQuoteCardDarkPreview() {
+private fun SmallQuoteCardDarkPreview(
+    @PreviewParameter(QuotePreviewParameter::class) quote: Quote
+) {
     SmallQuoteCard(
-        quote = Quote("123", "quote content goes here", "author name"),
+        quote = quote,
         onNavigateToQuoteDetails = {}
     )
 }

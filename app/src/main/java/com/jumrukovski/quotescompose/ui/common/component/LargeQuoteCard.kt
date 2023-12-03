@@ -16,12 +16,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import com.jumrukovski.quotescompose.ui.theme.TertiaryColor
 import com.jumrukovski.quotescompose.ui.theme.largeTextStyle
 import com.jumrukovski.quotescompose.ui.theme.mediumTextStyle
+import com.jumrukovski.quotescompose.ui.theme.spacing
 
 @Composable
 fun LargeQuoteCard(content: String, author: String) {
@@ -37,7 +37,7 @@ fun LargeQuoteCard(content: String, author: String) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(MaterialTheme.spacing.normal)
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Center
         ) {

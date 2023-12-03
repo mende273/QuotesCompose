@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -22,6 +23,7 @@ import com.jumrukovski.quotescompose.ui.common.component.UiStateWrapper
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import com.jumrukovski.quotescompose.ui.preview.parameter.ListOfTagsPreviewParameter
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
+import com.jumrukovski.quotescompose.ui.theme.spacing
 
 @Composable
 fun TagsScreen(
@@ -50,8 +52,8 @@ private fun ScreenContents(
                 FullSizeBox(contentAlignment = Alignment.TopCenter) {
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(minSize = 150.dp),
-                        verticalArrangement = Arrangement.spacedBy(16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.normal),
+                        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.normal)
                     ) {
                         items(data) { tag ->
                             TagCard(tag = tag, onItemClicked = { onNavigateToSelectedTag(it) })
