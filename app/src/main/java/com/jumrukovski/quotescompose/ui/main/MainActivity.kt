@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.screen.main
+package com.jumrukovski.quotescompose.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
