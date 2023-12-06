@@ -1,9 +1,8 @@
 package com.jumrukovski.quotescompose.domain.mapper
 
-import com.jumrukovski.quotescompose.domain.model.Quote
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 
-fun List<Quote>?.toUiState(): UIState<List<Quote>> {
+fun <T> List<T>?.toUiState(): UIState<List<T>> {
     return when (this) {
         null -> UIState.ErrorRetrievingData
         else -> {

@@ -2,6 +2,7 @@ package com.jumrukovski.quotescompose.ui.screen.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jumrukovski.quotescompose.domain.mapper.toUiState
 import com.jumrukovski.quotescompose.domain.model.Quote
 import com.jumrukovski.quotescompose.domain.repository.RemoteRepositoryImpl
 import com.jumrukovski.quotescompose.ui.common.state.UIState
@@ -24,15 +25,8 @@ class HomeViewModel @Inject constructor(private val remoteRepository: RemoteRepo
     // todo get paginated quotes list
     private suspend fun getQuotes() {
         _uiState.value = remoteRepository.getQuotes().fold(
-            onSuccess = {
-                when (it.isEmpty()) {
-                    true -> UIState.SuccessWithNoData
-                    false -> UIState.SuccessWithData(it)
-                }
-            },
-            onFailure = {
-                UIState.ErrorRetrievingData
-            }
-        )
+            onSuccess = { it },
+            onFailure = { null }
+        ).toUiState()
     }
 }

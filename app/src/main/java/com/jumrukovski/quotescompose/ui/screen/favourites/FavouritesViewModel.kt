@@ -2,6 +2,7 @@ package com.jumrukovski.quotescompose.ui.screen.favourites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jumrukovski.quotescompose.domain.mapper.toUiState
 import com.jumrukovski.quotescompose.domain.model.Quote
 import com.jumrukovski.quotescompose.domain.repository.LocalRepositoryImpl
 import com.jumrukovski.quotescompose.ui.common.state.UIState
@@ -27,10 +28,7 @@ class FavouritesViewModel @Inject constructor(
 
     private suspend fun getAllFavourites() {
         localRepository.getAllFavouriteQuotesAsync().collectLatest {
-            _uiState.value = when (it.isEmpty()) {
-                true -> UIState.SuccessWithNoData
-                false -> UIState.SuccessWithData(it)
-            }
+            _uiState.value = it.toUiState()
         }
     }
 }

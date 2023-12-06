@@ -2,6 +2,7 @@ package com.jumrukovski.quotescompose.ui.screen.tags
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jumrukovski.quotescompose.domain.mapper.toUiState
 import com.jumrukovski.quotescompose.domain.model.Tag
 import com.jumrukovski.quotescompose.domain.repository.RemoteRepositoryImpl
 import com.jumrukovski.quotescompose.ui.common.state.UIState
@@ -23,15 +24,8 @@ class TagsViewModel @Inject constructor(private val remoteRepository: RemoteRepo
 
     private suspend fun getAllTags() {
         _uiState.value = remoteRepository.getAllTags().fold(
-            onSuccess = {
-                when (it.isEmpty()) {
-                    true -> UIState.SuccessWithNoData
-                    false -> UIState.SuccessWithData(it)
-                }
-            },
-            onFailure = {
-                UIState.ErrorRetrievingData
-            }
-        )
+            onSuccess = { it },
+            onFailure = { null }
+        ).toUiState()
     }
 }
