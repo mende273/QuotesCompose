@@ -3,8 +3,15 @@ package com.jumrukovski.quotescompose.ui.main
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -26,6 +33,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
 
+            var isNavigationBarVisible by remember { mutableStateOf(false) }
+
+            isNavigationBarVisible = isRouteFromBottomBarMenu(
+                navController.currentBackStackEntryAsState()
+            )
+
             QuotesComposeTheme {
                 Scaffold(
                     content = { innerPadding ->
@@ -36,9 +49,10 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     bottomBar = {
-                        if (isRouteFromBottomBarMenu(
-                                navController.currentBackStackEntryAsState()
-                            )
+                        AnimatedVisibility(
+                            visible = isNavigationBarVisible,
+                            enter = slideInVertically(initialOffsetY = { it }),
+                            exit = slideOutVertically(targetOffsetY = { it })
                         ) {
                             BottomNavigationBar(navController, bottomNavigationItems)
                         }
