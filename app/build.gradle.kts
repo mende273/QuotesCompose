@@ -116,8 +116,8 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.6")
 
     // dagger Hilt dependency injection
-    implementation("com.google.dagger:hilt-android:2.48")
-    ksp("com.google.dagger:hilt-compiler:2.48")
+    implementation("com.google.dagger:hilt-android:2.49")
+    ksp("com.google.dagger:hilt-compiler:2.49")
 
     // Activity KTX for viewModels()
     implementation("androidx.activity:activity-ktx:1.8.2")
