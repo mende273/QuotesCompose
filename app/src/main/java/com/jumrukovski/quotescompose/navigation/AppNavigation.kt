@@ -30,12 +30,14 @@ fun AppNavigation(
 ) {
     NavHost(
         navHostController,
-        startDestination = Screen.WithoutArguments.Home.route,
-        Modifier.padding(innerPadding)
+        startDestination = Screen.WithoutArguments.Home.route
     ) {
         composable(Screen.WithoutArguments.Tags.route) {
             val viewModel: TagsViewModel by activity.viewModels()
-            TagsScreen(viewModel) {
+            TagsScreen(
+                modifier = Modifier.padding(innerPadding),
+                viewModel = viewModel
+            ) {
                 navHostController.navigate(
                     Screen.WithArguments.SelectedTag.getRouteWithArguments(it)
                 ) {
@@ -47,7 +49,8 @@ fun AppNavigation(
         composable(Screen.WithoutArguments.Favourites.route) {
             val viewModel: FavouritesViewModel by activity.viewModels()
             FavouritesScreen(
-                viewModel,
+                modifier = Modifier.padding(innerPadding),
+                viewModel = viewModel,
                 onNavigateToQuoteDetails = {
                     navHostController.navigate(
                         route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
@@ -129,19 +132,24 @@ fun AppNavigation(
 
         composable(Screen.WithoutArguments.Home.route) {
             val viewModel: HomeViewModel by activity.viewModels()
-            HomeScreen(viewModel = viewModel, onNavigateToQuoteDetails = { quote ->
-                navHostController.navigate(
-                    route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
-                        quote.id,
-                        quote.content,
-                        quote.author
-                    )
-                ) {
-                    launchSingleTop = true
-                }
-            }, onNavigateToRandomQuote = {
+            HomeScreen(
+                modifier = Modifier.padding(innerPadding),
+                viewModel = viewModel,
+                onNavigateToQuoteDetails = { quote ->
+                    navHostController.navigate(
+                        route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
+                            quote.id,
+                            quote.content,
+                            quote.author
+                        )
+                    ) {
+                        launchSingleTop = true
+                    }
+                },
+                onNavigateToRandomQuote = {
                     navHostController.navigate(Screen.WithoutArguments.RandomQuote.route)
-                })
+                }
+            )
         }
     }
 }

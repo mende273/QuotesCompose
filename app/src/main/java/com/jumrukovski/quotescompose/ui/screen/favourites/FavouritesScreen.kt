@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -20,6 +21,7 @@ import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
 fun FavouritesScreen(
+    modifier: Modifier,
     viewModel: FavouritesViewModel,
     onNavigateToQuoteDetails: (Quote) -> Unit,
     onNavigateBack: () -> Unit
@@ -27,6 +29,7 @@ fun FavouritesScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     ScreenContents(
+        modifier = modifier,
         uiState = uiState,
         onNavigateToQuoteDetails = { onNavigateToQuoteDetails(it) },
         onNavigateBack = { onNavigateBack() }
@@ -35,11 +38,12 @@ fun FavouritesScreen(
 
 @Composable
 private fun ScreenContents(
+    modifier: Modifier,
     uiState: UIState<List<Quote>>,
     onNavigateToQuoteDetails: (Quote) -> Unit,
     onNavigateBack: () -> Unit
 ) {
-    Column {
+    Column(modifier = modifier) {
         TopBar(
             title = stringResource(id = R.string.screen_favourites),
             isBackButtonEnabled = true,
@@ -67,6 +71,7 @@ private fun ScreenContentsPreview(
 ) {
     QuotesComposeTheme {
         ScreenContents(
+            modifier = Modifier,
             uiState = UIState.SuccessWithData(quotes),
             onNavigateToQuoteDetails = {},
             onNavigateBack = {}

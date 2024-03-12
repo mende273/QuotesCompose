@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -21,6 +22,7 @@ import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
 fun HomeScreen(
+    modifier: Modifier,
     viewModel: HomeViewModel,
     onNavigateToQuoteDetails: (Quote) -> Unit,
     onNavigateToRandomQuote: () -> Unit
@@ -28,6 +30,7 @@ fun HomeScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     ScreenContents(
+        modifier = modifier,
         uiState = uiState,
         onNavigateToRandomQuote = { onNavigateToRandomQuote() },
         onNavigateToQuoteDetails = { onNavigateToQuoteDetails(it) }
@@ -36,11 +39,12 @@ fun HomeScreen(
 
 @Composable
 private fun ScreenContents(
+    modifier: Modifier,
     uiState: UIState<List<Quote>>,
     onNavigateToRandomQuote: () -> Unit,
     onNavigateToQuoteDetails: (Quote) -> Unit
 ) {
-    Column {
+    Column(modifier = modifier) {
         TopBar(
             title = stringResource(id = R.string.screen_home),
             menuItems = listOf(
@@ -79,6 +83,7 @@ private fun ScreenContentsPreview(
 ) {
     QuotesComposeTheme {
         ScreenContents(
+            modifier = Modifier,
             uiState = UIState.SuccessWithData(quotes),
             onNavigateToRandomQuote = { },
             onNavigateToQuoteDetails = {}
