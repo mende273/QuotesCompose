@@ -38,11 +38,9 @@ fun AppNavigation(
                 modifier = Modifier.padding(innerPadding),
                 viewModel = viewModel
             ) {
-                navHostController.navigate(
-                    Screen.WithArguments.SelectedTag.getRouteWithArguments(it)
-                ) {
-                    launchSingleTop = true
-                }
+                navHostController.singleTopNavigate(
+                    route = Screen.WithArguments.SelectedTag.getRouteWithArguments(it)
+                )
             }
         }
 
@@ -52,15 +50,13 @@ fun AppNavigation(
                 modifier = Modifier.padding(innerPadding),
                 viewModel = viewModel,
                 onNavigateToQuoteDetails = {
-                    navHostController.navigate(
+                    navHostController.singleTopNavigate(
                         route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
                             it.id,
                             it.content,
                             it.author
                         )
-                    ) {
-                        launchSingleTop = true
-                    }
+                    )
                 },
                 onNavigateBack = {
                     navHostController.navigateUp()
@@ -107,15 +103,13 @@ fun AppNavigation(
                 viewModel = viewModel,
                 tagName = tagName,
                 onNavigateToQuoteDetails = {
-                    navHostController.navigate(
+                    navHostController.singleTopNavigate(
                         route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
                             it.id,
                             it.content,
                             it.author
                         )
-                    ) {
-                        launchSingleTop = true
-                    }
+                    )
                 },
                 onNavigateBack = {
                     navHostController.navigateUp()
@@ -136,20 +130,24 @@ fun AppNavigation(
                 modifier = Modifier.padding(innerPadding),
                 viewModel = viewModel,
                 onNavigateToQuoteDetails = { quote ->
-                    navHostController.navigate(
+                    navHostController.singleTopNavigate(
                         route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
                             quote.id,
                             quote.content,
                             quote.author
                         )
-                    ) {
-                        launchSingleTop = true
-                    }
+                    )
                 },
                 onNavigateToRandomQuote = {
                     navHostController.navigate(Screen.WithoutArguments.RandomQuote.route)
                 }
             )
         }
+    }
+}
+
+private fun NavHostController.singleTopNavigate(route: String) {
+    this.navigate(route) {
+        launchSingleTop = true
     }
 }
