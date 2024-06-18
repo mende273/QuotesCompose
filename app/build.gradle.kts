@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
-    id("org.jlleitschuh.gradle.ktlint") version "11.5.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
 }
 
@@ -94,30 +94,30 @@ dependencies {
     // compose
     implementation("androidx.activity:activity-compose:1.9.0")
     implementation("androidx.compose.material3:material3:1.2.1")
-    platform("androidx.compose:compose-bom:2024.05.00")
+    platform("androidx.compose:compose-bom:2024.06.00")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
-    testImplementation("com.google.truth:truth:1.1.3")
+    testImplementation("com.google.truth:truth:1.4.2")
 
     // compose extensions
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
 
     // lifecycle
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.2")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.2")
 
     // navigation component
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
     // dagger Hilt dependency injection
-    implementation("com.google.dagger:hilt-android:2.49")
-    ksp("com.google.dagger:hilt-compiler:2.49")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    ksp("com.google.dagger:hilt-compiler:2.51.1")
 
     // Activity KTX for viewModels()
     implementation("androidx.activity:activity-ktx:1.9.0")
@@ -132,7 +132,7 @@ dependencies {
 
     // Okhttp3
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // Kotlin Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
