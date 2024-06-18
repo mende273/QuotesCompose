@@ -1,8 +1,10 @@
 import com.android.build.gradle.internal.tasks.factory.dependsOn
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
@@ -45,6 +47,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+    }
+
     ktlint {
         this.android.set(true)
         this.ignoreFailures.set(false)
@@ -72,14 +80,9 @@ android {
         buildConfig = true
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
-    }
-
-    packaging {
-        resources {
-            excludes += "META-INF/*"
-        }
+    composeCompiler {
+        enableStrongSkippingMode = true
+        reportsDestination = layout.buildDirectory.dir("compose_compiler")
     }
 }
 
