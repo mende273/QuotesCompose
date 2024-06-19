@@ -2,8 +2,8 @@ package com.jumrukovski.quotescompose.di
 
 import com.jumrukovski.quotescompose.data.db.LocalDB
 import com.jumrukovski.quotescompose.data.network.ApiService
-import com.jumrukovski.quotescompose.domain.repository.LocalRepositoryImpl
-import com.jumrukovski.quotescompose.domain.repository.RemoteRepositoryImpl
+import com.jumrukovski.quotescompose.data.repository.LocalRepositoryImpl
+import com.jumrukovski.quotescompose.data.repository.RemoteRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

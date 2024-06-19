@@ -15,7 +15,7 @@
         android:theme="@style/Theme.QuotesCompose"
         tools:targetApi="31">
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.feature.main.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.QuotesCompose">
             <intent-filter>

@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.jumrukovski.quotescompose.R
-import com.jumrukovski.quotescompose.domain.model.MenuItem
+import com.jumrukovski.quotescompose.ui.menu.MenuItem
 import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
 import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 
