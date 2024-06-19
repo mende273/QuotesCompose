@@ -2,6 +2,7 @@ package com.jumrukovski.quotescompose.domain.repository
 
 import com.google.common.truth.Truth.assertThat
 import com.jumrukovski.quotescompose.data.network.ApiService
+import com.jumrukovski.quotescompose.data.repository.RemoteRepositoryImpl
 import com.jumrukovski.quotescompose.domain.model.Quote
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

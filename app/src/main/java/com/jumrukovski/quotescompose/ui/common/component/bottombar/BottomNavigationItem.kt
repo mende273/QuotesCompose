@@ -3,7 +3,7 @@ package com.jumrukovski.quotescompose.ui.common.component.bottombar
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.jumrukovski.quotescompose.R
-import com.jumrukovski.quotescompose.navigation.Screen
+import com.jumrukovski.quotescompose.ui.navigation.Screen
 
 enum class BottomNavigationItem(
     val route: String,
