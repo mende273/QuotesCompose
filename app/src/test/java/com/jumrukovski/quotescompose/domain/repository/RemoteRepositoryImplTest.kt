@@ -20,7 +20,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class RemoteRepositoryImplTest {
 
-    private lateinit var remoteRepository: RemoteRepositoryImpl
+    private lateinit var remoteRepository: RemoteRepository
     private lateinit var apiService: ApiService
     private lateinit var mockWebServer: MockWebServer
 

@@ -1,28 +1,24 @@
 package com.jumrukovski.quotescompose.di
 
-import com.jumrukovski.quotescompose.data.db.LocalDB
-import com.jumrukovski.quotescompose.data.network.ApiService
 import com.jumrukovski.quotescompose.data.repository.LocalRepositoryImpl
 import com.jumrukovski.quotescompose.data.repository.RemoteRepositoryImpl
+import com.jumrukovski.quotescompose.domain.repository.LocalRepository
+import com.jumrukovski.quotescompose.domain.repository.RemoteRepository
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
+abstract class RepositoryModule {
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideRemoteRepository(apiService: ApiService): RemoteRepositoryImpl {
-        return RemoteRepositoryImpl(apiService)
-    }
+    internal abstract fun bindLocalRepository(repository: LocalRepositoryImpl): LocalRepository
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideLocalRepository(localDB: LocalDB): LocalRepositoryImpl {
-        return LocalRepositoryImpl(localDB)
-    }
+    internal abstract fun bindRemoteRepository(repository: RemoteRepositoryImpl): RemoteRepository
 }

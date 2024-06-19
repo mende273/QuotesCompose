@@ -2,8 +2,8 @@ package com.jumrukovski.quotescompose.ui.feature.random
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jumrukovski.quotescompose.data.repository.RemoteRepositoryImpl
 import com.jumrukovski.quotescompose.domain.model.Quote
+import com.jumrukovski.quotescompose.domain.repository.RemoteRepository
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class RandomQuoteViewModel @Inject constructor(
-    private val remoteRepository: RemoteRepositoryImpl
+    private val remoteRepository: RemoteRepository
 ) :
     ViewModel() {
 
