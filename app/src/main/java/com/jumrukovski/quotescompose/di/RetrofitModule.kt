@@ -1,8 +1,8 @@
 package com.jumrukovski.quotescompose.di
 
-import android.content.Context
 import com.jumrukovski.quotescompose.BuildConfig
 import com.jumrukovski.quotescompose.data.network.ApiService
+import com.jumrukovski.quotescompose.data.network.CacheInterceptor
 import com.jumrukovski.quotescompose.data.network.NoConnectionInterceptor
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -11,7 +11,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,8 +19,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
-
-    private const val cacheSize = 10 * 1024 * 1024
 
     @Provides
     @Singleton
@@ -56,11 +53,11 @@ object RetrofitModule {
     @Singleton
     fun provideOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
-        cache: Cache
+        cacheInterceptor: CacheInterceptor
     ): OkHttpClient {
         val builder = OkHttpClient.Builder()
+            .addNetworkInterceptor(cacheInterceptor)
             .addInterceptor(httpLoggingInterceptor)
-            .cache(cache)
         return builder.build()
     }
 
@@ -78,9 +75,7 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideHttpCache(context: Context): Cache {
-        return Cache(context.cacheDir, cacheSize.toLong())
-    }
+    fun provideCacheInterceptor(): CacheInterceptor = CacheInterceptor()
 
     @Provides
     @Singleton
