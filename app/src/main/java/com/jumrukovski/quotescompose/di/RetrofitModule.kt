@@ -43,7 +43,7 @@ object RetrofitModule {
         moshiConverterFactory: MoshiConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.quotable.io/")
+            .baseUrl("https://zenquotes.io/api/")
             .addConverterFactory(moshiConverterFactory)
             .client(okHttpClient)
             .build()

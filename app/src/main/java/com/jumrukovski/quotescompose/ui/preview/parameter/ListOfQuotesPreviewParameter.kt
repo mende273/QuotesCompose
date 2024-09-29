@@ -7,24 +7,24 @@ class ListOfQuotesPreviewParameter : PreviewParameterProvider<List<Quote>> {
     override val values: Sequence<List<Quote>> = sequenceOf(
         listOf(
             Quote(
-                "1",
-                "Everything comes to him who hustles while he waits.",
-                "Thomas Edison"
+                id = 1,
+                content = "Everything comes to him who hustles while he waits.",
+                author = "Thomas Edison"
             ),
             Quote(
-                "2",
-                "Change in all things is sweet.",
-                "Aristotle"
+                id = 2,
+                content = "Change in all things is sweet.",
+                author = "Aristotle"
             ),
             Quote(
-                "3",
-                "I never think of the future - it comes soon enough.",
-                "Albert Einstein"
+                id = 3,
+                content = "I never think of the future - it comes soon enough.",
+                author = "Albert Einstein"
             ),
             Quote(
-                "4",
-                "As a cure for worrying, work is better than whisky.",
-                "Thomas Edison"
+                id = 4,
+                content = "As a cure for worrying, work is better than whisky.",
+                author = "Thomas Edison"
             )
         )
     )

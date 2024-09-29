@@ -11,7 +11,11 @@ enum class BottomNavigationItem(
     @DrawableRes val icon: Int?
 ) {
     HOME(Screen.WithoutArguments.Home.route, R.string.screen_home, R.drawable.baseline_home_24),
-    TAGS(Screen.WithoutArguments.Tags.route, R.string.screen_tags, R.drawable.baseline_tag_24),
+    QUOTE_OF_THE_DAY(
+        Screen.WithoutArguments.QuoteOfTheDay.route,
+        R.string.screen_quote_today,
+        R.drawable.baseline_today_24
+    ),
     FAVORITES(
         Screen.WithoutArguments.Favourites.route,
         R.string.screen_favourites,

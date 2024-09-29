@@ -1,11 +1,9 @@
 package com.jumrukovski.quotescompose.data.repository
 
-import com.jumrukovski.quotescompose.data.mapper.mapQuoteAsResult
-import com.jumrukovski.quotescompose.data.mapper.mapQuotesAsResult
-import com.jumrukovski.quotescompose.data.mapper.mapTagsAsResult
+import com.jumrukovski.quotescompose.data.mapper.mapQuotesAsListResult
+import com.jumrukovski.quotescompose.data.mapper.mapToFirstQuoteAsResult
 import com.jumrukovski.quotescompose.data.network.ApiService
 import com.jumrukovski.quotescompose.domain.model.Quote
-import com.jumrukovski.quotescompose.domain.model.Tag
 import com.jumrukovski.quotescompose.domain.repository.RemoteRepository
 import javax.inject.Inject
 
@@ -13,14 +11,11 @@ class RemoteRepositoryImpl @Inject constructor(private val apiService: ApiServic
     RemoteRepository {
 
     override suspend fun getQuotes(): Result<List<Quote>> =
-        apiService.getQuotes().mapQuotesAsResult()
-
-    override suspend fun getAllTags(): Result<List<Tag>> =
-        apiService.getAllTags().mapTagsAsResult()
-
-    override suspend fun getQuotesForTag(tag: String): Result<List<Quote>> =
-        apiService.getQuotesForTag(tag).mapQuotesAsResult()
+        apiService.getQuotes().mapQuotesAsListResult()
 
     override suspend fun getRandomQuote(): Result<Quote> =
-        apiService.getRandomQuote().mapQuoteAsResult()
+        apiService.getRandomQuote().mapToFirstQuoteAsResult()
+
+    override suspend fun getQuoteOfTheDay(): Result<Quote> =
+        apiService.getQuoteOfTheDay().mapToFirstQuoteAsResult()
 }

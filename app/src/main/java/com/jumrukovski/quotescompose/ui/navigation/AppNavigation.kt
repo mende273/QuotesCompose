@@ -17,10 +17,8 @@ import com.jumrukovski.quotescompose.ui.feature.home.HomeScreen
 import com.jumrukovski.quotescompose.ui.feature.home.HomeViewModel
 import com.jumrukovski.quotescompose.ui.feature.random.RandomQuoteScreen
 import com.jumrukovski.quotescompose.ui.feature.random.RandomQuoteViewModel
-import com.jumrukovski.quotescompose.ui.feature.tag.SelectedTagScreen
-import com.jumrukovski.quotescompose.ui.feature.tag.SelectedTagViewModel
-import com.jumrukovski.quotescompose.ui.feature.tags.TagsScreen
-import com.jumrukovski.quotescompose.ui.feature.tags.TagsViewModel
+import com.jumrukovski.quotescompose.ui.feature.today.QuoteOfTheDayScreen
+import com.jumrukovski.quotescompose.ui.feature.today.QuoteOfTheDayViewModel
 
 @Composable
 fun AppNavigation(
@@ -32,18 +30,6 @@ fun AppNavigation(
         navHostController,
         startDestination = Screen.WithoutArguments.Home.route
     ) {
-        composable(Screen.WithoutArguments.Tags.route) {
-            val viewModel: TagsViewModel by activity.viewModels()
-            TagsScreen(
-                modifier = Modifier.padding(innerPadding),
-                viewModel = viewModel
-            ) {
-                navHostController.singleTopNavigate(
-                    route = Screen.WithArguments.SelectedTag.getRouteWithArguments(it)
-                )
-            }
-        }
-
         composable(Screen.WithoutArguments.Favourites.route) {
             val viewModel: FavouritesViewModel by activity.viewModels()
             FavouritesScreen(
@@ -52,7 +38,7 @@ fun AppNavigation(
                 onNavigateToQuoteDetails = {
                     navHostController.singleTopNavigate(
                         route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
-                            it.id,
+                            it.id.toString(),
                             it.content,
                             it.author
                         )
@@ -80,7 +66,7 @@ fun AppNavigation(
                 val viewModel: QuoteDetailViewModel by activity.viewModels()
                 QuoteDetailScreen(
                     viewModel = viewModel,
-                    id = id,
+                    id = id.toInt(),
                     content = content,
                     author = author,
                     onNavigateBack = {
@@ -90,38 +76,16 @@ fun AppNavigation(
             }
         }
 
-        composable(
-            route = Screen.WithArguments.SelectedTag.route,
-            arguments = Screen.WithArguments.SelectedTag.getNavArguments()
-        ) { backStackEntry ->
-            val tagName: String = backStackEntry.arguments?.getString(
-                Screen.WithArguments.SelectedTag.ARGUMENT_TAG_NAME,
-                ""
-            ) ?: ""
-            val viewModel: SelectedTagViewModel by activity.viewModels()
-            SelectedTagScreen(
-                viewModel = viewModel,
-                tagName = tagName,
-                onNavigateToQuoteDetails = {
-                    navHostController.singleTopNavigate(
-                        route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
-                            it.id,
-                            it.content,
-                            it.author
-                        )
-                    )
-                },
-                onNavigateBack = {
-                    navHostController.navigateUp()
-                }
-            )
-        }
-
         composable(Screen.WithoutArguments.RandomQuote.route) {
             val viewModel: RandomQuoteViewModel by activity.viewModels()
             RandomQuoteScreen(viewModel, onNavigateBack = {
                 navHostController.popBackStack()
             })
+        }
+
+        composable(Screen.WithoutArguments.QuoteOfTheDay.route) {
+            val viewModel: QuoteOfTheDayViewModel by activity.viewModels()
+            QuoteOfTheDayScreen(viewModel)
         }
 
         composable(Screen.WithoutArguments.Home.route) {
@@ -132,7 +96,7 @@ fun AppNavigation(
                 onNavigateToQuoteDetails = { quote ->
                     navHostController.singleTopNavigate(
                         route = Screen.WithArguments.QuoteDetail.getRouteWithArguments(
-                            quote.id,
+                            quote.id.toString(),
                             quote.content,
                             quote.author
                         )
