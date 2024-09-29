@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun QuoteDetailScreen(
     viewModel: QuoteDetailViewModel,
-    id: String,
+    id: Int,
     content: String,
     author: String,
     onNavigateBack: () -> Unit

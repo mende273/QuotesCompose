@@ -92,7 +92,7 @@ dependencies {
 
     // tests
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.ext:junit:1.2.0")
 
     // compose
     implementation("androidx.activity:activity-compose:1.9.0")

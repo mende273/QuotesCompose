@@ -11,18 +11,18 @@ import kotlinx.coroutines.flow.Flow
 
 class LocalRepositoryImpl @Inject constructor(private val localDB: LocalDB) : LocalRepository {
 
-    override fun getAllFavouriteQuotesAsync(): Flow<List<Quote>> =
-        localDB.quoteDao().getAllFavouriteQuotesAsync().mapToQuotes()
+    override fun getAllFavouriteQuotes(): Flow<List<Quote>> =
+        localDB.quoteDao().getAllFavouriteQuotes().mapToQuotes()
 
-    override fun getFavouriteQuoteAsync(id: String): Flow<Quote?> =
-        localDB.quoteDao().getFavouriteQuoteAsync(id).mapToQuote()
+    override fun getFavouriteQuote(id: Int): Flow<Quote?> =
+        localDB.quoteDao().getFavouriteQuote(id).mapToQuote()
 
-    override fun addFavouriteQuote(id: String, content: String, author: String) {
+    override fun addFavouriteQuote(id: Int, content: String, author: String) {
         val entity = mapToFavouriteQuoteEntity(id, content, author)
         localDB.quoteDao().addFavouriteQuote(entity)
     }
 
-    override fun removeFavouriteQuote(id: String, content: String, author: String) {
+    override fun removeFavouriteQuote(id: Int, content: String, author: String) {
         val entity = mapToFavouriteQuoteEntity(id, content, author)
         localDB.quoteDao().deleteFavouriteQuote(entity)
     }

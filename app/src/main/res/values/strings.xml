@@ -7,13 +7,10 @@
 
     <!-- Screens -->
     <string name="screen_home">Home</string>
-    <string name="screen_tags">Tags</string>
     <string name="screen_favourites">Favourites</string>
     <string name="screen_quote_detail">Quote Detail</string>
-    <string name="screen_selected_tag">Selected Tag</string>
     <string name="screen_random_quote">Random Quote</string>
-
-    <string name="screen_selected_tag_title">Tag: %1$s</string>
+    <string name="screen_quote_today">Quote of the day</string>
 
     <string name="no_data">Nothing here!</string>
     <string name="error">Something went wrong!</string>

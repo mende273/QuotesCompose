@@ -9,20 +9,20 @@ sealed interface Screen {
 
     sealed interface WithoutArguments : Screen {
 
-        object Home : WithoutArguments {
+        data object Home : WithoutArguments {
             override val route: String = "home"
         }
 
-        object Tags : WithoutArguments {
-            override val route: String = "tags"
-        }
-
-        object Favourites : WithoutArguments {
+        data object Favourites : WithoutArguments {
             override val route: String = "favourites"
         }
 
-        object RandomQuote : WithoutArguments {
+        data object RandomQuote : WithoutArguments {
             override val route: String = "random quote"
+        }
+
+        data object QuoteOfTheDay : WithoutArguments {
+            override val route: String = "today"
         }
     }
 
@@ -46,18 +46,7 @@ sealed interface Screen {
             return route.substringBefore("/") + builder.toString()
         }
 
-        object SelectedTag : WithArguments {
-
-            const val ARGUMENT_TAG_NAME = "tagName"
-
-            override val route: String = "tag/{$ARGUMENT_TAG_NAME}"
-
-            override fun getNavArguments(): List<NamedNavArgument> {
-                return listOf(navArgument(ARGUMENT_TAG_NAME) { type = NavType.StringType })
-            }
-        }
-
-        object QuoteDetail : WithArguments {
+        data object QuoteDetail : WithArguments {
 
             const val ARGUMENT_ID = "id"
             const val ARGUMENT_CONTENT = "content"

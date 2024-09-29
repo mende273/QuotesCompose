@@ -21,21 +21,21 @@ class QuoteDetailViewModel @Inject constructor(
         private const val TIMEOUT_MILLIS: Long = 5_000
     }
 
-    fun checkIfQuoteIsInFavouritesDB(id: String): StateFlow<Quote?> {
-        return localRepository.getFavouriteQuoteAsync(id).stateIn(
+    fun checkIfQuoteIsInFavouritesDB(id: Int): StateFlow<Quote?> {
+        return localRepository.getFavouriteQuote(id).stateIn(
             scope = viewModelScope,
             initialValue = null,
             started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS)
         )
     }
 
-    fun addQuoteToFavourites(id: String, content: String, author: String) {
+    fun addQuoteToFavourites(id: Int, content: String, author: String) {
         viewModelScope.launch(Dispatchers.IO) {
             localRepository.addFavouriteQuote(id, content, author)
         }
     }
 
-    fun removeQuoteFromFavourites(id: String, content: String, author: String) {
+    fun removeQuoteFromFavourites(id: Int, content: String, author: String) {
         viewModelScope.launch(Dispatchers.IO) {
             localRepository.removeFavouriteQuote(id, content, author)
         }

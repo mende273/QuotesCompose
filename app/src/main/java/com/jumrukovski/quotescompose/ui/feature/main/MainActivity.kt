@@ -68,7 +68,7 @@ private fun isRouteFromBottomBarMenu(currentBackStackEntry: State<NavBackStackEn
     return currentRoute?.let { route ->
         return@let (
             route == Screen.WithoutArguments.Home.route ||
-                route == Screen.WithoutArguments.Tags.route ||
+                route == Screen.WithoutArguments.QuoteOfTheDay.route ||
                 route == Screen.WithoutArguments.Favourites.route
             )
     } ?: false

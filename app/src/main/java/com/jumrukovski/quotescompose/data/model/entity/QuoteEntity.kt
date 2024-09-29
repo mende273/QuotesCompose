@@ -4,9 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class FavouriteQuoteEntity(
+data class QuoteEntity(
     @PrimaryKey(autoGenerate = false)
-    val id: String,
+    val id: Int,
     val content: String,
     val author: String
 )

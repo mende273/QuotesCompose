@@ -27,7 +27,7 @@ class FavouritesViewModel @Inject constructor(
     }
 
     private suspend fun getAllFavourites() {
-        localRepository.getAllFavouriteQuotesAsync().collectLatest {
+        localRepository.getAllFavouriteQuotes().collectLatest {
             _uiState.value = it.toUiState()
         }
     }
