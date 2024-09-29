@@ -21,18 +21,16 @@ import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
 fun FavouritesScreen(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     viewModel: FavouritesViewModel,
-    onNavigateToQuoteDetails: (Quote) -> Unit,
-    onNavigateBack: () -> Unit
+    onNavigateToQuoteDetails: (Quote) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     ScreenContents(
         modifier = modifier,
         uiState = uiState,
-        onNavigateToQuoteDetails = { onNavigateToQuoteDetails(it) },
-        onNavigateBack = { onNavigateBack() }
+        onNavigateToQuoteDetails = { onNavigateToQuoteDetails(it) }
     )
 }
 
@@ -40,14 +38,11 @@ fun FavouritesScreen(
 private fun ScreenContents(
     modifier: Modifier,
     uiState: UIState<List<Quote>>,
-    onNavigateToQuoteDetails: (Quote) -> Unit,
-    onNavigateBack: () -> Unit
+    onNavigateToQuoteDetails: (Quote) -> Unit
 ) {
     Column(modifier = modifier) {
         TopBar(
-            title = stringResource(id = R.string.screen_favourites),
-            isBackButtonEnabled = true,
-            onNavigateBack = onNavigateBack
+            title = stringResource(id = R.string.screen_favourites)
         )
 
         UiStateWrapper(
@@ -73,8 +68,7 @@ private fun ScreenContentsPreview(
         ScreenContents(
             modifier = Modifier,
             uiState = UIState.SuccessWithData(quotes),
-            onNavigateToQuoteDetails = {},
-            onNavigateBack = {}
+            onNavigateToQuoteDetails = {}
         )
     }
 }

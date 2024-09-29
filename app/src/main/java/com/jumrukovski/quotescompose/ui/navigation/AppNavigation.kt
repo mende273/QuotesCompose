@@ -2,10 +2,7 @@ package com.jumrukovski.quotescompose.ui.navigation
 
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,8 +20,7 @@ import com.jumrukovski.quotescompose.ui.feature.today.QuoteOfTheDayViewModel
 @Composable
 fun AppNavigation(
     activity: ComponentActivity,
-    navHostController: NavHostController,
-    innerPadding: PaddingValues
+    navHostController: NavHostController
 ) {
     NavHost(
         navHostController,
@@ -33,7 +29,6 @@ fun AppNavigation(
         composable(Screen.WithoutArguments.Favourites.route) {
             val viewModel: FavouritesViewModel by activity.viewModels()
             FavouritesScreen(
-                modifier = Modifier.padding(innerPadding),
                 viewModel = viewModel,
                 onNavigateToQuoteDetails = {
                     navHostController.singleTopNavigate(
@@ -43,9 +38,6 @@ fun AppNavigation(
                             it.author
                         )
                     )
-                },
-                onNavigateBack = {
-                    navHostController.navigateUp()
                 }
             )
         }
@@ -91,7 +83,6 @@ fun AppNavigation(
         composable(Screen.WithoutArguments.Home.route) {
             val viewModel: HomeViewModel by activity.viewModels()
             HomeScreen(
-                modifier = Modifier.padding(innerPadding),
                 viewModel = viewModel,
                 onNavigateToQuoteDetails = { quote ->
                     navHostController.singleTopNavigate(

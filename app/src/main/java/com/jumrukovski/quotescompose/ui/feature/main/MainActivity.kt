@@ -1,8 +1,10 @@
 package com.jumrukovski.quotescompose.ui.feature.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -23,10 +25,12 @@ import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
         val bottomNavigationItems = enumValues<BottomNavigationItem>()
 
@@ -41,11 +45,10 @@ class MainActivity : ComponentActivity() {
 
             QuotesComposeTheme {
                 Scaffold(
-                    content = { innerPadding ->
+                    content = {
                         AppNavigation(
                             this@MainActivity,
-                            navHostController = navController,
-                            innerPadding = innerPadding
+                            navHostController = navController
                         )
                     },
                     bottomBar = {

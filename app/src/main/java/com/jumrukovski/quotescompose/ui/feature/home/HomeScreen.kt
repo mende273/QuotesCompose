@@ -22,7 +22,7 @@ import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
 fun HomeScreen(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     viewModel: HomeViewModel,
     onNavigateToQuoteDetails: (Quote) -> Unit,
     onNavigateToRandomQuote: () -> Unit
