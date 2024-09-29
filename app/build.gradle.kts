@@ -79,11 +79,6 @@ android {
         compose = true
         buildConfig = true
     }
-
-    composeCompiler {
-        enableStrongSkippingMode = true
-        reportsDestination = layout.buildDirectory.dir("compose_compiler")
-    }
 }
 
 dependencies {
