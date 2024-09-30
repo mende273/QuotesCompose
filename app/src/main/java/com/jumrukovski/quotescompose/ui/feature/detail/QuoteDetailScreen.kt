@@ -22,9 +22,7 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun QuoteDetailScreen(
     viewModel: QuoteDetailViewModel,
-    id: Int,
-    content: String,
-    author: String,
+    quote: Quote,
     onNavigateBack: () -> Unit
 ) {
     var isFavourite by remember { mutableStateOf<Quote?>(null) }
@@ -42,8 +40,8 @@ fun QuoteDetailScreen(
         )
     }
 
-    LaunchedEffect(key1 = id, block = {
-        viewModel.checkIfQuoteIsInFavouritesDB(id).collectLatest {
+    LaunchedEffect(key1 = quote.id, block = {
+        viewModel.checkIfQuoteIsInFavouritesDB(quote.id).collectLatest {
             isFavourite = it
 
             menuItems = menuItems.map { item ->
@@ -57,24 +55,22 @@ fun QuoteDetailScreen(
     })
 
     ScreenContents(
-        content = content,
-        author = author,
+        quote = quote,
         isFavourite = isFavourite != null,
         menuItems = menuItems,
-        onAddQuoteToFavourites = { viewModel.addQuoteToFavourites(id, content, author) },
-        onRemoveQuoteFromFavourites = { viewModel.removeQuoteFromFavourites(id, content, author) },
+        onAddQuoteToFavourites = viewModel::addQuoteToFavourites,
+        onRemoveQuoteFromFavourites = viewModel::removeQuoteFromFavourites,
         onNavigateBack = { onNavigateBack() }
     )
 }
 
 @Composable
 private fun ScreenContents(
-    content: String,
-    author: String,
+    quote: Quote,
     isFavourite: Boolean,
     menuItems: List<MenuItem>,
-    onAddQuoteToFavourites: () -> Unit,
-    onRemoveQuoteFromFavourites: () -> Unit,
+    onAddQuoteToFavourites: (Quote) -> Unit,
+    onRemoveQuoteFromFavourites: (Quote) -> Unit,
     onNavigateBack: () -> Unit
 ) {
     Column {
@@ -85,15 +81,15 @@ private fun ScreenContents(
             onMenuItemClick = {
                 if (it.titleTextId == R.string.action_favourite) {
                     when (isFavourite) {
-                        true -> onRemoveQuoteFromFavourites()
-                        false -> onAddQuoteToFavourites()
+                        true -> onRemoveQuoteFromFavourites(quote)
+                        false -> onAddQuoteToFavourites(quote)
                     }
                 }
             }
         )
 
         FullSizeBox {
-            LargeQuoteCard(content, author)
+            LargeQuoteCard(quote.content, quote.author)
         }
     }
 }
@@ -105,8 +101,7 @@ private fun ScreenContentsPreview(
 ) {
     QuotesComposeTheme {
         ScreenContents(
-            content = quote.content,
-            author = quote.author,
+            quote = quote,
             isFavourite = false,
             menuItems = listOf(
                 MenuItem(

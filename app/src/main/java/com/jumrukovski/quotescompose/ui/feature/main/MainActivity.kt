@@ -9,18 +9,21 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.jumrukovski.quotescompose.navigation.AppNavigation
+import com.jumrukovski.quotescompose.navigation.Screen
 import com.jumrukovski.quotescompose.ui.common.component.bottombar.BottomNavigationBar
 import com.jumrukovski.quotescompose.ui.common.component.bottombar.BottomNavigationItem
-import com.jumrukovski.quotescompose.ui.navigation.AppNavigation
-import com.jumrukovski.quotescompose.ui.navigation.Screen
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,9 +42,15 @@ class MainActivity : ComponentActivity() {
 
             var isNavigationBarVisible by remember { mutableStateOf(false) }
 
-            isNavigationBarVisible = isRouteFromBottomBarMenu(
-                navController.currentBackStackEntryAsState()
-            )
+            val currentNavigationBarDestination = navController
+                .currentBackStackEntryAsState()
+                .value
+                .currentDestinationFromNavigationBar(
+                    enumValues<BottomNavigationItem>()
+                        .map { it.route }
+                )
+
+            isNavigationBarVisible = currentNavigationBarDestination != null
 
             QuotesComposeTheme {
                 Scaffold(
@@ -57,7 +66,11 @@ class MainActivity : ComponentActivity() {
                             enter = slideInVertically(initialOffsetY = { it }),
                             exit = slideOutVertically(targetOffsetY = { it })
                         ) {
-                            BottomNavigationBar(navController, bottomNavigationItems)
+                            BottomNavigationBar(
+                                currentNavigationBarDestination,
+                                bottomNavigationItems,
+                                onNavigateToScreen = { navController.singleTopNavigate(it) }
+                            )
                         }
                     }
                 )
@@ -66,13 +79,29 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private fun isRouteFromBottomBarMenu(currentBackStackEntry: State<NavBackStackEntry?>): Boolean {
-    val currentRoute = currentBackStackEntry.value?.destination?.route
-    return currentRoute?.let { route ->
-        return@let (
-            route == Screen.WithoutArguments.Home.route ||
-                route == Screen.WithoutArguments.QuoteOfTheDay.route ||
-                route == Screen.WithoutArguments.Favourites.route
-            )
-    } ?: false
+private fun NavBackStackEntry?.currentDestinationFromNavigationBar(
+    navigationBarItems: List<Screen>
+): Screen? {
+    var currentDestination: Screen? = null
+
+    navigationBarItems.forEach { item ->
+        if (this?.destination?.hierarchy?.any {
+            it.hasRoute(item::class)
+        } == true
+        ) {
+            currentDestination = item
+        }
+    }
+
+    return currentDestination
+}
+
+private fun NavHostController.singleTopNavigate(screen: Screen) {
+    navigate(screen) {
+        popUpTo(graph.findStartDestination().id) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
 }

@@ -1,8 +1,8 @@
 package com.jumrukovski.quotescompose.data.repository
 
 import com.jumrukovski.quotescompose.data.db.LocalDB
-import com.jumrukovski.quotescompose.data.mapper.mapToFavouriteQuoteEntity
 import com.jumrukovski.quotescompose.data.mapper.mapToQuote
+import com.jumrukovski.quotescompose.data.mapper.mapToQuoteEntity
 import com.jumrukovski.quotescompose.data.mapper.mapToQuotes
 import com.jumrukovski.quotescompose.domain.model.Quote
 import com.jumrukovski.quotescompose.domain.repository.LocalRepository
@@ -17,13 +17,13 @@ class LocalRepositoryImpl @Inject constructor(private val localDB: LocalDB) : Lo
     override fun getFavouriteQuote(id: Int): Flow<Quote?> =
         localDB.quoteDao().getFavouriteQuote(id).mapToQuote()
 
-    override fun addFavouriteQuote(id: Int, content: String, author: String) {
-        val entity = mapToFavouriteQuoteEntity(id, content, author)
+    override fun addFavouriteQuote(quote: Quote) {
+        val entity = quote.mapToQuoteEntity()
         localDB.quoteDao().addFavouriteQuote(entity)
     }
 
-    override fun removeFavouriteQuote(id: Int, content: String, author: String) {
-        val entity = mapToFavouriteQuoteEntity(id, content, author)
+    override fun removeFavouriteQuote(quote: Quote) {
+        val entity = quote.mapToQuoteEntity()
         localDB.quoteDao().deleteFavouriteQuote(entity)
     }
 }

@@ -9,6 +9,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -136,6 +137,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+
+    // kotlinx
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 
     // Room
     implementation("androidx.room:room-runtime:2.6.1")
