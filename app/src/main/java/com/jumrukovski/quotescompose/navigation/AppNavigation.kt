@@ -2,7 +2,10 @@ package com.jumrukovski.quotescompose.navigation
 
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,6 +26,7 @@ import kotlin.reflect.typeOf
 @Composable
 fun AppNavigation(
     activity: ComponentActivity,
+    innerPaddingValues: PaddingValues,
     navHostController: NavHostController
 ) {
     NavHost(
@@ -32,6 +36,7 @@ fun AppNavigation(
         composable<Screen.Favourites> {
             val viewModel: FavouritesViewModel by activity.viewModels()
             FavouritesScreen(
+                modifier = Modifier.padding(bottom = innerPaddingValues.calculateBottomPadding()),
                 viewModel = viewModel,
                 onNavigateToQuoteDetails = {
                     navHostController.navigate(Screen.QuoteDetail(it))
@@ -68,6 +73,7 @@ fun AppNavigation(
         composable<Screen.Home> {
             val viewModel: HomeViewModel by activity.viewModels()
             HomeScreen(
+                modifier = Modifier.padding(bottom = innerPaddingValues.calculateBottomPadding()),
                 viewModel = viewModel,
                 onNavigateToQuoteDetails = { quote ->
                     navHostController.navigate(Screen.QuoteDetail(quote))

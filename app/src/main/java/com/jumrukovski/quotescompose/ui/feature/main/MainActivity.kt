@@ -1,6 +1,5 @@
 package com.jumrukovski.quotescompose.ui.feature.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,7 +27,6 @@ import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,9 +52,10 @@ class MainActivity : ComponentActivity() {
 
             QuotesComposeTheme {
                 Scaffold(
-                    content = {
+                    content = { innerPaddingValues ->
                         AppNavigation(
                             this@MainActivity,
+                            innerPaddingValues = innerPaddingValues,
                             navHostController = navController
                         )
                     },
