@@ -5,8 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalRepository {
 
-    fun getAllFavouriteQuotes(): Flow<List<Quote>>
-    fun getFavouriteQuote(id: Int): Flow<Quote?>
-    fun addFavouriteQuote(quote: Quote)
-    fun removeFavouriteQuote(quote: Quote)
+    suspend fun getAllFavouriteQuotes(): Flow<List<Quote>>
+    suspend fun getFavouriteQuote(id: Int): Flow<Quote?>
+    suspend fun addFavouriteQuote(quote: Quote)
+    suspend fun removeFavouriteQuote(quote: Quote)
 }

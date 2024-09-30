@@ -6,7 +6,6 @@ import com.jumrukovski.quotescompose.domain.model.Quote
 import com.jumrukovski.quotescompose.domain.repository.LocalRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -21,7 +20,7 @@ class QuoteDetailViewModel @Inject constructor(
         private const val TIMEOUT_MILLIS: Long = 5_000
     }
 
-    fun checkIfQuoteIsInFavouritesDB(id: Int): StateFlow<Quote?> {
+    suspend fun checkIfQuoteIsInFavouritesDB(id: Int): StateFlow<Quote?> {
         return localRepository.getFavouriteQuote(id).stateIn(
             scope = viewModelScope,
             initialValue = null,
@@ -30,13 +29,13 @@ class QuoteDetailViewModel @Inject constructor(
     }
 
     fun addQuoteToFavourites(quote: Quote) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             localRepository.addFavouriteQuote(quote)
         }
     }
 
     fun removeQuoteFromFavourites(quote: Quote) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             localRepository.removeFavouriteQuote(quote)
         }
     }
