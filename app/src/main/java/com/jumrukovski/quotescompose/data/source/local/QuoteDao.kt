@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.data.db
+package com.jumrukovski.quotescompose.data.source.local
 
 import androidx.room.Dao
 import androidx.room.Delete

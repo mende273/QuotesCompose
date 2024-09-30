@@ -13,10 +13,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jumrukovski.quotescompose.navigation.Screen
-import com.jumrukovski.quotescompose.ui.theme.MediumDarkGreyColor
-import com.jumrukovski.quotescompose.ui.theme.NavigationBarBackgroundColor
-import com.jumrukovski.quotescompose.ui.theme.NavigationBarItemRippleColor
-import com.jumrukovski.quotescompose.ui.theme.NavigationBarSelectedColor
+import com.jumrukovski.quotescompose.theme.MediumDarkGreyColor
+import com.jumrukovski.quotescompose.theme.NavigationBarBackgroundColor
+import com.jumrukovski.quotescompose.theme.NavigationBarItemRippleColor
+import com.jumrukovski.quotescompose.theme.NavigationBarSelectedColor
 
 @Composable
 fun BottomNavigationBar(

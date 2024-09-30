@@ -3,7 +3,7 @@ package com.jumrukovski.quotescompose.ui.feature.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jumrukovski.quotescompose.domain.model.Quote
-import com.jumrukovski.quotescompose.domain.repository.LocalRepository
+import com.jumrukovski.quotescompose.domain.repository.local.LocalRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow

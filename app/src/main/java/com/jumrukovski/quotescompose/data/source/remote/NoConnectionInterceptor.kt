@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.data.network
+package com.jumrukovski.quotescompose.data.source.remote
 
 import java.net.UnknownHostException
 import okhttp3.Interceptor

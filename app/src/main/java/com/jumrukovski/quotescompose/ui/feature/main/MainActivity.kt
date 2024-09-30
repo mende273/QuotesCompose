@@ -21,9 +21,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.jumrukovski.quotescompose.navigation.AppNavigation
 import com.jumrukovski.quotescompose.navigation.Screen
+import com.jumrukovski.quotescompose.theme.QuotesComposeTheme
 import com.jumrukovski.quotescompose.ui.common.component.bottombar.BottomNavigationBar
 import com.jumrukovski.quotescompose.ui.common.component.bottombar.BottomNavigationItem
-import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

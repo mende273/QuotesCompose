@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.theme
+package com.jumrukovski.quotescompose.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

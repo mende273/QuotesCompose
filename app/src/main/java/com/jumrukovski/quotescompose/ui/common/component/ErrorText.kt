@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
-import com.jumrukovski.quotescompose.ui.theme.mediumTextStyle
+import com.jumrukovski.quotescompose.theme.QuotesComposeTheme
+import com.jumrukovski.quotescompose.theme.mediumTextStyle
 
 @Composable
 fun ErrorText(reason: String) {

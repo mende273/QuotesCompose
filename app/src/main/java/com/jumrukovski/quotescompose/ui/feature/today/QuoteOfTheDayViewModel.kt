@@ -3,7 +3,7 @@ package com.jumrukovski.quotescompose.ui.feature.today
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jumrukovski.quotescompose.domain.model.Quote
-import com.jumrukovski.quotescompose.domain.repository.RemoteRepository
+import com.jumrukovski.quotescompose.domain.repository.remote.RemoteRepository
 import com.jumrukovski.quotescompose.ui.common.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

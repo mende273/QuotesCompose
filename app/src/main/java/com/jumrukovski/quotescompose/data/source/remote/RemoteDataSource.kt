@@ -1,10 +1,10 @@
-package com.jumrukovski.quotescompose.data.network
+package com.jumrukovski.quotescompose.data.source.remote
 
 import com.jumrukovski.quotescompose.data.model.dto.QuoteDTO
 import retrofit2.Response
 import retrofit2.http.GET
 
-interface ApiService {
+interface RemoteDataSource {
 
     @GET("quotes")
     suspend fun getQuotes(): Response<List<QuoteDTO>>

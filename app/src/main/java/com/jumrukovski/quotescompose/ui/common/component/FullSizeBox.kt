@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.jumrukovski.quotescompose.ui.theme.spacing
+import com.jumrukovski.quotescompose.theme.spacing
 
 @Composable
 fun FullSizeBox(

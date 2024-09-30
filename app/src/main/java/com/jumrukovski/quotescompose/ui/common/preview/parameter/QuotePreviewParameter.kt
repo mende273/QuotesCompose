@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.preview.parameter
+package com.jumrukovski.quotescompose.ui.common.preview.parameter
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.jumrukovski.quotescompose.domain.model.Quote

@@ -18,10 +18,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.jumrukovski.quotescompose.domain.model.Quote
-import com.jumrukovski.quotescompose.ui.preview.parameter.QuotePreviewParameter
-import com.jumrukovski.quotescompose.ui.theme.TertiaryColor
-import com.jumrukovski.quotescompose.ui.theme.mediumTextStyle
-import com.jumrukovski.quotescompose.ui.theme.spacing
+import com.jumrukovski.quotescompose.theme.TertiaryColor
+import com.jumrukovski.quotescompose.theme.mediumTextStyle
+import com.jumrukovski.quotescompose.theme.spacing
+import com.jumrukovski.quotescompose.ui.common.preview.parameter.QuotePreviewParameter
 
 @Composable
 fun SmallQuoteCard(quote: Quote, onNavigateToQuoteDetails: (Quote) -> Unit) {

@@ -1,9 +1,10 @@
 package com.jumrukovski.quotescompose.domain.repository
 
 import com.google.common.truth.Truth.assertThat
-import com.jumrukovski.quotescompose.data.network.ApiService
-import com.jumrukovski.quotescompose.data.repository.RemoteRepositoryImpl
+import com.jumrukovski.quotescompose.data.repository.remote.RemoteRepositoryImpl
+import com.jumrukovski.quotescompose.data.source.remote.RemoteDataSource
 import com.jumrukovski.quotescompose.domain.model.Quote
+import com.jumrukovski.quotescompose.domain.repository.remote.RemoteRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.net.HttpURLConnection
@@ -23,7 +24,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 class RemoteRepositoryImplTest {
 
     private lateinit var remoteRepository: RemoteRepository
-    private lateinit var apiService: ApiService
+    private lateinit var remoteDataSource: RemoteDataSource
     private lateinit var mockWebServer: MockWebServer
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -36,8 +37,8 @@ class RemoteRepositoryImplTest {
 
         val mockApiService = MockApiService(mockWebServer.url("/").toString())
 
-        apiService = mockApiService.get()
-        remoteRepository = RemoteRepositoryImpl(apiService, testDispatcher)
+        remoteDataSource = mockApiService.get()
+        remoteRepository = RemoteRepositoryImpl(remoteDataSource, testDispatcher)
     }
 
     @After
@@ -82,11 +83,11 @@ class RemoteRepositoryImplTest {
 }
 
 private class MockApiService(url: String) {
-    fun get(): ApiService = apiService
+    fun get(): RemoteDataSource = remoteDataSource
 
     private val okHttpClient = OkHttpClient.Builder()
 
-    private val apiService = Retrofit.Builder()
+    private val remoteDataSource = Retrofit.Builder()
         .baseUrl(url)
         .addConverterFactory(
             MoshiConverterFactory.create(
@@ -97,7 +98,7 @@ private class MockApiService(url: String) {
         )
         .client(okHttpClient.build())
         .build()
-        .create(ApiService::class.java)
+        .create(RemoteDataSource::class.java)
 }
 
 private const val MOCK_RESPONSE_GET_QUOTES = """
