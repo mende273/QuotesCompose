@@ -16,7 +16,7 @@ Android application demonstrating the use of JetPack Compose with Hilt, Navigati
 | <img src="/screenshots/3_light.png" width="250"> | <img src="/screenshots/3_dark.png" width="250"> |
 
 ## Api
-The project is using the free api from [quotable.io](https://github.com/lukePeavey/quotable)
+The project is using the free api from [zenquotes.io](https://zenquotes.io/)
 
 ## PreBuild
 The preBuild depends on 2 tasks: <b>ktlint</b> and <b>Detekt</b>. You can manually run the tasks with <code>./gradlew ktlintFormat</code> and <code>./gradlew detekt</code>
