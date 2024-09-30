@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.domain.repository
+package com.jumrukovski.quotescompose.domain.repository.local
 
 import com.jumrukovski.quotescompose.domain.model.Quote
 import kotlinx.coroutines.flow.Flow

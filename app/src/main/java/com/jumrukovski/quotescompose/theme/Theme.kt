@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.theme
+package com.jumrukovski.quotescompose.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme

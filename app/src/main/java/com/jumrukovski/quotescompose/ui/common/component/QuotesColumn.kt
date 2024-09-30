@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.jumrukovski.quotescompose.domain.model.Quote
-import com.jumrukovski.quotescompose.ui.preview.parameter.ListOfQuotesPreviewParameter
-import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
-import com.jumrukovski.quotescompose.ui.theme.spacing
+import com.jumrukovski.quotescompose.theme.QuotesComposeTheme
+import com.jumrukovski.quotescompose.theme.spacing
+import com.jumrukovski.quotescompose.ui.common.preview.parameter.ListOfQuotesPreviewParameter
 
 @Composable
 fun QuotesColumn(

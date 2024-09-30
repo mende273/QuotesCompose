@@ -16,12 +16,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.jumrukovski.quotescompose.ui.theme.PrimaryBackgroundColor
-import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
-import com.jumrukovski.quotescompose.ui.theme.TertiaryColor
-import com.jumrukovski.quotescompose.ui.theme.largeTextStyle
-import com.jumrukovski.quotescompose.ui.theme.mediumTextStyle
-import com.jumrukovski.quotescompose.ui.theme.spacing
+import com.jumrukovski.quotescompose.theme.PrimaryBackgroundColor
+import com.jumrukovski.quotescompose.theme.QuotesComposeTheme
+import com.jumrukovski.quotescompose.theme.TertiaryColor
+import com.jumrukovski.quotescompose.theme.largeTextStyle
+import com.jumrukovski.quotescompose.theme.mediumTextStyle
+import com.jumrukovski.quotescompose.theme.spacing
 
 @Composable
 fun LargeQuoteCard(content: String, author: String) {

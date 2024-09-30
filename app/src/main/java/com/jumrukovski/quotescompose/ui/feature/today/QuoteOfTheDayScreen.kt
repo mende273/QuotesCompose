@@ -10,13 +10,13 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.domain.model.Quote
+import com.jumrukovski.quotescompose.theme.QuotesComposeTheme
 import com.jumrukovski.quotescompose.ui.common.component.FullSizeBox
 import com.jumrukovski.quotescompose.ui.common.component.LargeQuoteCard
 import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import com.jumrukovski.quotescompose.ui.common.component.UiStateWrapper
+import com.jumrukovski.quotescompose.ui.common.preview.parameter.QuotePreviewParameter
 import com.jumrukovski.quotescompose.ui.common.state.UIState
-import com.jumrukovski.quotescompose.ui.preview.parameter.QuotePreviewParameter
-import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
 fun QuoteOfTheDayScreen(viewModel: QuoteOfTheDayViewModel) {

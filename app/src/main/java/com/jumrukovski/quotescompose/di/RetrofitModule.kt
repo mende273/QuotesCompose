@@ -1,9 +1,9 @@
 package com.jumrukovski.quotescompose.di
 
 import com.jumrukovski.quotescompose.BuildConfig
-import com.jumrukovski.quotescompose.data.network.ApiService
-import com.jumrukovski.quotescompose.data.network.CacheInterceptor
-import com.jumrukovski.quotescompose.data.network.NoConnectionInterceptor
+import com.jumrukovski.quotescompose.data.source.remote.CacheInterceptor
+import com.jumrukovski.quotescompose.data.source.remote.NoConnectionInterceptor
+import com.jumrukovski.quotescompose.data.source.remote.RemoteDataSource
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -22,8 +22,8 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun provideService(retrofit: Retrofit): RemoteDataSource {
+        return retrofit.create(RemoteDataSource::class.java)
     }
 
     @Provides

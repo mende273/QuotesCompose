@@ -1,9 +1,9 @@
 package com.jumrukovski.quotescompose.di
 
-import com.jumrukovski.quotescompose.data.repository.LocalRepositoryImpl
-import com.jumrukovski.quotescompose.data.repository.RemoteRepositoryImpl
-import com.jumrukovski.quotescompose.domain.repository.LocalRepository
-import com.jumrukovski.quotescompose.domain.repository.RemoteRepository
+import com.jumrukovski.quotescompose.data.repository.local.LocalRepositoryImpl
+import com.jumrukovski.quotescompose.data.repository.remote.RemoteRepositoryImpl
+import com.jumrukovski.quotescompose.domain.repository.local.LocalRepository
+import com.jumrukovski.quotescompose.domain.repository.remote.RemoteRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

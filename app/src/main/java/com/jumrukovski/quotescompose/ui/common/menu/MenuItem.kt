@@ -1,4 +1,4 @@
-package com.jumrukovski.quotescompose.ui.menu
+package com.jumrukovski.quotescompose.ui.common.menu
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
