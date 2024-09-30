@@ -21,6 +21,6 @@ fun Flow<QuoteEntity?>.mapToQuote(): Flow<Quote?> {
     }
 }
 
-fun mapToFavouriteQuoteEntity(id: Int, content: String, author: String): QuoteEntity {
+fun Quote.mapToQuoteEntity(): QuoteEntity {
     return QuoteEntity(id, content, author)
 }
