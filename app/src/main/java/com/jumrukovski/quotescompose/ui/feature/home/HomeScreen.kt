@@ -32,8 +32,8 @@ fun HomeScreen(
     ScreenContents(
         modifier = modifier,
         uiState = uiState,
-        onNavigateToRandomQuote = { onNavigateToRandomQuote() },
-        onNavigateToQuoteDetails = { onNavigateToQuoteDetails(it) }
+        onNavigateToRandomQuote = onNavigateToRandomQuote,
+        onNavigateToQuoteDetails = onNavigateToQuoteDetails
     )
 }
 
@@ -47,19 +47,11 @@ private fun ScreenContents(
     Column(modifier = modifier) {
         TopBar(
             title = stringResource(id = R.string.screen_home),
-            menuItems = listOf(
-                MenuItem(
-                    R.string.action_random,
-                    R.drawable.baseline_random,
-                    0,
-                    false
-                )
+            menuItem = MenuItem(
+                R.string.action_random,
+                R.drawable.baseline_random
             ),
-            onMenuItemClick = {
-                if (it.titleTextId == R.string.action_random) {
-                    onNavigateToRandomQuote()
-                }
-            }
+            onMenuItemClick = onNavigateToRandomQuote
         )
 
         UiStateWrapper(
@@ -68,7 +60,7 @@ private fun ScreenContents(
                 FullSizeBox(contentAlignment = Alignment.TopCenter) {
                     QuotesColumn(
                         quotes = data,
-                        onNavigateToQuoteDetails = { onNavigateToQuoteDetails(it) }
+                        onNavigateToQuoteDetails = onNavigateToQuoteDetails
                     )
                 }
             }

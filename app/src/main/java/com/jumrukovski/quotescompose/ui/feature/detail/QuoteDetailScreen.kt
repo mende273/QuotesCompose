@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jumrukovski.quotescompose.R
 import com.jumrukovski.quotescompose.domain.model.Quote
 import com.jumrukovski.quotescompose.ui.common.component.FullSizeBox
@@ -17,7 +18,6 @@ import com.jumrukovski.quotescompose.ui.common.component.TopBar
 import com.jumrukovski.quotescompose.ui.menu.MenuItem
 import com.jumrukovski.quotescompose.ui.preview.parameter.QuotePreviewParameter
 import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun QuoteDetailScreen(
@@ -25,67 +25,53 @@ fun QuoteDetailScreen(
     quote: Quote,
     onNavigateBack: () -> Unit
 ) {
-    var isFavourite by remember { mutableStateOf<Quote?>(null) }
+    val isFavorite by viewModel.isFavorite.collectAsStateWithLifecycle()
 
-    var menuItems by remember {
+    var menuItem by remember {
         mutableStateOf(
-            listOf(
-                MenuItem(
-                    R.string.action_favourite,
-                    R.drawable.baseline_favorite_border_24,
-                    R.drawable.baseline_favorite_24,
-                    false
-                )
+            MenuItem(
+                R.string.action_favourite,
+                R.drawable.baseline_favorite_border_24
             )
         )
     }
 
     LaunchedEffect(key1 = quote.id, block = {
-        viewModel.checkIfQuoteIsInFavouritesDB(quote.id).collectLatest {
-            isFavourite = it
-
-            menuItems = menuItems.map { item ->
-                if (item.titleTextId == R.string.action_favourite) {
-                    item.copy(isSelected = it != null)
-                } else {
-                    item
-                }
-            }
-        }
+        viewModel.init(quote)
     })
+
+    LaunchedEffect(key1 = isFavorite) {
+        menuItem = menuItem.copy(
+            icon =
+            if (isFavorite) {
+                R.drawable.baseline_favorite_24
+            } else {
+                R.drawable.baseline_favorite_border_24
+            }
+        )
+    }
 
     ScreenContents(
         quote = quote,
-        isFavourite = isFavourite != null,
-        menuItems = menuItems,
-        onAddQuoteToFavourites = viewModel::addQuoteToFavourites,
-        onRemoveQuoteFromFavourites = viewModel::removeQuoteFromFavourites,
-        onNavigateBack = { onNavigateBack() }
+        menuItem = menuItem,
+        onToggleFavorite = viewModel::toggleFavourite,
+        onNavigateBack = onNavigateBack
     )
 }
 
 @Composable
 private fun ScreenContents(
     quote: Quote,
-    isFavourite: Boolean,
-    menuItems: List<MenuItem>,
-    onAddQuoteToFavourites: (Quote) -> Unit,
-    onRemoveQuoteFromFavourites: (Quote) -> Unit,
+    menuItem: MenuItem? = null,
+    onToggleFavorite: () -> Unit,
     onNavigateBack: () -> Unit
 ) {
     Column {
         TopBar(
             isBackButtonEnabled = true,
             onNavigateBack = onNavigateBack,
-            menuItems = menuItems,
-            onMenuItemClick = {
-                if (it.titleTextId == R.string.action_favourite) {
-                    when (isFavourite) {
-                        true -> onRemoveQuoteFromFavourites(quote)
-                        false -> onAddQuoteToFavourites(quote)
-                    }
-                }
-            }
+            menuItem = menuItem,
+            onMenuItemClick = onToggleFavorite
         )
 
         FullSizeBox {
@@ -102,17 +88,11 @@ private fun ScreenContentsPreview(
     QuotesComposeTheme {
         ScreenContents(
             quote = quote,
-            isFavourite = false,
-            menuItems = listOf(
-                MenuItem(
-                    R.string.action_favourite,
-                    R.drawable.baseline_favorite_border_24,
-                    R.drawable.baseline_favorite_24,
-                    false
-                )
+            menuItem = MenuItem(
+                R.string.action_favourite,
+                R.drawable.baseline_favorite_border_24
             ),
-            onAddQuoteToFavourites = {},
-            onRemoveQuoteFromFavourites = {},
+            onToggleFavorite = {},
             onNavigateBack = {}
         )
     }

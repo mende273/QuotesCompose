@@ -6,9 +6,10 @@ import com.jumrukovski.quotescompose.domain.model.Quote
 import com.jumrukovski.quotescompose.domain.repository.LocalRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -16,27 +17,36 @@ class QuoteDetailViewModel @Inject constructor(
     private val localRepository: LocalRepository
 ) : ViewModel() {
 
-    companion object {
-        private const val TIMEOUT_MILLIS: Long = 5_000
+    private var quote: Quote? = null
+
+    private val _isFavorite = MutableStateFlow(false)
+    val isFavorite: StateFlow<Boolean> get() = _isFavorite
+
+    fun init(quote: Quote) {
+        this.quote = quote
+        checkIsFavorite()
     }
 
-    suspend fun checkIfQuoteIsInFavouritesDB(id: Int): StateFlow<Quote?> {
-        return localRepository.getFavouriteQuote(id).stateIn(
-            scope = viewModelScope,
-            initialValue = null,
-            started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS)
-        )
-    }
-
-    fun addQuoteToFavourites(quote: Quote) {
+    private fun checkIsFavorite() {
         viewModelScope.launch {
-            localRepository.addFavouriteQuote(quote)
+            quote?.let {
+                localRepository.getFavouriteQuote(it.id)
+                    .collectLatest { quote ->
+                        _isFavorite.update { quote != null }
+                    }
+            }
         }
     }
 
-    fun removeQuoteFromFavourites(quote: Quote) {
+    fun toggleFavourite() {
         viewModelScope.launch {
-            localRepository.removeFavouriteQuote(quote)
+            quote?.let {
+                when (_isFavorite.value) {
+                    true -> localRepository.removeFavouriteQuote(it)
+
+                    false -> localRepository.addFavouriteQuote(it)
+                }
+            }
         }
     }
 }

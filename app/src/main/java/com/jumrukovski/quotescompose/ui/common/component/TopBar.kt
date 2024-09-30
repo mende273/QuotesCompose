@@ -24,9 +24,9 @@ import com.jumrukovski.quotescompose.ui.theme.PrimaryTextColor
 @Composable
 fun TopBar(
     title: String = "",
-    menuItems: List<MenuItem> = emptyList(),
+    menuItem: MenuItem? = null,
     isBackButtonEnabled: Boolean = false,
-    onMenuItemClick: (MenuItem) -> Unit = {},
+    onMenuItemClick: () -> Unit = {},
     onNavigateBack: () -> Unit = {}
 ) {
     TopAppBar(
@@ -40,19 +40,13 @@ fun TopBar(
             actionIconContentColor = PrimaryTextColor
         ),
         actions = {
-            with(menuItems) {
-                if (this.isNotEmpty()) {
-                    this.forEach { menuItem ->
-                        MenuItem(menuItem = menuItem, onMenuItemClick = { onMenuItemClick(it) })
-                    }
-                }
+            menuItem?.let {
+                MenuItem(menuItem = menuItem, onMenuItemClick = onMenuItemClick)
             }
         },
         navigationIcon = {
             if (isBackButtonEnabled) {
-                BackButton(onBackPressed = {
-                    onNavigateBack()
-                })
+                BackButton(onBackPressed = onNavigateBack)
             }
         }
     )
@@ -63,13 +57,9 @@ fun TopBar(
 private fun TopBarWithMenuItemPreview() {
     TopBar(
         title = "Home",
-        menuItems = listOf(
-            MenuItem(
-                R.string.action_random,
-                R.drawable.baseline_random,
-                0,
-                false
-            )
+        menuItem = MenuItem(
+            R.string.action_random,
+            R.drawable.baseline_random
         )
     )
 }
@@ -79,13 +69,9 @@ private fun TopBarWithMenuItemPreview() {
 private fun TopBarWithBackButtonAndMenuItemPreview() {
     TopBar(
         title = "Home",
-        menuItems = listOf(
-            MenuItem(
-                R.string.action_random,
-                R.drawable.baseline_random,
-                0,
-                false
-            )
+        menuItem = MenuItem(
+            R.string.action_random,
+            R.drawable.baseline_random
         ),
         isBackButtonEnabled = true
     )
@@ -102,7 +88,7 @@ private fun TopBarWithBackButtonPreview() {
 
 @Composable
 private fun BackButton(onBackPressed: () -> Unit) {
-    IconButton(onClick = { onBackPressed() }) {
+    IconButton(onClick = onBackPressed) {
         Icon(Icons.AutoMirrored.Filled.ArrowBack, "backIcon")
     }
 }
@@ -116,16 +102,11 @@ private fun BackButtonPreview() {
 @Composable
 private fun MenuItem(
     menuItem: MenuItem,
-    onMenuItemClick: (MenuItem) -> Unit = {}
+    onMenuItemClick: () -> Unit = {}
 ) {
-    val menuIcon = when (menuItem.isSelected) {
-        true -> menuItem.selectedIcon
-        false -> menuItem.icon
-    }
-
-    IconButton(onClick = { onMenuItemClick(menuItem) }) {
+    IconButton(onClick = onMenuItemClick) {
         Icon(
-            painter = painterResource(id = menuIcon),
+            painter = painterResource(id = menuItem.icon),
             contentDescription = stringResource(id = menuItem.titleTextId),
             tint = MaterialTheme.colorScheme.onSurface
         )
@@ -138,9 +119,7 @@ private fun MenuItemPreview() {
     MenuItem(
         menuItem = MenuItem(
             R.string.action_favourite,
-            R.drawable.baseline_favorite_border_24,
-            R.drawable.baseline_favorite_24,
-            false
+            R.drawable.baseline_favorite_border_24
         )
     )
 }

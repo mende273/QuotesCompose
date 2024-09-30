@@ -30,7 +30,7 @@ fun FavouritesScreen(
     ScreenContents(
         modifier = modifier,
         uiState = uiState,
-        onNavigateToQuoteDetails = { onNavigateToQuoteDetails(it) }
+        onNavigateToQuoteDetails = onNavigateToQuoteDetails
     )
 }
 
@@ -51,7 +51,7 @@ private fun ScreenContents(
                 FullSizeBox(contentAlignment = Alignment.TopCenter) {
                     QuotesColumn(
                         quotes = data,
-                        onNavigateToQuoteDetails = { onNavigateToQuoteDetails(it) }
+                        onNavigateToQuoteDetails = onNavigateToQuoteDetails
                     )
                 }
             }

@@ -23,15 +23,13 @@ import com.jumrukovski.quotescompose.ui.theme.QuotesComposeTheme
 
 @Composable
 fun RandomQuoteScreen(viewModel: RandomQuoteViewModel, onNavigateBack: () -> Unit) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
     val menuItems by remember {
         mutableStateOf(
-            listOf(
-                MenuItem(
-                    R.string.action_random,
-                    R.drawable.baseline_refresh_24,
-                    0,
-                    false
-                )
+            MenuItem(
+                R.string.action_random,
+                R.drawable.baseline_refresh_24
             )
         )
     }
@@ -40,34 +38,28 @@ fun RandomQuoteScreen(viewModel: RandomQuoteViewModel, onNavigateBack: () -> Uni
         viewModel.getRandomQuote()
     }
 
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
     ScreenContents(
         uiState = uiState,
-        menuItems = menuItems,
-        onNavigateBack = { onNavigateBack() },
-        onGetNewRandomQuote = { viewModel.getRandomQuote() }
+        menuItem = menuItems,
+        onNavigateBack = onNavigateBack,
+        onGetNewRandomQuote = viewModel::getRandomQuote
     )
 }
 
 @Composable
 private fun ScreenContents(
     uiState: UIState<Quote>,
-    menuItems: List<MenuItem>,
+    menuItem: MenuItem,
     onNavigateBack: () -> Unit,
     onGetNewRandomQuote: () -> Unit
 ) {
     Column {
         TopBar(
             title = stringResource(id = R.string.screen_random_quote),
-            menuItems = menuItems,
+            menuItem = menuItem,
             isBackButtonEnabled = true,
             onNavigateBack = onNavigateBack,
-            onMenuItemClick = {
-                if (it.titleTextId == R.string.action_random) {
-                    onGetNewRandomQuote()
-                }
-            }
+            onMenuItemClick = onGetNewRandomQuote
         )
 
         UiStateWrapper(
@@ -89,13 +81,9 @@ private fun ScreenContentsPreview(
     QuotesComposeTheme {
         ScreenContents(
             uiState = UIState.SuccessWithData(quote),
-            menuItems = listOf(
-                MenuItem(
-                    R.string.action_random,
-                    R.drawable.baseline_refresh_24,
-                    0,
-                    false
-                )
+            menuItem = MenuItem(
+                R.string.action_random,
+                R.drawable.baseline_refresh_24
             ),
             onNavigateBack = { },
             onGetNewRandomQuote = {}
