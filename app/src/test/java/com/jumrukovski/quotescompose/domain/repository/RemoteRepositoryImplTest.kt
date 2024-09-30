@@ -7,7 +7,9 @@ import com.jumrukovski.quotescompose.domain.model.Quote
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.net.HttpURLConnection
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
@@ -24,6 +26,9 @@ class RemoteRepositoryImplTest {
     private lateinit var apiService: ApiService
     private lateinit var mockWebServer: MockWebServer
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private val testDispatcher = UnconfinedTestDispatcher()
+
     @Before
     fun setUp() {
         mockWebServer = MockWebServer()
@@ -32,7 +37,7 @@ class RemoteRepositoryImplTest {
         val mockApiService = MockApiService(mockWebServer.url("/").toString())
 
         apiService = mockApiService.get()
-        remoteRepository = RemoteRepositoryImpl(apiService)
+        remoteRepository = RemoteRepositoryImpl(apiService, testDispatcher)
     }
 
     @After

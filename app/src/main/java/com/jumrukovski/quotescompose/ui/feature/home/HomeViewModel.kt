@@ -22,7 +22,6 @@ class HomeViewModel @Inject constructor(private val remoteRepository: RemoteRepo
         viewModelScope.launch { getQuotes() }
     }
 
-    // todo get paginated quotes list
     private suspend fun getQuotes() {
         _uiState.value = remoteRepository.getQuotes().fold(
             onSuccess = { it },
