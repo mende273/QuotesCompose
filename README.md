@@ -6,6 +6,8 @@
 
 Android application demonstrating the use of JetPack Compose with Hilt, Navigation Component and MVVM architecture
 
+For KMP version, refer to this project [QuotesKMP](https://github.com/mende273/QuotesKMP)
+
 ## App Screenshots
 | Light Theme | Dark Theme |
 | --- | --- |
