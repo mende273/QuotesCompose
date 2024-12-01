@@ -18,15 +18,11 @@ class LocalRepositoryImpl @Inject constructor(
     @Dispatcher(QuotesDispatchers.IO) private val ioDispatcher: CoroutineDispatcher
 ) : LocalRepository {
 
-    override suspend fun getAllFavouriteQuotes(): Flow<List<Quote>> =
-        withContext(ioDispatcher) {
-            localDataSource.quoteDao().getAllFavouriteQuotes().mapToQuotes()
-        }
+    override fun getAllFavouriteQuotes(): Flow<List<Quote>> =
+        localDataSource.quoteDao().getAllFavouriteQuotes().mapToQuotes()
 
-    override suspend fun getFavouriteQuote(id: Int): Flow<Quote?> =
-        withContext(ioDispatcher) {
-            localDataSource.quoteDao().getFavouriteQuote(id).mapToQuote()
-        }
+    override fun getFavouriteQuote(id: Int): Flow<Quote?> =
+        localDataSource.quoteDao().getFavouriteQuote(id).mapToQuote()
 
     override suspend fun addFavouriteQuote(quote: Quote) {
         withContext(ioDispatcher) {
