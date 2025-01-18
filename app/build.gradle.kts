@@ -91,9 +91,9 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
 
     // compose
-    implementation("androidx.activity:activity-compose:1.9.3")
+    implementation("androidx.activity:activity-compose:1.10.0")
     implementation("androidx.compose.material3:material3:1.3.1")
-    platform("androidx.compose:compose-bom:2024.12.01")
+    platform("androidx.compose:compose-bom:2025.01.00")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -119,7 +119,7 @@ dependencies {
     ksp("com.google.dagger:hilt-compiler:2.52")
 
     // Activity KTX for viewModels()
-    implementation("androidx.activity:activity-ktx:1.9.3")
+    implementation("androidx.activity:activity-ktx:1.10.0")
 
     // Moshi
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
