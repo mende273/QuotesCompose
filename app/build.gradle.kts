@@ -91,7 +91,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
 
     // compose
-    implementation("androidx.activity:activity-compose:1.10.0")
+    implementation("androidx.activity:activity-compose:1.10.1")
     implementation("androidx.compose.material3:material3:1.3.1")
     platform("androidx.compose:compose-bom:2025.02.00")
     implementation("androidx.compose.ui:ui")
@@ -112,14 +112,14 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
 
     // navigation component
-    implementation("androidx.navigation:navigation-compose:2.8.7")
+    implementation("androidx.navigation:navigation-compose:2.8.8")
 
     // dagger Hilt dependency injection
     implementation("com.google.dagger:hilt-android:2.52")
     ksp("com.google.dagger:hilt-compiler:2.52")
 
     // Activity KTX for viewModels()
-    implementation("androidx.activity:activity-ktx:1.10.0")
+    implementation("androidx.activity:activity-ktx:1.10.1")
 
     // Moshi
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
